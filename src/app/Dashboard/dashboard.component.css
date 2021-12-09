@@ -1,0 +1,12 @@
+.toolbar {
+  margin-left: auto;
+  display: flex;
+}
+
+.user-action {
+  display: inline-table;
+}
+
+img {
+  max-width: 20%;
+}

@@ -1,0 +1,308 @@
+<div class="container-fluid">
+  <nb-card>
+    <nb-card-header>
+      <h4 class="text-center">Estadísticas por intérvalo de fecha</h4>
+    </nb-card-header>
+    <nb-card-body>
+      <form #dateForm="ngForm">
+        <div class="form-group">
+          <label for="fecha_inicio">Fecha incial (*)</label>
+          <input
+            id="fecha_inicio"
+            type="date"
+            name="fecha_inicio"
+            class="form-control"
+            (change)="handler('inicio', $event)"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="fecha_fin">Fecha final (*)</label>
+          <input
+            id="fecha_fin"
+            type="date"
+            name="fecha_fin"
+            class="form-control"
+            (change)="handler('fin', $event)"
+            required
+          />
+        </div>
+      </form>
+      <h6 [hidden]="!showStats" class="text-warning">
+        ¡Para realizar una nueva consulta recarga la página!
+      </h6>
+      <button
+        (click)="getCases()"
+        class="btn btn-primary float-right"
+        [disabled]="!fecha_inicio || !fecha_fin"
+        [hidden]="showCalculateButton"
+      >
+        Ejecutar
+      </button>
+    </nb-card-body>
+  </nb-card>
+  <div class="table-wrapper" *ngIf="showStats">
+    <div class="table-title">
+      <div class="row">
+        <div class="col-12 text-center mb-5">
+          <h3>Casos por origen</h3>
+        </div>
+      </div>
+      <div class="row mx-3">
+        <div class="col-12 mx-auto px-1">
+          <nb-card>
+            <nb-card-body>
+              <h6 class="mb-2 text-center font-weight-normal">Total casos</h6>
+              <h4 class="text-center m-0">{{ totalCases }}</h4>
+            </nb-card-body>
+          </nb-card>
+        </div>
+        <div class="col-6 col-sm-4 col-lg mx-auto px-1">
+          <nb-card>
+            <nb-card-body>
+              <h6 class="mb-2 text-center font-weight-normal">Teléfono</h6>
+              <h4 class="text-center m-0">{{ totalCasesPhone }}</h4>
+            </nb-card-body>
+          </nb-card>
+        </div>
+        <div class="col-6 col-sm-4 col-lg mx-auto px-1">
+          <nb-card>
+            <nb-card-body>
+              <h6 class="mb-2 text-center font-weight-normal">Whatsapp</h6>
+              <h4 class="text-center m-0">{{ totalCasesWhatsapp }}</h4>
+            </nb-card-body>
+          </nb-card>
+        </div>
+        <div class="col-6 col-sm-4 col-lg mx-auto px-1">
+          <nb-card>
+            <nb-card-body>
+              <h6 class="mb-2 text-center font-weight-normal">
+                Redes Sociales
+              </h6>
+              <h4 class="text-center m-0">{{ totalCasesRedes }}</h4>
+            </nb-card-body>
+          </nb-card>
+        </div>
+        <div class="col-6 col-sm-4 col-lg mx-auto px-1">
+          <nb-card>
+            <nb-card-body>
+              <h6 class="mb-2 text-center font-weight-normal">
+                Correo Electrónico
+              </h6>
+              <h4 class="text-center m-0">{{ totalCasesCorreo }}</h4>
+            </nb-card-body>
+          </nb-card>
+        </div>
+        <div class="col-6 col-sm-4 col-lg mx-auto px-1">
+          <nb-card>
+            <nb-card-body>
+              <h6 class="mb-2 text-center font-weight-normal">Buzón</h6>
+              <h4 class="text-center m-0">{{ totalCasesBuzon }}</h4>
+            </nb-card-body>
+          </nb-card>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="table-wrapper" *ngIf="showStats">
+    <div class="table-title">
+      <div class="row">
+        <div class="col-12 text-center mb-5">
+          <h3>Casos por psicólogo</h3>
+        </div>
+      </div>
+      <div class="row mx-3">
+        <div
+          class="col-6 col-sm-4 col-lg-4 mx-auto px-1"
+          *ngFor="let psicologo of psicologos"
+        >
+          <nb-card>
+            <nb-card-body>
+              <h6 class="mb-2 text-center font-weight-normal">
+                {{ psicologo.nombre }}
+              </h6>
+              <h4 class="text-center m-0">{{ psicologo.cantidad }}</h4>
+            </nb-card-body>
+          </nb-card>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="table-wrapper" *ngIf="showStats">
+    <div class="table-title">
+      <div class="row">
+        <div class="col-12 text-center mb-5">
+          <h3>Casos por municipio</h3>
+        </div>
+      </div>
+      <div class="row mx-3">
+        <div
+          class="col-6 col-sm-4 col-lg-3 mx-auto px-1"
+          *ngFor="let municipio of municipios"
+        >
+          <nb-card>
+            <nb-card-body>
+              <h6 class="mb-2 text-center font-weight-normal">
+                {{ municipio.nombre }}
+              </h6>
+              <h4 class="text-center m-0">
+                {{ municipio.cantidad }}
+              </h4>
+            </nb-card-body>
+          </nb-card>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="table-wrapper" *ngIf="showStats">
+    <div class="table-title">
+      <div class="row">
+        <div class="col-12 text-center mb-5">
+          <h3>Casos por edades</h3>
+        </div>
+      </div>
+      <div class="row mx-3">
+        <div
+          class="col-6 col-sm-4 col-lg-3 mx-auto px-1"
+          *ngFor="let edad of edades"
+        >
+          <nb-card>
+            <nb-card-body>
+              <h6 class="mb-2 text-center font-weight-normal">
+                {{ edad.nombre }}
+              </h6>
+              <h4 class="text-center m-0">
+                {{ edad.cantidad }}
+              </h4>
+            </nb-card-body>
+          </nb-card>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="table-wrapper" *ngIf="showStats">
+    <div class="table-title">
+      <div class="row">
+        <div class="col-12 text-center mb-5">
+          <h3>Casos por sexo</h3>
+        </div>
+      </div>
+      <div class="row mx-3">
+        <div
+          class="col-6 col-sm-4 col-lg-3 mx-auto px-1"
+          *ngFor="let sexo of sexos"
+        >
+          <nb-card>
+            <nb-card-body>
+              <h6 class="mb-2 text-center font-weight-normal">
+                {{ sexo.nombre }}
+              </h6>
+              <h4 class="text-center m-0">{{ sexo.cantidad }}</h4>
+            </nb-card-body>
+          </nb-card>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="table-wrapper" *ngIf="showStats">
+    <div class="table-title">
+      <div class="row">
+        <div class="col-12 text-center mb-5">
+          <h3>Casos por género</h3>
+        </div>
+      </div>
+      <div class="row mx-3">
+        <div
+          class="col-6 col-sm-4 col-lg-3 mx-auto px-1"
+          *ngFor="let genero of generos"
+        >
+          <nb-card>
+            <nb-card-body>
+              <h6 class="mb-2 text-center font-weight-normal">
+                {{ genero.nombre }}
+              </h6>
+              <h4 class="text-center m-0">{{ genero.cantidad }}</h4>
+            </nb-card-body>
+          </nb-card>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="table-wrapper" *ngIf="showStats">
+    <div class="table-title">
+      <div class="row">
+        <div class="col-12 text-center mb-5">
+          <h3>Casos por tipo de sector</h3>
+        </div>
+      </div>
+      <div class="row mx-3">
+        <div class="col-6 col-sm-4 mx-auto px-1" *ngFor="let zona of zonas">
+          <nb-card>
+            <nb-card-body>
+              <h6 class="mb-2 text-center font-weight-normal">
+                {{ zona.nombre }}
+              </h6>
+              <h4 class="text-center m-0">{{ zona.cantidad }}</h4>
+            </nb-card-body>
+          </nb-card>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="table-wrapper" *ngIf="showStats">
+    <div class="table-title">
+      <div class="row">
+        <div class="col-12 text-center mb-5">
+          <h3>Casos por motivo de consulta</h3>
+        </div>
+      </div>
+      <div class="row mx-3">
+        <div
+          class="col-6 col-sm-4 col-lg-4 mx-auto px-1"
+          *ngFor="let motivo of motivos"
+        >
+          <nb-card>
+            <nb-card-body>
+              <h6 class="mb-2 text-center font-weight-normal">
+                {{ motivo.nombre }}
+              </h6>
+              <h4 class="text-center m-0">{{ motivo.cantidad }}</h4>
+            </nb-card-body>
+          </nb-card>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="table-wrapper" *ngIf="showStats">
+    <div class="table-title">
+      <div class="row">
+        <div class="col-12 text-center mb-5">
+          <h3>Casos por linea de intervención</h3>
+        </div>
+      </div>
+      <div class="row mx-3">
+        <div
+          class="col-6 col-sm-4 col-lg-4 mx-auto px-1"
+          *ngFor="let intervencion of intervenciones"
+        >
+          <nb-card>
+            <nb-card-body>
+              <h6 class="mb-2 text-center font-weight-normal">
+                {{ intervencion.nombre }}
+              </h6>
+              <h4 class="text-center m-0">{{ intervencion.cantidad }}</h4>
+            </nb-card-body>
+          </nb-card>
+        </div>
+      </div>
+    </div>
+  </div>
+  <button
+        (click)="exportAsXLSX()"
+        class="btn btn-success float-right"
+        [disabled]="!showExportButton"
+        [hidden]="!showStats"
+      >
+        Descargar reporte
+      </button>
+</div>

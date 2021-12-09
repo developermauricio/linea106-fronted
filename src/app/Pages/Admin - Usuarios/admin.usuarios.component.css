@@ -1,0 +1,17 @@
+td {
+    vertical-align: middle;
+}
+
+th {
+    border-top: 0;
+}
+
+.form-group {
+    display: flex;
+  }
+  
+  .form-group label {
+    width: 174px;
+    align-self: center;
+    margin: 0 0.5rem;
+  }

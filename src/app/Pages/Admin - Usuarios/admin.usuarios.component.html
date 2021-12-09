@@ -1,0 +1,246 @@
+<h3>Administración de Usuarios</h3>
+
+<button
+  class="float-right text-capitalize d-block"
+  nbButton
+  (click)="openDialog(CreateUser, false)"
+>
+  Agregar nuevo Usuario
+</button>
+<br />
+<div class="card mt-4">
+  <div class="card-body d-inline">
+    <h4 class="text-center p-3">
+      Lista de Psicólogos
+    </h4>
+    <table class="table table-sm table-hover mb-5">
+      <tbody>
+        <tr>
+          <th></th>
+          <th><strong>Identificación</strong></th>
+          <th><strong>Nombre</strong></th>
+          <th><strong>Correo</strong></th>
+          <th><strong>Rol</strong></th>
+        </tr>
+        <tr *ngFor="let item of psicologos | async">
+          <td>
+            <a
+              class="btn btn-outline-primaryprimary text-primary"
+              (click)="openDialog(UpdateUser, true, item.id)"
+            >
+              <nb-icon icon="more-vertical-outline"></nb-icon>
+            </a>
+          </td>
+          <td>{{ item.id }}</td>
+          <td>{{ item.nombre }} {{ item.apellido }}</td>
+          <td>{{ item.correo }}</td>
+          <td>{{ item.rol }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<div class="card mt-4">
+  <div class="card-body d-inline">
+    <h4 class="text-center p-3">
+      Lista de Administradores
+    </h4>
+    <table class="table table-sm table-hover mb-5">
+      <tbody>
+        <tr>
+          <th></th>
+          <th><strong>Identificación</strong></th>
+          <th><strong>Nombre</strong></th>
+          <th><strong>Correo</strong></th>
+          <th><strong>Rol</strong></th>
+        </tr>
+        <tr *ngFor="let item of administradores | async">
+          <td>
+            <a
+              class="btn btn-outline-primaryprimary text-primary"
+              (click)="openDialog(UpdateUser, true, item.id)"
+            >
+              <nb-icon icon="more-vertical-outline"></nb-icon>
+            </a>
+          </td>
+          <td>{{ item.id }}</td>
+          <td>{{ item.nombre }} {{ item.apellido }}</td>
+          <td>{{ item.correo }}</td>
+          <td>{{ item.rol }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<ng-template #CreateUser let-data let-ref="dialogRef">
+  <nb-card>
+    <nb-card-header>
+      <h6>Crear nuevo Usuario</h6>
+    </nb-card-header>
+    <nb-card-body>
+      <p>
+        Instrucciones: Agregue los datos del nuevo usuario y presiones el botón
+        enviar para confirmar.
+      </p>
+      <form
+        id="createUserForm"
+        #createUserForm="ngForm"
+        (ngSubmit)="addUser(createUserForm)"
+      >
+        <div class="form-group">
+          <label for="id">Identificación</label>
+          <input type="text" name="id" class="form-control" ngModel required />
+        </div>
+        <div class="form-group">
+          <label for="nombre">Nombre</label>
+          <input
+            type="text"
+            name="nombre"
+            class="form-control"
+            ngModel
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="apellido">Apellido</label>
+          <input
+            type="text"
+            name="apellido"
+            class="form-control"
+            ngModel
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="apellido">Correo</label>
+          <input
+            type="email"
+            name="correo"
+            class="form-control"
+            ngModel
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="rol">Tipo de usuario</label>
+          <select name="rol" class="form-control" ngModel required>
+            <option disabled selected value>--Seleccione--</option>
+            <option>Administrador</option>
+            <option>Psicólogo</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="clave">Contraseña</label>
+          <input
+            type="password"
+            name="clave"
+            class="form-control"
+            ngModel
+            required
+          />
+        </div>
+        <hr />
+        <button (click)="ref.close()" class="btn btn-info">Cancelar</button>
+        <button
+          id="submit"
+          type="submit"
+          [disabled]="createUserForm.invalid"
+          class="btn btn-primary float-right"
+        >
+          Enviar
+        </button>
+      </form>
+    </nb-card-body>
+  </nb-card>
+</ng-template>
+<ng-template #UpdateUser let-data let-ref="dialogRef">
+  <nb-card>
+    <nb-card-header>
+      <h6>Modificar Usuario</h6>
+    </nb-card-header>
+    <nb-card-body>
+      <p>
+        Instrucciones: Modifique los datos del usuario y presiones el botón
+        guardar cambios para confirmar.
+      </p>
+      <form
+        id="updateUserForm"
+        #updateUserForm="ngForm"
+        (ngSubmit)="updateUser(updateUserForm)"
+      >
+        <div class="form-group">
+          <label for="id">Identificación</label>
+          <input
+            #id
+            type="text"
+            name="id"
+            class="form-control"
+            readonly
+            ngModel
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="nombre">Nombre</label>
+          <input
+            type="text"
+            name="nombre"
+            class="form-control"
+            ngModel
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="apellido">Apellido</label>
+          <input
+            type="text"
+            name="apellido"
+            class="form-control"
+            ngModel
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="apellido">Correo</label>
+          <input
+            #correo
+            type="email"
+            name="correo"
+            class="form-control"
+            ngModel
+            required
+            readonly
+          />
+        </div>
+        <div class="form-group">
+          <label for="rol">Tipo de usuario</label>
+          <select name="rol" class="form-control" ngModel required>
+            <option disabled selected value>--Seleccione--</option>
+            <option>Administrador</option>
+            <option>Psicólogo</option>
+          </select>
+        </div>
+        <button
+          type="button"
+          (click)="recoverPassword(correo.value)"
+          name="recoverPassword"
+          class="btn btn-secondary"
+        >
+          Enviar contraseña de recuperación al correo
+        </button>
+        <hr />
+        <button (click)="ref.close()" class="btn btn-info">Cancelar</button>
+        <button
+          type="button"
+          (click)="deleteUser(id.value)"
+          class="btn btn-danger mx-2"
+        >
+          Eliminar Usuario
+        </button>
+        <button id="submit" type="submit" class="btn btn-primary float-right">
+          Guardar cambios
+        </button>
+      </form>
+    </nb-card-body>
+  </nb-card>
+</ng-template>

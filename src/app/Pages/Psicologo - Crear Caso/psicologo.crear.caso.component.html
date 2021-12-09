@@ -1,0 +1,887 @@
+<h3 class="mb-5">Registro de nuevo caso</h3>
+
+<nb-card>
+  <nb-card-header>
+    <h5 class="text-center">Datos del caso</h5>
+  </nb-card-header>
+  <nb-card-body>
+    <form #createCaseForm="ngForm" class="row">
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="fecha_inicio">Fecha Inicial (*)</label>
+          <input
+            type="datetime-local"
+            name="fecha_inicio"
+            class="form-control"
+            ngModel
+            required
+          />
+        </div>
+        <hr class="w-100 mt-4" />
+        <div class="form-group">
+          <label for="quien_comunica">¿Quién se comunica? (*)</label>
+          <select name="quien_comunica" class="form-control" ngModel required>
+            <option disabled selected value>--Seleccione--</option>
+            <option>El mismo usuario</option>
+            <option #otraPersona>Otra persona</option>
+          </select>
+        </div>
+        <div class="form-group" *ngIf="otraPersona.selected">
+          <label for="nombre_llama">Nombre de quien llama</label>
+          <input type="text" name="nombre_llama" class="form-control" ngModel />
+        </div>
+        <div class="form-group" *ngIf="otraPersona.selected">
+          <label for="documento_llama">Documento de quien llama</label>
+          <input
+            type="text"
+            name="documento_llama"
+            class="form-control"
+            ngModel
+          />
+        </div>
+        <div class="form-group" *ngIf="otraPersona.selected">
+          <label for="relacion">Relación con el usuario</label>
+          <input type="text" name="relacion" class="form-control" ngModel />
+        </div>
+        <div class="form-group">
+          <label for="tipo_paciente">Tipo de usuario (*)</label>
+          <select
+            name="tipo_paciente"
+            class="form-control"
+            ngModel
+            required
+            (change)="validatePaciente(pacienteNuevo)"
+          >
+            <option disabled selected value>--Seleccione--</option>
+            <option #pacienteNuevo>Usuario nuevo</option>
+            <option #pacienteExistente>Usuario existente</option>
+          </select>
+        </div>
+        <div class="form-group" *ngIf="pacienteExistente.selected">
+          <label for="paciente">Identificación del Paciente (*)</label>
+          <input
+            type="text"
+            name="paciente"
+            class="form-control"
+            ngModel
+            required
+          />
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="fecha_fin">Fecha Final (*)</label>
+          <input
+            type="datetime-local"
+            name="fecha_fin"
+            class="form-control"
+            ngModel
+            required
+          />
+        </div>
+        <hr class="w-100 mt-4" />
+        <div class="form-group">
+          <label for="origen">Origen (*)</label>
+          <select name="origen" class="form-control" ngModel required>
+            <option disabled selected value>--Seleccione--</option>
+            <option>Redes Sociales</option>
+            <option>Teléfono</option>
+            <option>Whatsapp</option>
+            <option>Correo</option>
+            <option>Buzón</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="motivoConsulta">Motivo de consulta (*)</label>
+          <select name="motivoConsulta" class="form-control" ngModel required>
+            <option disabled selected value>--Seleccione--</option>
+            <option #m17>Coronavirus Covid-19</option>
+            <option #m1>Salud</option>
+            <option #m2>Salud Mental</option>
+            <option #m3>Dinámica Familiar</option>
+            <option #m4>Relaciones en contexto</option>
+            <option #m5>Trastornos Mentales y del comportamiento</option>
+            <option #m6>Estados Emocionales Específicos</option>
+            <option #m7>Suicidio</option>
+            <option #m8>Sustancias PSICO ADICTIVAS</option>
+            <option #m9
+              >Situaciones en la educación y contextos académicos</option
+            >
+            <option #m10>Desarrollo Laboral</option>
+            <option #m11>Salud sexual y reproductiva</option>
+            <option #m12>Violencia</option>
+            <option #m13
+              >Vulnerabilidad Social - Barreras de acceso a servicios</option
+            >
+            <option #m14>Protocolos Internos</option>
+            <option #m15>Juego</option>
+            <option>No aplica</option>
+            <option #m16>Otro</option>
+          </select>
+        </div>
+        <div class="form-group" *ngIf="m1.selected">
+          <label for="especificoSalud">Motivo específico (*)</label>
+          <select name="especificoSalud" class="form-control" ngModel required>
+            <option disabled selected value>--Seleccione--</option>
+            <option>Enfermedades prevalentes por etapa del ciclo vital</option>
+            <option
+              >RIAS primera infancia – crecimiento y desarrollo, vacunación,
+              nutrición</option
+            >
+            <option>Cuidado al cuidador</option>
+            <option>Hábitos y estilos de vida saludables</option>
+            <option>Nutrición</option>
+          </select>
+        </div>
+        <div class="form-group" *ngIf="m2.selected">
+          <label for="especificoSaludMental">Motivo específico (*)</label>
+          <select
+            name="especificoSaludMental"
+            class="form-control"
+            ngModel
+            required
+          >
+            <option disabled selected value>--Seleccione--</option>
+            <option>Habilidades para la vida</option>
+            <option>Habilidades cognitivas</option>
+            <option>Habilidades sociales</option>
+            <option>Habilidades emocionales</option>
+            <option>Autoesquemas</option>
+            <option>Autoimagen, autoconcepto y autoestima</option>
+            <option>Proyecto de vida</option>
+            <option>Cumplimiento de Metas Personales</option>
+            <option>Dinámicas de relacionamiento</option>
+            <option>Búsqueda de red de apoyo</option>
+          </select>
+        </div>
+        <div class="form-group" *ngIf="m3.selected">
+          <label for="especificoFamiliar">Motivo específico (*)</label>
+          <select
+            name="especificoFamiliar"
+            class="form-control"
+            ngModel
+            required
+          >
+            <option disabled selected value>--Seleccione--</option>
+            <option>Relaciones Familiares</option>
+            <option>Padres en conflicto (separación, divorcio…)</option>
+            <option
+              >Relaciones de pareja (infidelidad, otros conflictos de
+              pareja…)</option
+            >
+            <option>Relaciones entre Padres e hijos - hijos y padres</option>
+            <option>Relaciones entre hijos-hijos y padres</option>
+            <option>Relaciones entre hermanos</option>
+            <option>Conflictos con parientes o familia extensa</option>
+            <option>Pautas de crianza</option>
+            <option>Relaciones con otros adultos</option>
+            <option>Relación con mascotas domésticas</option>
+          </select>
+        </div>
+        <div class="form-group" *ngIf="m4.selected">
+          <label for="especificoContexto">Motivo específico (*)</label>
+          <select
+            name="especificoContexto"
+            class="form-control"
+            ngModel
+            required
+          >
+            <option disabled selected value>--Seleccione--</option>
+            <option>Relaciones de pares</option>
+            <option>Relaciones con amigos-amigas</option>
+            <option>Ausencia de amigos-amigas</option>
+            <option>Relación con Espacio Educativo</option>
+          </select>
+        </div>
+        <div class="form-group" *ngIf="m5.selected">
+          <label for="especificoTrastornos">Motivo específico</label>
+          <select
+            name="especificoTrastornos"
+            class="form-control"
+            ngModel
+            required
+          >
+            <option disabled selected value>--Seleccione--</option>
+            <option>Depresión</option>
+            <option>Ansiedad</option>
+            <option>Trastorno mixto de ansiedad y depresión</option>
+            <option>Trastornos neuropsiquiátricos</option>
+            <option>Trastornos afectivo bipolar</option>
+            <option>Trastornos generalizados del desarrollo</option>
+            <option>Trastorno de conducta alimentaria</option>
+            <option>Psicosis</option>
+            <option>Fobias</option>
+          </select>
+        </div>
+        <div class="form-group" *ngIf="m6.selected">
+          <label for="especificoEstadosEmocionales"
+            >Motivo específico (*)</label
+          >
+          <select
+            name="especificoEstadosEmocionales"
+            class="form-control"
+            ngModel
+            required
+          >
+            <option disabled selected value>--Seleccione--</option>
+            <option>Soledad</option>
+            <option>Sentimiento de Tristeza</option>
+            <option>Expresividad Afectiva y manejo de emociones</option>
+            <option>Perdida o Duelo</option>
+          </select>
+        </div>
+        <div class="form-group" *ngIf="m7.selected">
+          <label for="especificoSuicidio">Motivo específico (*)</label>
+          <select
+            name="especificoSuicidio"
+            class="form-control"
+            ngModel
+            required
+          >
+            <option disabled selected value>--Seleccione--</option>
+            <option>Conducta Suicida</option>
+            <option>Idea Suicida</option>
+            <option>Amenaza (plan) Suicida</option>
+            <option>Intento de Suicidio</option>
+            <option>Suicidio Consumado</option>
+            <option>Autolesión</option>
+          </select>
+        </div>
+        <div class="form-group" *ngIf="m8.selected">
+          <label for="especificoSustancias">Motivo específico (*)</label>
+          <select
+            name="especificoSustancias"
+            class="form-control"
+            ngModel
+            required
+          >
+            <option disabled selected value>--Seleccione--</option>
+            <option>Consumo de Sustancias Psicoactivas</option>
+            <option>Inquietudes sobre el uso de SPA</option>
+            <option>Consumo problemático de alcohol</option>
+          </select>
+        </div>
+        <div class="form-group" *ngIf="m9.selected">
+          <label for="especificoEducacion">Motivo específico (*)</label>
+          <select
+            name="especificoEducacion"
+            class="form-control"
+            ngModel
+            required
+          >
+            <option disabled selected value>--Seleccione--</option>
+            <option>Deserción Educativa</option>
+            <option>Problemas Académicos</option>
+            <option>Ansiedad de Desempeño</option>
+            <option>NNAA con capacidades diferenciadas</option>
+            <option>NNAA en condición de discapacidad</option>
+            <option>NNAA con capacidades y talentos excepcionales</option>
+            <option>Alertas en el desarrollo</option>
+            <option>Alteraciones en el neurodesarrollo</option>
+            <option>Alteraciones específicas en el aprendizaje escolar</option>
+            <option>Orientación vocacional</option>
+            <option>Convivencia Escolar</option>
+            <option>Manejo de Redes Sociales Virtuales</option>
+            <option>Manejo del Tiempo Libre y Juego - Actividad Lúdica</option>
+            <option>Fecha Especial</option>
+            <option>Habilidades Artísticas</option>
+          </select>
+        </div>
+        <div class="form-group" *ngIf="m10.selected">
+          <label for="especificoLaboral">Motivo específico (*)</label>
+          <select
+            name="especificoLaboral"
+            class="form-control"
+            ngModel
+            required
+          >
+            <option disabled selected value>--Seleccione--</option>
+            <option>Desempleo</option>
+            <option>Ambiente Laboral</option>
+            <option>Jubilación, pensión y uso del buen retiro</option>
+          </select>
+        </div>
+        <div class="form-group" *ngIf="m11.selected">
+          <label for="especificoSaludSexual">Motivo específico (*)</label>
+          <select
+            name="especificoSaludSexual"
+            class="form-control"
+            ngModel
+            required
+          >
+            <option disabled selected value>--Seleccione--</option>
+            <option>Inquietudes sobre sexualidad</option>
+            <option>Sexualidad en Personas con Discapacidad</option>
+            <option>Embarazo</option>
+            <option>Identidad de género</option>
+            <option>Infecciones de transmisión sexual</option>
+            <option>Orientación sexual</option>
+            <option>Noviazgo</option>
+            <option>Métodos anticonceptivos</option>
+            <option>Sentencia C355 – IVE </option>
+          </select>
+        </div>
+        <div class="form-group" *ngIf="m12.selected">
+          <label for="especificoViolencia">Motivo específico (*)</label>
+          <select
+            name="especificoViolencia"
+            class="form-control"
+            ngModel
+            required
+          >
+            <option disabled selected value>--Seleccione--</option>
+            <option>Violencia Física</option>
+            <option>Violencia Sexual</option>
+            <option>Violencia Psicológica</option>
+            <option>Violencia por Negligencia</option>
+            <option>Violencia por Intimidación Escolar</option>
+            <option>Violencia Informática</option>
+            <option>Explotación Sexual Comercial de NNA</option>
+            <option>Explotación Laboral Infantil</option>
+            <option>Violencia contra adultos mayores</option>
+            <option>Otras formas de violencia</option>
+          </select>
+        </div>
+        <div class="form-group" *ngIf="m13.selected">
+          <label for="especificoVulnerabilidad">Motivo específico (*)</label>
+          <select
+            name="especificoVulnerabilidad"
+            class="form-control"
+            ngModel
+            required
+          >
+            <option disabled selected value>--Seleccione--</option>
+            <option>Educción</option>
+            <option>Salud</option>
+            <option>Protección</option>
+            <option>Recreación</option>
+          </select>
+        </div>
+        <div class="form-group" *ngIf="m14.selected">
+          <label for="especificoProtocolos">Motivo específico (*)</label>
+          <select
+            name="especificoProtocolos"
+            class="form-control"
+            ngModel
+            required
+          >
+            <option selected value>Otros motivos no clasificados</option>
+          </select>
+        </div>
+        <div class="form-group" *ngIf="m16.selected">
+          <label for="cual_motivo">¿Cuál motivo? (*)</label>
+          <input
+            type="text"
+            name="cual_motivo"
+            class="form-control"
+            ngModel
+            required
+          />
+        </div>
+        <div class="form-group" *ngIf="m17.selected">
+          <label for="especificoCoronavirus">Motivo específico (*)</label>
+          <select
+            name="especificoCoronavirus"
+            class="form-control"
+            ngModel
+            required
+          >
+            <option disabled selected value>--Seleccione--</option>
+            <option
+              >Información de protocolos prevención y cuidado sobre el
+              COVID-19</option
+            >
+            <option
+              >Reporte de sintomatología sospechosa para caso de
+              COVID-19</option
+            >
+            <option>Información sobre rutas de atención del COVID-19</option>
+            <option
+              >Información sobre normativas que rigen durante el estado de
+              emergencia sanitaria</option
+            >
+            <option
+              >Afectaciones de salud mental debido al aislamiento
+              obligatorio</option
+            >
+            <option
+              >Reporte de casos de violencia intrafamiliar debido al aislamiento
+              obligatorio</option
+            >
+            <option>Otras relacionadas con el aislamiento obligatorio</option>
+            <option>Otras relacionadas con el COVID-19</option>
+          </select>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="turno">Turno (*)</label>
+          <select name="turno" class="form-control" ngModel required>
+            <option disabled selected value>--Seleccione--</option>
+            <option>7:00 AM - 01:00 PM</option>
+            <option>1:00 PM - 07:00 PM</option>
+            <option>7:00 PM - 07:00 AM</option>
+          </select>
+        </div>
+        <hr class="w-100 mt-4" />
+        <div class="form-group">
+          <label for="fuente">Número o correo del usuario (*)</label>
+          <input
+            type="text"
+            name="fuente"
+            class="form-control"
+            ngModel
+            required
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="linea_intervencion">Linea de intervención (*)</label>
+          <select
+            name="linea_intervencion"
+            class="form-control"
+            ngModel
+            required
+          >
+            <option disabled selected value>--Seleccione--</option>
+            <option>Acompañamiento psicosocial</option>
+            <option>Promoción de la Salud y Prevención de la enfermedad</option>
+            <option>Información</option>
+            <option #remision>Remisión</option>
+            <option>Referenciación</option>
+            <option>Seguimiento de las acciones de los usuarios</option>
+            <option>Seguimiento Institucional</option>
+          </select>
+        </div>
+        <div class="form-group" *ngIf="remision.selected">
+          <label for="remision">¿Cuál entidad? (*)</label>
+          <select name="remision" class="form-control" ngModel required>
+            <option disabled selected value>--Seleccione--</option>
+            <option>ICBF (Regional Valle del Cauca)</option>
+            <option>Fiscalía General de la Nación</option>
+            <option>Comisaría de familia</option>
+            <option>CESPA</option>
+            <option>Defensoría del pueblo</option>
+            <option>Personería Municipal</option>
+            <option>Veeduría ciudadana</option>
+            <option>Procuraduría General de la Nación</option>
+            <option>Contraloría General de la República</option>
+            <option>CAVIF</option>
+            <option>URI</option>
+            <option>CAPIV</option>
+            <option>SIJIN</option>
+            <option>EAPB (u otras entidades de salud)</option>
+            <option>Hospitales</option>
+            <option
+              >Línea 155 de orientación a mujeres víctimas de la Policía
+              Nacional de Colombia</option
+            >
+            <option>SIVIGILA</option>
+            <option
+              >Instituciones educativas / Instituciones de educación
+              superior</option
+            >
+            <option>Línea 141 de Protección ICBF</option>
+            <option>Línea 123 de la Policía Nacional de Colombia</option>
+            <option>Línea 119 Bomberos</option>
+            <option>Línea 132 de Cruz Roja</option>
+            <option>Línea 144 de la Defensa Civil</option>
+            <option
+              >Línea 018000911119 de Reparación Integral de Víctimas</option
+            >
+            <option>Línea 122 para denunciar casos de trata de personas</option>
+            <option
+              >Línea 018000522020 para denunciar casos de trata de
+              personas</option
+            >
+            <option #otroSS>Otros servicios sociales</option>
+            <option #otroNF>Otros no formulados</option>
+            <option
+              >Línea 112 del Centro Regulador de Urgencias, Emergencias y
+              Desastres (CRUE)</option
+            >
+            <option>Policía de infancia y adolescencia</option>
+          </select>
+        </div>
+        <div class="form-group" *ngIf="remision.selected">
+          <label for="respuesta">Respuesta efectiva (*)</label>
+          <select name="respuesta" class="form-control" ngModel required>
+            <option disabled selected value>--Seleccione--</option>
+            <option>Oficio enviado</option>
+            <option>Oficio recibido</option>
+            <option>Respuesta de la entidad</option>
+            <option>Caso cerrado</option>
+          </select>
+        </div>
+        <div class="form-group" *ngIf="remision.selected">
+          <label for="radicado">Número de radicado (*)</label>
+          <input
+            type="text"
+            name="radicado"
+            class="form-control"
+            ngModel
+            required
+          />
+        </div>
+      </div>
+      <hr class="w-100 mt-4" />
+      <div class="col-12">
+        <div class="form-group">
+          <label for="narrativa">Narrativa (*)</label>
+          <textarea
+            #narrativa
+            (keyup)="counter(narrativa, current, counterLetter)"
+            name="narrativa"
+            class="form-control"
+            maxlength="8000"
+            ngModel
+            required
+          ></textarea>
+          <div #counterLetter class="my-2 float-right">
+            <span #current>0</span>
+            <span> / 8.000</span>
+          </div>
+        </div>
+        <div *ngIf="nuevoPaciente">
+          <hr class="w-100 mt-5" />
+          <h5 class="my-4 text-center">Datos del nuevo usuario</h5>
+          <form #createUsuarioForm="ngForm" class="d-block d-lg-flex">
+            <div class="col-md-4">
+              <div class="form-group">
+                <label for="tipo_id">Tipo de documento</label>
+                <select name="tipo_id" class="form-control" ngModel>
+                  <option #seleccione disabled selected value
+                    >--Seleccione--</option
+                  >
+                  <option>Cedula de Ciudadanía</option>
+                  <option>Cedula de Extranjería</option>
+                  <option #adultoNI>Adulto sin identificar</option>
+                  <option>Registro civil</option>
+                  <option>Tarjeta de identidad</option>
+                  <option>Pasaporte</option>
+                  <option #menorNI>Menor sin Identificar</option>
+                </select>
+              </div>
+              <div
+                class="form-group"
+                *ngIf="
+                  !seleccione.selected &&
+                  !adultoNI.selected &&
+                  !menorNI.selected
+                "
+              >
+                <label for="id">Número de identificación</label>
+                <input type="text" name="id" class="form-control" ngModel />
+              </div>
+              <div class="form-group">
+                <label for="nombre">Nombre</label>
+                <input type="text" name="nombre" class="form-control" ngModel />
+              </div>
+              <div class="form-group">
+                <label for="apellido">Apellido</label>
+                <input
+                  type="text"
+                  name="apellido"
+                  class="form-control"
+                  ngModel
+                />
+              </div>
+              <div class="form-group">
+                <label for="fecha_nacimiento">Fecha de nacimiento</label>
+                <input
+                  type="date"
+                  name="fecha_nacimiento"
+                  class="form-control"
+                  ngModel
+                />
+              </div>
+
+              <div class="form-group">
+                <label for="edad">Edad</label>
+                <input type="number" name="edad" class="form-control" ngModel />
+              </div>
+              <div class="form-group">
+                <label for="estado_civil">Estado civil</label>
+                <select name="estado_civil" class="form-control" ngModel>
+                  <option disabled selected value>--Seleccione--</option>
+                  <option>Soltero(a)</option>
+                  <option>Casado(a)</option>
+                  <option>Unión libre</option>
+                  <option>Divorciado(a)</option>
+                  <option>Viudo(a)</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="col-md-4">
+              <div class="form-group">
+                <label for="sexo">Sexo (*)</label>
+                <select name="sexo" class="form-control" ngModel required>
+                  <option disabled selected value>--Seleccione--</option>
+                  <option>Mujer</option>
+                  <option>Hombre</option>
+                  <option>Intersexual</option>
+                  <option>No sabe/No informa/ No Aplica</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="genero">Género (*)</label>
+                <select name="genero" class="form-control" ngModel required>
+                  <option disabled selected value>--Seleccione--</option>
+                  <option>Femenino</option>
+                  <option>Masculino</option>
+                  <option>Transgenerista</option>
+                  <option>Otro</option>
+                  <option>No sabe/No informa/ No Aplica</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="orientacion_sexual">Orientación sexual</label>
+                <select name="orientacion_sexual" class="form-control" ngModel>
+                  <option disabled selected value>--Seleccione--</option>
+                  <option>Homosexual</option>
+                  <option>Heretosexual</option>
+                  <option>Bisexual</option>
+                  <option>Otro</option>
+                  <option>No sabe/No informa/ No Aplica</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="etnicidad">Pertenencia Étnica</label>
+                <select name="etnicidad" class="form-control" ngModel>
+                  <option disabled selected value>--Seleccione--</option>
+                  <option>Indígena</option>
+                  <option>Rom</option>
+                  <option>Raizal</option>
+                  <option>Palenquero</option>
+                  <option>Negro/Mulato/Afrocolombiano</option>
+                  <option>Otro</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="poblacion_interes">Población de interés</label>
+                <select name="poblacion_interes" class="form-control" ngModel>
+                  <option disabled selected value>--Seleccione--</option>
+                  <option>Gestante</option>
+                  <option
+                    >PSD (Población en Situación de Desplazamiento)</option
+                  >
+                  <option>Habitante de Calle</option>
+                  <option>Discapacidad</option>
+                  <option>LGBTI</option>
+                  <option>Trabajador Infantil</option>
+                  <option>No Escolarizado</option>
+                  <option>Riesgo o Vinculación al Conflicto Armado</option>
+                  <option
+                    >Trastorno por déficit de atención con hiperactividad
+                  </option>
+                  <option>Migrantes</option>
+                  <option>Carcelarios</option>
+                  <option>NNA bajo protección ICBF</option>
+                  <option>Madres Comunitarias</option>
+                  <option>Desmovilizados</option>
+                  <option>Centro psiquiátrico</option>
+                  <option>Otros grupos poblacionales</option>
+                  <option>No aplica</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="sisben">Sisben</label>
+                <input type="text" name="sisben" class="form-control" ngModel />
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <label for="municipio">Municipio</label>
+                <select name="municipio" class="form-control" ngModel>
+                  <option disabled selected value>--Seleccione--</option>
+                  <option>Cali</option>
+                  <option>Alcalá</option>
+                  <option>Andalucía</option>
+                  <option>Ansermanuevo</option>
+                  <option>Argelia</option>
+                  <option>Bolívar</option>
+                  <option>Buenaventura</option>
+                  <option>Bugalagrande</option>
+                  <option>Buga</option>
+                  <option>Caicedonia</option>
+                  <option>Calima - El Darién</option>
+                  <option>Candelaria</option>
+                  <option>Cartago</option>
+                  <option>Dagua</option>
+                  <option>El Águila</option>
+                  <option>El Cairo</option>
+                  <option>El Cerrito</option>
+                  <option>El Dovio</option>
+                  <option>Florida</option>
+                  <option>Ginebra</option>
+                  <option>Guacarí</option>
+                  <option>Jamundí</option>
+                  <option>La Cumbre</option>
+                  <option>La Unión</option>
+                  <option>La Victoria</option>
+                  <option>Obando</option>
+                  <option>Palmira</option>
+                  <option>Pradera</option>
+                  <option>Restrepo</option>
+                  <option>Riofrío</option>
+                  <option>Roldanillo</option>
+                  <option>San Pedro</option>
+                  <option>Sevilla</option>
+                  <option>Toro</option>
+                  <option>Trujillo</option>
+                  <option>Tuluá</option>
+                  <option>Ulloa</option>
+                  <option>Versalles</option>
+                  <option>Vijes</option>
+                  <option>Yotoco</option>
+                  <option>Yumbo</option>
+                  <option>Zarzal</option>
+                  <option #otroDep>Otro departamento</option>
+                </select>
+              </div>
+              <div class="form-group" *ngIf="otroDep.selected">
+                <label for="otroDepartamento">Departamento y municipio</label>
+                <input
+                  type="text"
+                  name="otroDepartamento"
+                  class="form-control"
+                  ngModel
+                />
+              </div>
+              <div class="form-group">
+                <label for="zona">Zona</label>
+                <select name="zona" class="form-control" ngModel>
+                  <option disabled selected value>--Seleccione--</option>
+                  <option>Urbana</option>
+                  <option #rural>Rural</option>
+                </select>
+              </div>
+              <div class="form-group" *ngIf="rural.selected">
+                <label for="vereda">Vereda</label>
+                <input type="text" name="vereda" class="form-control" ngModel />
+              </div>
+              <div class="form-group">
+                <label for="direccion">Dirección</label>
+                <input
+                  type="text"
+                  name="direccion"
+                  class="form-control"
+                  ngModel
+                />
+              </div>
+              <div class="form-group">
+                <label for="como_conocio">¿Cómo conoció la linea 106?</label>
+                <input
+                  type="text"
+                  name="como_conocio"
+                  class="form-control"
+                  ngModel
+                />
+              </div>
+
+              <div class="form-group">
+                <label for="escolaridad">Escolaridad</label>
+                <select name="escolaridad" class="form-control" ngModel>
+                  <option disabled selected value>--Seleccione--</option>
+                  <option>Preescolar</option>
+                  <option>Básica Primaria</option>
+                  <option>Básica Secundaria</option>
+                  <option>Media (10° y 11°)</option>
+                  <option>Técnica</option>
+                  <option>Tecnológica</option>
+                  <option>Profesional</option>
+                  <option>Ninguno</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="ocupacion">Ocupación</label>
+                <select name="ocupacion" class="form-control" ngModel>
+                  <option disabled selected value>--Seleccione--</option>
+                  <option>Estudiante</option>
+                  <option>Desempleado(a)</option>
+                  <option>Empleado(a)</option>
+                  <option>Independiente</option>
+                  <option>Pensionado(a)</option>
+                </select>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="form-group">
+          <hr class="w-100 mt-3" *ngIf="nuevoPaciente" />
+          <label for="observaciones">Observaciones de cierre (*)</label>
+          <textarea
+            #observaciones
+            (keyup)="counter2(observaciones, current2, counterLetter2)"
+            name="observaciones"
+            class="form-control"
+            maxlength="4000"
+            ngModel
+            required
+          ></textarea>
+          <div #counterLetter2 class="my-2 float-right">
+            <span #current2>0</span>
+            <span> / 4.000</span>
+          </div>
+        </div>
+      </div>
+    </form>
+  </nb-card-body>
+  <nb-card-footer>
+    <button
+      class="btn btn-outline-success mx-2"
+      (click)="
+        redirect('https://www.adres.gov.co/BDUA/Consulta-Afiliados-BDUA')
+      "
+    >
+      Comprobador de derechos
+    </button>
+    <button
+      class="btn btn-outline-success mx-2"
+      (click)="
+        redirect(
+          'https://www.sisben.gov.co/atencion-al-ciudadano/paginas/consulta-del-puntaje.aspx'
+        )
+      "
+    >
+      Sisben
+    </button>
+    <button
+      (click)="resetForms()"
+      class="btn btn-info mx-2 float-right"
+      *ngIf="!nuevoPaciente"
+    >
+      Cancelar
+    </button>
+    <button
+      id="submit"
+      (click)="addCase(createCaseForm)"
+      type="submit"
+      *ngIf="!nuevoPaciente"
+      [disabled]="createCaseForm.invalid || sentButton"
+      class="btn btn-primary ml-2 float-right"
+    >
+      Enviar
+    </button>
+
+    <button
+      (click)="resetForms()"
+      class="btn btn-info mx-2 float-right"
+      *ngIf="nuevoPaciente"
+    >
+      Cancelar
+    </button>
+    <button
+      id="submit"
+      (click)="addCase(createCaseForm)"
+      type="submit"
+      *ngIf="nuevoPaciente"
+      [disabled]="!createCaseForm.valid || !createUsuarioForm.valid"
+      class="btn btn-primary ml-2 float-right"
+    >
+      Enviar
+    </button>
+  </nb-card-footer>
+</nb-card>
