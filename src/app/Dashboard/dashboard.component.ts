@@ -126,8 +126,6 @@ export class DashboardComponent implements OnInit {
     this.sidebarService.toggle(true);
   }
 
-  isLoggedIn = this.loginService.isLogged();
-
   itemsContext = [
     {
       title: "Cerrar sesión",

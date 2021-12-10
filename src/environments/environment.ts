@@ -4,13 +4,14 @@
 
 export const environment = {
   production: false,
+  apiUrl: 'http://localhost:8000',
   firebase: {
-    apiKey: "AIzaSyC0sVb-FwmZzKAZje8i3ug5yQINdkkgkAo",
-    authDomain: "linea-106.firebaseapp.com",
-    databaseURL: "https://linea-106.firebaseio.com",
-    projectId: "linea-106",
-    storageBucket: "linea-106.appspot.com",
+    apiKey: "123123213",
+    authDomain: "22.firebaseapp.com",
+    databaseURL: "https://22.firebaseio.com",
+    projectId: "22",
+    storageBucket: "22.appspot.com",
     messagingSenderId: "1075860310685",
-    appId: "1:1075860310685:web:3eb99d247526307e"
+    appId: "asdas"
   }
 };

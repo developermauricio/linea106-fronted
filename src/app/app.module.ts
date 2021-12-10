@@ -2,6 +2,7 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { BrowserModule } from "@angular/platform-browser";
 import { FormsModule } from "@angular/forms";
 import { NgModule } from "@angular/core";
+import { HttpClientModule } from "@angular/common/http";
 
 //Firebase imports
 import { AngularFireModule } from "@angular/fire";
@@ -11,6 +12,8 @@ import {
   AngularFireFunctionsModule,
   FUNCTIONS_ORIGIN,
 } from "@angular/fire/functions";
+
+
 
 //Nebular imports
 import {
@@ -129,6 +132,7 @@ import { Ng2SmartTableModule } from "ng2-smart-table";
     NbEvaIconsModule,
     FormsModule,
     Ng2SmartTableModule,
+    HttpClientModule
   ],
   providers: [
     LoginService,

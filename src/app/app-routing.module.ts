@@ -33,62 +33,61 @@ const routes: Routes = [
   {
     path: "",
     component: DashboardComponent,
-    canActivate: [LoginGuardian],
     children: [
       {
         path: "inicio",
         component: AdminInicioComponent,
-        canActivate: [LoginGuardian, AdminGuardian],
+        canActivate: [AdminGuardian],
       },
       {
         path: "casos",
         component: AdminCasosComponent,
-        canActivate: [LoginGuardian, AdminGuardian],
+        canActivate: [AdminGuardian],
       },
       {
         path: "usuarios",
         component: AdminUsuariosComponent,
-        canActivate: [LoginGuardian, AdminGuardian],
+        canActivate: [AdminGuardian],
       },
       {
         path: "reportes",
         component: AdminReportesComponent,
-        canActivate: [LoginGuardian, AdminGuardian],
+        canActivate: [AdminGuardian],
       },
       {
         path: "perfil",
         component: AdminMiPerfilComponent,
-        canActivate: [LoginGuardian, AdminGuardian],
+        canActivate: [AdminGuardian],
       },
       {
         path: "anuncios",
         component: PsicologoInicioComponent,
-        canActivate: [LoginGuardian, PsicologoGuardian],
+        canActivate: [PsicologoGuardian],
       },
       {
         path: "crearCaso",
         component: PsicologoCrearCasoComponent,
-        canActivate: [LoginGuardian, PsicologoGuardian],
+        canActivate: [PsicologoGuardian],
       },
       {
         path: "historialCasos",
         component: PsicologoCasosComponent,
-        canActivate: [LoginGuardian, PsicologoGuardian],
+        canActivate: [PsicologoGuardian],
       },
       {
         path: "misCasos",
         component: PsicologoMisCasosComponent,
-        canActivate: [LoginGuardian, PsicologoGuardian],
+        canActivate: [PsicologoGuardian],
       },
       {
         path: "miPerfil",
         component: PsicologoPerfilComponent,
-        canActivate: [LoginGuardian, PsicologoGuardian],
+        canActivate: [PsicologoGuardian],
       },
       {
         path: "seguimientos",
         component: PsicologoSeguimientoComponent,
-        canActivate: [LoginGuardian, PsicologoGuardian]
+        canActivate: [PsicologoGuardian]
       },
       {
         path: "estadisticas",
@@ -100,7 +99,7 @@ const routes: Routes = [
   {
     path: "login",
     component: LoginComponent
-  }
+  },
 ];
 
 @NgModule({
