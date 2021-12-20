@@ -145,4 +145,4 @@ import { Ng2SmartTableModule } from "ng2-smart-table";
   ],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }

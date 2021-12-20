@@ -15,6 +15,10 @@ import { DashboardComponent } from "../../Dashboard/dashboard.component";
 })
 export class PsicologoCrearCasoComponent implements OnInit {
   @ViewChild("createUsuarioForm") createUsuarioForm: NgForm;
+
+  currentDate;
+  lastDate;
+
   nuevoPaciente: boolean = false;
   sentButton: boolean = false;
   psicologo: string;
@@ -28,12 +32,31 @@ export class PsicologoCrearCasoComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.initDate();
     this.userDataService
       .getUserDataByEmail(this.dashboardComponent.getEmail())
       .subscribe(
         (user) =>
           (this.psicologo = user[0]["nombre"] + " " + user[0]["apellido"])
       );
+  }
+
+  private initDate() {
+    const date = new Date();
+    const time = date.toTimeString().slice(0, 5);
+    const fecha = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
+    this.currentDate = `${fecha}T${time}`;
+    this.lastDate = `${fecha}T${time}`;
+
+    const checkDate = /^[0-9]{4}-[0-9]{1,2}-[0-9]{1,2}(T|t)[0-9]{1,2}:[0-9]{1,2}$/;
+
+    if (!checkDate.test(this.currentDate)) {
+      this.currentDate = null;
+    }
+
+    if (!checkDate.test(this.lastDate)) {
+      this.lastDate = null;
+    }
   }
 
   addCase(createCaseForm: NgForm) {

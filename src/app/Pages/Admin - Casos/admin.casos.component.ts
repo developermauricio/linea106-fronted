@@ -24,7 +24,7 @@ export class AdminCasosComponent implements OnInit {
     private caseDataService: CaseDataService,
     private toastrService: NbToastrService,
     private dialogService: NbDialogService
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.caseDataService.getSizeCollection().subscribe((resp) => {
@@ -33,8 +33,13 @@ export class AdminCasosComponent implements OnInit {
         "$1."
       );
     });
-    this.caseDataService.getCases().subscribe((resp) => {
-      this.source = resp;
+    this.caseDataService.getOldCases().then(casesOld => {
+      this.caseDataService.getCasesLimited().subscribe((resp) => {
+        this.source = resp;
+        setTimeout(() => {
+          this.source = this.source.concat(casesOld);
+        }, 50);
+      });
     });
   }
 

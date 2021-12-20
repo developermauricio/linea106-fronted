@@ -33,7 +33,7 @@ export class PsicologoCasosComponent implements OnInit {
     private caseDataService: CaseDataService,
     private toastrService: NbToastrService,
     private dialogService: NbDialogService
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.caseDataService.getSizeCollection().subscribe((resp) => {
@@ -42,8 +42,10 @@ export class PsicologoCasosComponent implements OnInit {
         "$1."
       );
     });
-    this.caseDataService.getCases().subscribe((resp) => {
-      this.source = resp;
+    this.caseDataService.getOldCases().then(casesOld => {
+      this.caseDataService.getCasesLimited().subscribe((resp) => {
+        this.source = resp.concat(casesOld);
+      });
     });
     this.userDataService
       .getUserDataByEmail(this.dashboardComponent.getEmail())

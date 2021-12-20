@@ -1,14 +1,92 @@
 import { AngularFirestore } from "@angular/fire/firestore";
 import { Injectable } from "@angular/core";
+import { Observable } from 'rxjs';
 
 @Injectable()
 export class CaseDataService {
-  cases;
-  constructor(private db: AngularFirestore) {}
 
-  getCases() {
+
+  private caseDateFilter;
+  private cacheData: { [key: string]: any; } = {};
+
+  cases;
+
+  constructor(private db: AngularFirestore) {
+    this.updateCaseDateFilter();
+    // this.getOldCases().then(casesOld => {
+    //   this.casesOld = casesOld;
+    // });
+  }
+
+  private updateCaseDateFilter() {
+    const date = new Date();
+    date.setSeconds(0);
+    date.setMilliseconds(0);
+    date.setMinutes(0);
+    date.setHours(0);
+    this.caseDateFilter = (date.getTime() - this.dayToMilliseconds(2));
+  };
+
+  private dayToMilliseconds(quantity = 1) {
+    return 86400000 * quantity;
+  }
+
+  private getData(key, query: Observable<any>, subString = '0') {
+    this.updateCaseDateFilter();
+    let subKey = 0;
+    for (let i = 0; i < subString.length; i++) {
+      subKey += subString.charCodeAt(i);
+    }
+    const keyCache = `o_${this.caseDateFilter}${subKey}`;
+    return new Promise<any[]>((resolver, rechazar) => {
+      if (this.cacheData[key]) {
+        resolver(this.cacheData[key]);
+        return;
+      }
+      caches.open(key).then((cache) => {
+        cache.match(keyCache).then(resp => {
+          if (resp) {
+            resp.json().then(r => {
+              this.cacheData[key] = r;
+              resolver(r);
+            });
+          } else {
+            cache.keys().then(r => {
+              r.forEach(ca => {
+                cache.delete(ca);
+              });
+            });
+            const sub = query.subscribe(response => {
+              cache.put(keyCache, new Response(JSON.stringify(response))).then(() => {
+                this.cacheData[key] = response;
+                resolver(response);
+              });
+              sub.unsubscribe();
+            }, err => {
+              rechazar(err);
+              sub.unsubscribe();
+            });
+          }
+        });
+      });
+    });
+  }
+
+  getOldCases() {
+    const query = this.db
+      .collection("CASOS", (ref) => {
+        return ref.orderBy("fecha_inicio", "desc")
+          .where('fecha_inicio', '<', this.caseDateFilter);
+      }).valueChanges({ idField: "id" });
+    return this.getData('oldCases', query);
+  }
+
+  getCasesLimited() {
     return (this.cases = this.db
-      .collection("CASOS", (ref) => ref.orderBy("fecha_inicio", "desc"))
+      .collection("CASOS", (ref) => {
+        return ref.orderBy("fecha_inicio", "desc")
+          .where('fecha_inicio', '>=', this.caseDateFilter);
+      })
       .valueChanges({ idField: "id" }));
   }
 
@@ -60,10 +138,25 @@ export class CaseDataService {
       .valueChanges({ idField: "id" });
   }
 
-  getCaseByPsicologo(psicologo: string) {
+  getCaseByPsicologoOld(psicologo: string) {
+    const query = this.db
+      .collection("CASOS", (ref) =>
+        ref
+          .where("psicologo", "==", psicologo)
+          .where("fecha_inicio", "<", this.caseDateFilter)
+          .orderBy("fecha_inicio", "desc")
+      )
+      .valueChanges({ idField: "id" });
+
+    return this.getData('casesByPsicologo', query, psicologo);
+  }
+
+  getCaseByPsicologoLimit(psicologo: string) {
     return this.db
       .collection("CASOS", (ref) =>
-        ref.where("psicologo", "==", psicologo).orderBy("fecha_inicio", "desc")
+        ref.where("psicologo", "==", psicologo)
+          .where("fecha_inicio", ">=", this.caseDateFilter)
+          .orderBy("fecha_inicio", "desc")
       )
       .valueChanges({ idField: "id" });
   }

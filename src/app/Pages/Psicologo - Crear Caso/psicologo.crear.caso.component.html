@@ -13,7 +13,7 @@
             type="datetime-local"
             name="fecha_inicio"
             class="form-control"
-            ngModel
+            [(ngModel)]="currentDate"
             required
           />
         </div>
@@ -75,7 +75,7 @@
             type="datetime-local"
             name="fecha_fin"
             class="form-control"
-            ngModel
+            [(ngModel)]="lastDate"
             required
           />
         </div>
