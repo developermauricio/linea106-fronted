@@ -20,6 +20,8 @@ export class PsicologoCasosComponent implements OnInit {
   total;
   source;
 
+  loading = false;
+
   psicologoId: string;
   modalOpenCase: any;
   modalOpenPatient: any;
@@ -42,9 +44,26 @@ export class PsicologoCasosComponent implements OnInit {
         "$1."
       );
     });
+
+    this.loading = true;
     this.caseDataService.getOldCases().then(casesOld => {
       this.caseDataService.getCasesLimited().subscribe((resp) => {
         this.source = resp.concat(casesOld);
+        this.loading = false;
+      }, err => {
+        this.loading = false;
+        console.error('Error al traer los datos', err);
+        this.toastrService.show(
+          "Error al cargar los datos",
+          "Error",
+          {
+            destroyByClick: true,
+            preventDuplicates: true,
+            status: "danger",
+            icon: "alert-triangle",
+            iconPack: "eva",
+          }
+        );
       });
     });
     this.userDataService

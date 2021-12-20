@@ -19,6 +19,9 @@ export class AdminCasosComponent implements OnInit {
   modalOpenCase: any;
   modalOpenPatient: any;
   modalOpenDataCase: any;
+
+  loading = false;
+
   constructor(
     private patientDataService: PatientDataService,
     private caseDataService: CaseDataService,
@@ -27,6 +30,7 @@ export class AdminCasosComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.loading = true;
     this.caseDataService.getSizeCollection().subscribe((resp) => {
       this.total = ("" + resp["numberOfDocs"]).replace(
         /(\d)(?=(\d{3})+(?!\d))/g,
@@ -35,10 +39,22 @@ export class AdminCasosComponent implements OnInit {
     });
     this.caseDataService.getOldCases().then(casesOld => {
       this.caseDataService.getCasesLimited().subscribe((resp) => {
-        this.source = resp;
-        setTimeout(() => {
-          this.source = this.source.concat(casesOld);
-        }, 50);
+        this.loading = false;
+        this.source = resp.concat(casesOld);
+      }, err => {
+        this.loading = false;
+        console.error('Error al traer los datos', err);
+        this.toastrService.show(
+          "Error al cargar los datos",
+          "Error",
+          {
+            destroyByClick: true,
+            preventDuplicates: true,
+            status: "danger",
+            icon: "alert-triangle",
+            iconPack: "eva",
+          }
+        );
       });
     });
   }

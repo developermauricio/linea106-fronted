@@ -20,6 +20,8 @@ export class PsicologoMisCasosComponent implements OnInit {
   total;
   source;
 
+  loading = false;
+
   psicologoId: string;
   modalOpenCase: any;
   modalOpenPatient: any;
@@ -39,6 +41,7 @@ export class PsicologoMisCasosComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.loading = true;
     this.dashboardComponent.getUserData().subscribe((resp) => {
       this.psicologoId = resp[0]["id"];
       this.caseDataService.getCaseByPsicologoOld(this.psicologoId).then(casesOld => {
@@ -48,6 +51,21 @@ export class PsicologoMisCasosComponent implements OnInit {
             this.total = (this.source.length + "").replace(
               /(\d)(?=(\d{3})+(?!\d))/g,
               "$1."
+            );
+            this.loading = false;
+          }, err => {
+            this.loading = false;
+            console.error('Error al traer los datos', err);
+            this.toastrService.show(
+              "Error al cargar los datos",
+              "Error",
+              {
+                destroyByClick: true,
+                preventDuplicates: true,
+                status: "danger",
+                icon: "alert-triangle",
+                iconPack: "eva",
+              }
             );
           });
       });

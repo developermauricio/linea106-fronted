@@ -42,9 +42,16 @@
       </ng2-smart-table>
       <div class="row">
         <div class="col-12">
-          <h6 class="text-center">
-            <b>Mostrando 50 de {{ total }} casos</b>
-          </h6>
+          <ng-container *ngIf="loading; else elseTemplate">
+            <h6 class="text-center">
+              <b>Cargando...</b>
+            </h6>
+          </ng-container>
+          <ng-template #elseTemplate>
+            <h6 class="text-center">
+              <b>Mostrando 50 de {{ total }} casos</b>
+            </h6>
+          </ng-template>
         </div>
       </div>
     </nb-card-body>

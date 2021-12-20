@@ -1,6 +1,7 @@
 import { AngularFirestore } from "@angular/fire/firestore";
 import { Injectable } from "@angular/core";
 import { Observable } from 'rxjs';
+import { NbToastrService } from '@nebular/theme';
 
 @Injectable()
 export class CaseDataService {
@@ -11,11 +12,11 @@ export class CaseDataService {
 
   cases;
 
-  constructor(private db: AngularFirestore) {
+  constructor(
+    private db: AngularFirestore,
+    private toastrService: NbToastrService
+  ) {
     this.updateCaseDateFilter();
-    // this.getOldCases().then(casesOld => {
-    //   this.casesOld = casesOld;
-    // });
   }
 
   private updateCaseDateFilter() {
@@ -24,7 +25,7 @@ export class CaseDataService {
     date.setMilliseconds(0);
     date.setMinutes(0);
     date.setHours(0);
-    this.caseDateFilter = (date.getTime() - this.dayToMilliseconds(2));
+    this.caseDateFilter = (date.getTime() - this.dayToMilliseconds(1));
   };
 
   private dayToMilliseconds(quantity = 1) {
@@ -63,8 +64,20 @@ export class CaseDataService {
               });
               sub.unsubscribe();
             }, err => {
-              rechazar(err);
+              this.toastrService.show(
+                "Error al cargar los datos",
+                "Error",
+                {
+                  destroyByClick: true,
+                  preventDuplicates: true,
+                  status: "danger",
+                  icon: "alert-triangle",
+                  iconPack: "eva",
+                }
+              );
+              console.error("Error al traer los datos", err);
               sub.unsubscribe();
+              resolver([]);
             });
           }
         });
