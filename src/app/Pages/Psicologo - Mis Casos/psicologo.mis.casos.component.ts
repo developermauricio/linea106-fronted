@@ -36,21 +36,19 @@ export class PsicologoMisCasosComponent implements OnInit {
     private userDataService: UserDataService,
     private toastrService: NbToastrService,
     private dialogService: NbDialogService
-  ) {}
+  ) { }
 
   ngOnInit() {
-    this.dashboardComponent.getUserData().subscribe((resp) => {
-      this.psicologoId = resp[0]["id"];
-      this.caseDataService
-        .getCaseByPsicologo(this.psicologoId)
-        .subscribe((resp) => {
-          this.source = resp;
-          this.total = (resp.length + "").replace(
-            /(\d)(?=(\d{3})+(?!\d))/g,
-            "$1."
-          );
-        });
-    });
+    this.psicologoId = null;
+    this.caseDataService
+      .getCaseByPsicologo(this.psicologoId)
+      .subscribe((resp) => {
+        this.source = resp;
+        this.total = (resp.length + "").replace(
+          /(\d)(?=(\d{3})+(?!\d))/g,
+          "$1."
+        );
+      });
   }
 
   settings = {

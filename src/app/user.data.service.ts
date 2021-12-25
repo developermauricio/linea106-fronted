@@ -5,9 +5,9 @@ import { Injectable } from '@angular/core';
 export class UserDataService {
   constructor(private db: AngularFirestore) {}
 
-  getUserDataByEmail(email: string) {
-    return this.db.collection("USUARIOS", ref => ref.where("correo", "==", email)).valueChanges();
-  }
+  // getUserDataByEmail(email: string) {
+  //   return this.db.collection("USUARIOS", ref => ref.where("correo", "==", email)).valueChanges();
+  // }
 
   getUsersPsicologos() {
     return this.db.collection("USUARIOS", ref => ref.where("rol", "==", "Psicólogo")).valueChanges();

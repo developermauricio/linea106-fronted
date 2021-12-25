@@ -17,7 +17,7 @@ export class PsicologoCrearCasoComponent implements OnInit {
   @ViewChild("createUsuarioForm") createUsuarioForm: NgForm;
   nuevoPaciente: boolean = false;
   sentButton: boolean = false;
-  psicologo: string;
+
   constructor(
     private patientDataService: PatientDataService,
     private userDataService: UserDataService,
@@ -28,12 +28,6 @@ export class PsicologoCrearCasoComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.userDataService
-      .getUserDataByEmail(this.dashboardComponent.getEmail())
-      .subscribe(
-        (user) =>
-          (this.psicologo = user[0]["nombre"] + " " + user[0]["apellido"])
-      );
   }
 
   addCase(createCaseForm: NgForm) {
@@ -42,7 +36,7 @@ export class PsicologoCrearCasoComponent implements OnInit {
     newCase["fecha_inicio"] = new Date(newCase["fecha_inicio"]).getTime();
     newCase["fecha_fin"] = new Date(newCase["fecha_fin"]).getTime();
     newCase["ultima_actualizacion"] = new Date().valueOf();
-    newCase["psicologo"] = this.psicologo;
+    // newCase["psicologo"] = this.psicologo;
     if (newCase["tipo_paciente"] === "Usuario nuevo") {
       const newPatient = this.createUsuarioForm.value;
       if (newPatient.id) {

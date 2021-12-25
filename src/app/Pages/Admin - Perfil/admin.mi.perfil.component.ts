@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { LoginService } from 'src/app/Services/login.service';
 import { DashboardComponent } from '../../Dashboard/dashboard.component';
 
 @Component({
@@ -12,18 +13,21 @@ export class AdminMiPerfilComponent implements OnInit {
   userData: any[];
   rol = "";
 
-  constructor(private dashboard: DashboardComponent) {}
+  constructor(
+    private _loginService: LoginService,
+  ) { }
 
   ngOnInit() {
-    this.dashboard.getUserData().subscribe(resp => {
+    this._loginService.user.subscribe(user => {
+      console.log(user);
       this.profileForm.setValue({
-        id: resp[0]["id"],
-        nombre: resp[0]["nombre"],
-        apellido: resp[0]["apellido"],
-        correo: resp[0]["correo"],
-        rol: resp[0]["rol"]
+        id: user.id,
+        nombre: user.name,
+        apellido: user.last_name,
+        correo: user.email,
+        rol: user.rol
       });
-      this.rol = resp[0]["rol"];
+      this.rol = user.rol;
     });
   }
 }

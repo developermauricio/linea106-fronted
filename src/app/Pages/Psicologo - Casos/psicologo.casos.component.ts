@@ -6,6 +6,7 @@ import { NbToastrService, NbDialogService } from "@nebular/theme";
 import { SeguimientoDataService } from "../../seguimiento.data.service";
 import { UserDataService } from 'src/app/user.data.service';
 import { DashboardComponent } from 'src/app/Dashboard/dashboard.component';
+import { LoginService } from 'src/app/Services/login.service';
 
 @Component({
   selector: "app-psicologo.casos",
@@ -20,20 +21,18 @@ export class PsicologoCasosComponent implements OnInit {
   total;
   source;
 
-  psicologoId: string;
   modalOpenCase: any;
   modalOpenPatient: any;
   modalOpenDataCase: any;
   modalOpenSeguimiento: any;
+
   constructor(
     private seguimientoDataService: SeguimientoDataService,
-    private dashboardComponent: DashboardComponent,
     private patientDataService: PatientDataService,
-    private userDataService: UserDataService,
     private caseDataService: CaseDataService,
     private toastrService: NbToastrService,
     private dialogService: NbDialogService
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.caseDataService.getSizeCollection().subscribe((resp) => {
@@ -45,12 +44,6 @@ export class PsicologoCasosComponent implements OnInit {
     this.caseDataService.getCases().subscribe((resp) => {
       this.source = resp;
     });
-    this.userDataService
-      .getUserDataByEmail(this.dashboardComponent.getEmail())
-      .subscribe(
-        (user) =>
-          (this.psicologoId = user[0]["nombre"] + " " + user[0]["apellido"])
-      );
   }
 
   settings = {
@@ -302,7 +295,7 @@ export class PsicologoCasosComponent implements OnInit {
 
   addSeguimiento(seguimientoForm: NgForm) {
     let seguimiento = seguimientoForm.value;
-    seguimiento["psicologo"] = this.psicologoId;
+    seguimiento["psicologo"] = null;
     seguimiento["fecha"] = new Date().getTime();
     console.log(seguimiento);
     this.seguimientoDataService
