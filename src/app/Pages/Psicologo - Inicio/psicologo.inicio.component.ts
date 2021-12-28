@@ -1,6 +1,6 @@
-import { AnuncioDataService } from "../../anuncio.data.service";
 import { Component, OnInit } from '@angular/core';
-import { Observable } from "rxjs";
+import { AnuncioService } from 'src/app/Services/Psicologo/anuncio.service';
+import { AnuncioModel } from 'src/app/Models/anuncio.model';
 
 @Component({
   selector: "app-psicologo.inicio",
@@ -8,12 +8,16 @@ import { Observable } from "rxjs";
   styleUrls: ["./psicologo.inicio.component.css"]
 })
 export class PsicologoInicioComponent implements OnInit {
-  anuncios: Observable<any[]>;
+
+  anuncios: AnuncioModel[];
+
   constructor(
-    private anuncioDataService: AnuncioDataService,
-  ) {}
+    private _anuncioService: AnuncioService,
+  ) { }
 
   ngOnInit() {
-    this.anuncios = this.anuncioDataService.getAnuncios();
+    this._anuncioService.getAll().subscribe(res => {
+      this.anuncios = res;
+    });
   }
 }

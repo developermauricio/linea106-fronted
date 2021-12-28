@@ -1,37 +1,37 @@
 <nb-card>
-    <nb-card-header>
-        <h5>Mi perfil</h5>
-    </nb-card-header>
-    <nb-card-body class="row">
-        <div class="col-12 col-md-4">
-            <div class="card">
-                <img src="../../../assets/img/profile-pic.png" class="rounded-circle" alt="Perfil" style="width:100%">
-                <h4 class="text-center">{{rol}}</h4>
-            </div>
+  <nb-card-header>
+    <h5>Mi perfil</h5>
+  </nb-card-header>
+  <nb-card-body class="row">
+    <div class="col-12 col-md-4">
+      <div class="card">
+        <img src="../../../assets/img/profile-pic.png" class="rounded-circle" alt="Perfil" style="width:100%">
+        <h4 class="text-center">{{rol}}</h4>
+      </div>
+    </div>
+    <div class="col-12 col-md-6">
+      <form #miPerfil="ngForm">
+        <div class="form-group">
+          <label for="identificacion">Identificación</label>
+          <input #identificacion type="text" name="identificacion" class="form-control" ngModel readonly required>
         </div>
-        <div class="col-12 col-md-6">
-            <form #miPerfil="ngForm">
-                <div class="form-group">
-                    <label for="id">Identificación</label>
-                    <input #id type="text" name="id" class="form-control" ngModel readonly required>
-                </div>
-                <div class="form-group">
-                    <label for="nombre">Nombre</label>
-                    <input type="text" name="nombre" class="form-control" ngModel readonly required>
-                </div>
-                <div class="form-group">
-                    <label for="apellido">Apellido</label>
-                    <input type="text" name="apellido" class="form-control" ngModel readonly required>
-                </div>
-                <div class="form-group">
-                    <label for="correo">Correo</label>
-                    <input  type="text" name="correo" class="form-control" ngModel readonly required>
-                </div>
-                <div class="form-group">
-                    <label for="rol">Rol</label>
-                    <input type="text" name="rol" class="form-control" ngModel readonly required>
-                </div>
-            </form>
+        <div class="form-group">
+          <label for="nombre">Nombre</label>
+          <input type="text" name="nombre" class="form-control" ngModel readonly required>
         </div>
-    </nb-card-body>
+        <div class="form-group">
+          <label for="apellido">Apellido</label>
+          <input type="text" name="apellido" class="form-control" ngModel readonly required>
+        </div>
+        <div class="form-group">
+          <label for="correo">Correo</label>
+          <input type="text" name="correo" class="form-control" ngModel readonly required>
+        </div>
+        <div class="form-group">
+          <label for="rol">Rol</label>
+          <input type="text" name="rol" class="form-control" ngModel readonly required>
+        </div>
+      </form>
+    </div>
+  </nb-card-body>
 </nb-card>

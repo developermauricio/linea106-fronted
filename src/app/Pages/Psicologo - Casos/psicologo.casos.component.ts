@@ -1,12 +1,10 @@
 import { Component, OnInit, ViewChild, TemplateRef } from "@angular/core";
-import { CaseDataService } from "src/app/case.data.service";
 import { NgForm } from "@angular/forms";
 import { PatientDataService } from "../../patient.data.service";
 import { NbToastrService, NbDialogService } from "@nebular/theme";
 import { SeguimientoDataService } from "../../seguimiento.data.service";
-import { UserDataService } from 'src/app/user.data.service';
-import { DashboardComponent } from 'src/app/Dashboard/dashboard.component';
-import { LoginService } from 'src/app/Services/login.service';
+import { CasoService } from 'src/app/Services/Psicologo/caso.service';
+import { PaginateModel } from 'src/app/Models/paginate.model';
 
 @Component({
   selector: "app-psicologo.casos",
@@ -18,8 +16,9 @@ export class PsicologoCasosComponent implements OnInit {
   @ViewChild("casoDataForm") caseDataForm: NgForm;
   @ViewChild("pacienteForm") patientForm: NgForm;
   @ViewChild("seguimientoForm") seguimientoForm: NgForm;
-  total;
-  source;
+
+
+  casos: PaginateModel<CasoModel> = { data: [] };
 
   modalOpenCase: any;
   modalOpenPatient: any;
@@ -29,20 +28,14 @@ export class PsicologoCasosComponent implements OnInit {
   constructor(
     private seguimientoDataService: SeguimientoDataService,
     private patientDataService: PatientDataService,
-    private caseDataService: CaseDataService,
     private toastrService: NbToastrService,
-    private dialogService: NbDialogService
+    private dialogService: NbDialogService,
+    private _casoService: CasoService
   ) { }
 
   ngOnInit() {
-    this.caseDataService.getSizeCollection().subscribe((resp) => {
-      this.total = ("" + resp["numberOfDocs"]).replace(
-        /(\d)(?=(\d{3})+(?!\d))/g,
-        "$1."
-      );
-    });
-    this.caseDataService.getCases().subscribe((resp) => {
-      this.source = resp;
+    this._casoService.getAll().subscribe((resp) => {
+      this.casos = resp;
     });
   }
 
@@ -125,7 +118,7 @@ export class PsicologoCasosComponent implements OnInit {
   }
 
   loadCase(id: string) {
-    this.caseDataService.getCaseById(id).subscribe((result) => {
+    this._casoService.getById(id).subscribe((result) => {
       let paciente = "---";
       if (result["paciente"]) paciente = result["paciente"];
       this.caseForm.setValue({
@@ -138,7 +131,7 @@ export class PsicologoCasosComponent implements OnInit {
   }
 
   loadDataCase(id: string) {
-    this.caseDataService.getCaseById(id).subscribe((result) => {
+    this._casoService.getById(id).subscribe((result) => {
       let quienComunica = "---";
       let nombreLlama = "---";
       let paciente = "---";

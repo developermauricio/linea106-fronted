@@ -1,16 +1,16 @@
 <nb-card>
-    <nb-card-header>
-        <h5>Anuncios</h5>
-    </nb-card-header>
-    <nb-card-body class="p-4">
-        <nb-card class="w-100" *ngFor="let anuncio of anuncios | async">
-            <nb-card-header>
-                <h6>{{anuncio.titulo}}</h6>
-            </nb-card-header>
-            <nb-card-footer>
-                <h6 class="font-weight-light">{{anuncio.contenido}}</h6>
-                <p class="small float-right">{{anuncio.fecha}}</p>
-            </nb-card-footer>
-        </nb-card>
-    </nb-card-body>
+  <nb-card-header>
+    <h5>Anuncios</h5>
+  </nb-card-header>
+  <nb-card-body class="p-4">
+    <nb-card class="w-100" *ngFor="let anuncio of anuncios">
+      <nb-card-header>
+        <h6>{{anuncio.title}}</h6>
+      </nb-card-header>
+      <nb-card-footer>
+        <h6 class="font-weight-light">{{anuncio.description}}</h6>
+        <p class="small float-right">{{anuncio.created_at | date:'MMM d, y'}}</p>
+      </nb-card-footer>
+    </nb-card>
+  </nb-card-body>
 </nb-card>

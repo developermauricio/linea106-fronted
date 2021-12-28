@@ -1,0 +1,10 @@
+<nav class="p-2 ng2-smart-pagination-nav ng-star-inserted" [ngClass]="{'center': center}">
+  <ul class="ng2-smart-pagination pagination m-auto">
+    <li *ngFor="let link of links" [ngClass]="{'active': link.active}" class="ng2-smart-page-item page-item">
+      <a href="#" class="ng2-smart-page-link page-link" (click)="changePagination($event, link)">
+        <span aria-hidden="true">{{ getName(link.label) }}</span>
+        <span class="sr-only">First</span>
+      </a>
+    </li>
+  </ul>
+</nav>

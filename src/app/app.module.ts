@@ -1,7 +1,7 @@
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { BrowserModule } from "@angular/platform-browser";
 import { FormsModule } from "@angular/forms";
-import { NgModule } from "@angular/core";
+import { LOCALE_ID, NgModule } from "@angular/core";
 import { HttpClientModule } from "@angular/common/http";
 
 //Firebase imports
@@ -88,6 +88,13 @@ import { LoginGuardian } from "./Auth/Guardians/loginGuardian.service";
 import { seguimientoFilterPipe } from "./pipes/seguimientoFilter.pipe";
 import { Ng2SmartTableModule } from "ng2-smart-table";
 
+
+import esCo from '@angular/common/locales/es-CO';
+import { registerLocaleData } from '@angular/common';
+import { PaginationServerComponent } from './Components/pagination-server/pagination-server.component';
+
+registerLocaleData(esCo);
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -106,6 +113,7 @@ import { Ng2SmartTableModule } from "ng2-smart-table";
     PsicologoSeguimientoComponent,
     EstadisticasComponent,
     seguimientoFilterPipe,
+    PaginationServerComponent
   ],
   imports: [
     BrowserModule,
@@ -146,6 +154,7 @@ import { Ng2SmartTableModule } from "ng2-smart-table";
     PsicologoGuardian,
     ExcelReportService,
     { provide: FUNCTIONS_ORIGIN, useValue: "http://localhost:5001" },
+    { provide: LOCALE_ID, useValue: "es-CO" }
   ],
   bootstrap: [AppComponent],
 })

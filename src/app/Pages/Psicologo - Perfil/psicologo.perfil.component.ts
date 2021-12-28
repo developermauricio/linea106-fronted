@@ -9,8 +9,9 @@ import { LoginService } from 'src/app/Services/login.service';
   styleUrls: ['./psicologo.perfil.component.css']
 })
 export class PsicologoPerfilComponent implements OnInit {
+
   @ViewChild("miPerfil") profileForm: NgForm;
-  userData: any[];
+
   rol = "";
 
   constructor(
@@ -18,15 +19,17 @@ export class PsicologoPerfilComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this._loginService.user.subscribe(user => {
-      this.profileForm.setValue({
-        id: user.id,
-        nombre: user.name,
-        apellido: user.last_name,
-        correo: user.email,
-        rol: user.rol
+    setTimeout(() => {
+      this._loginService.user.subscribe(user => {
+        this.profileForm.setValue({
+          identificacion: user.identificacion || 'N/A',
+          nombre: user.name,
+          apellido: user.last_name,
+          correo: user.email,
+          rol: user.rol
+        });
+        this.rol = user.rol;
       });
-      this.rol = user.rol;
-    });
+    }, 200);
   }
 }
