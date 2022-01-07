@@ -94,11 +94,11 @@ export class DashboardComponent implements OnInit {
               icon: "folder-outline",
               link: ["/misCasos"],
             },
-            {
-              title: "Seguimientos",
-              icon: "folder-outline",
-              link: ["/seguimientos"],
-            },
+            // {
+            //   title: "Seguimientos",
+            //   icon: "folder-outline",
+            //   link: ["/seguimientos"],
+            // },
             {
               title: "Estadísticas",
               icon: "activity-outline",

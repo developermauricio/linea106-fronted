@@ -1,37 +1,69 @@
 <nb-card>
-        <nb-card-header>
-            <h5>Mi perfil</h5>
-        </nb-card-header>
-        <nb-card-body class="row">
-            <div class="col-12 col-md-4">
-                <div class="card">
-                    <img src="../../../assets/img/profile-pic.png" class="rounded-circle" alt="Perfil" style="width:100%">
-                    <h4 class="text-center">{{rol}}</h4>
-                </div>
-            </div>
-            <div class="col-12 col-md-6">
-                <form #miPerfil="ngForm">
-                    <div class="form-group">
-                        <label for="id">Identificación</label>
-                        <input #id type="text" name="id" class="form-control" ngModel readonly required>
-                    </div>
-                    <div class="form-group">
-                        <label for="nombre">Nombre</label>
-                        <input type="text" name="nombre" class="form-control" ngModel readonly required>
-                    </div>
-                    <div class="form-group">
-                        <label for="apellido">Apellido</label>
-                        <input type="text" name="apellido" class="form-control" ngModel readonly required>
-                    </div>
-                    <div class="form-group">
-                        <label for="correo">Correo</label>
-                        <input  type="text" name="correo" class="form-control" ngModel readonly required>
-                    </div>
-                    <div class="form-group">
-                        <label for="rol">Rol</label>
-                        <input type="text" name="rol" class="form-control" ngModel readonly required>
-                    </div>
-                </form>
-            </div>
-        </nb-card-body>
-    </nb-card>
+  <nb-card-header>
+    <h5>Mi perfil</h5>
+  </nb-card-header>
+  <nb-card-body class="row">
+    <div class="col-12 col-md-4">
+      <div class="card">
+        <img src="../../../assets/img/profile-pic.png" class="rounded-circle" alt="Perfil" style="width:100%">
+        <h4 class="text-center">{{rol}}</h4>
+      </div>
+    </div>
+    <div class="col-12 col-md-6">
+      <form #miPerfil="ngForm">
+        <div class="form-group">
+          <label for="id">Identificación</label>
+          <input #id type="text" name="id" class="form-control" ngModel readonly required>
+        </div>
+        <div class="form-group">
+          <label for="nombre">Nombre</label>
+          <input type="text" name="nombre" class="form-control" ngModel readonly required>
+        </div>
+        <div class="form-group">
+          <label for="apellido">Apellido</label>
+          <input type="text" name="apellido" class="form-control" ngModel readonly required>
+        </div>
+        <div class="form-group">
+          <label for="correo">Correo</label>
+          <input type="text" name="correo" class="form-control" ngModel readonly required>
+        </div>
+        <div class="form-group">
+          <label for="rol">Rol</label>
+          <input type="text" name="rol" class="form-control" ngModel readonly required>
+        </div>
+        <div>
+          <button class="btn btn-primary" (click)="openDialog(updatePassword)">Cambiar Contraseña</button>
+        </div>
+      </form>
+    </div>
+  </nb-card-body>
+</nb-card>
+
+
+<ng-template #updatePassword let-context let-ref="dialogRef">
+  <nb-card>
+    <nb-card-header>
+      <h6>Actualizar Contraseña</h6>
+    </nb-card-header>
+    <nb-card-body>
+      <form novalidate [formGroup]="formProfile">
+        <div class="mb-3">
+          <label for="old_password" class="form-label">Contraseña</label>
+          <input type="password" class="form-control" id="old_password" formControlName="old_password">
+        </div>
+        <div class="mb-3">
+          <label for="password" class="form-label">Nueva Contraseña</label>
+          <input type="password" class="form-control" id="password" formControlName="password">
+        </div>
+        <div class="mb-3">
+          <label for="password_confirmation" class="form-label">Repetir Nueva Contraseña</label>
+          <input type="password" class="form-control" id="password_confirmation" formControlName="password_confirmation">
+        </div>
+      </form>
+    </nb-card-body>
+    <nb-card-footer>
+      <button (click)="ref.close()" class="btn btn-info">Cancelar</button>
+      <button class="btn btn-primary float-right mx-2" (click)="context.updatePassword($event)">Guardar cambios</button>
+    </nb-card-footer>
+  </nb-card>
+</ng-template>

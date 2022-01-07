@@ -1,0 +1,8 @@
+<label class="switch" [ngStyle]="{'font-size': fontSize}" (click)="toggleClick()">
+  <input type="checkbox" disabled [checked]="customChecked">
+  <span class="slider round">
+  </span>
+  <p *ngIf="showMsg" class="texto-adicional">
+    {{adicionalText}}
+  </p>
+</label>

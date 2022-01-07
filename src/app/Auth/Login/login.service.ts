@@ -1,5 +1,5 @@
-import { AngularFireAuth } from "@angular/fire/auth";
 import { Injectable } from '@angular/core';
+import { AngularFireAuth } from "@angular/fire/auth";
 import { Router } from "@angular/router";
 
 @Injectable()
@@ -33,9 +33,9 @@ export class LoginService {
     this.router.navigate(["login"]);
   }
 
-  createUser(correo: string, clave: string) {
-    return this.afAuth.auth.createUserWithEmailAndPassword(correo, clave);
-  }
+  // createUser(correo: string, clave: string) {
+  //   return this.afAuth.auth.createUserWithEmailAndPassword(correo, clave);
+  // }
 
   recoverPassword(correo: string) {
     return this.afAuth.auth.sendPasswordResetEmail(correo);

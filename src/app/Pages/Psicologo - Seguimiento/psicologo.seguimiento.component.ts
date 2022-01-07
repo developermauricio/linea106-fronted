@@ -33,7 +33,7 @@ export class PsicologoSeguimientoComponent implements OnInit {
   loadSeguimiento(id: string) {
     this.seguimientoDataService.getSeguimientoById(id).subscribe(resp => {
       let id_caso;
-      if (resp["id_caso"]) id_caso = resp["id_caso"]
+      if (resp["id_caso"]) id_caso = resp["id_caso"];
       else id_caso = "---";
       let date = resp["fecha"];
       this.seguimientoForm.setValue({
@@ -55,6 +55,6 @@ export class PsicologoSeguimientoComponent implements OnInit {
           date.getSeconds()
         )
       });
-    })
+    });
   }
 }

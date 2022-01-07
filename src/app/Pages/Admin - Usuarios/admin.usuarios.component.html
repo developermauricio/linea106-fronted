@@ -3,8 +3,7 @@
 <button
   class="float-right text-capitalize d-block"
   nbButton
-  (click)="openDialog(CreateUser, false)"
->
+  (click)="openDialog(CreateUser, false)">
   Agregar nuevo Usuario
 </button>
 <br />
@@ -20,21 +19,25 @@
           <th><strong>Identificación</strong></th>
           <th><strong>Nombre</strong></th>
           <th><strong>Correo</strong></th>
-          <th><strong>Rol</strong></th>
+          <th><strong>Estado</strong></th>
         </tr>
-        <tr *ngFor="let item of psicologos | async">
+        <tr *ngFor="let item of psicologos; let i = index">
           <td>
             <a
               class="btn btn-outline-primaryprimary text-primary"
-              (click)="openDialog(UpdateUser, true, item.id)"
-            >
+              (click)="openDialog(UpdateUser, true, item, i, 'psicologo')">
               <nb-icon icon="more-vertical-outline"></nb-icon>
             </a>
           </td>
-          <td>{{ item.id }}</td>
-          <td>{{ item.nombre }} {{ item.apellido }}</td>
-          <td>{{ item.correo }}</td>
-          <td>{{ item.rol }}</td>
+          <td>{{ item.identificacion }}</td>
+          <td>{{ item.name }} {{ item.last_name }}</td>
+          <td>{{ item.email }}</td>
+          <td>
+            <app-custom-toggle
+              (checkedChange)="updateEstatus($event, i, 'psicologo')"
+              [checked]="getEstado(item.estado)"
+              [showMsg]="true"></app-custom-toggle>
+          </td>
         </tr>
       </tbody>
     </table>
@@ -52,21 +55,25 @@
           <th><strong>Identificación</strong></th>
           <th><strong>Nombre</strong></th>
           <th><strong>Correo</strong></th>
-          <th><strong>Rol</strong></th>
+          <th><strong>Estado</strong></th>
         </tr>
-        <tr *ngFor="let item of administradores | async">
+        <tr *ngFor="let item of administradores; let i = index">
           <td>
             <a
               class="btn btn-outline-primaryprimary text-primary"
-              (click)="openDialog(UpdateUser, true, item.id)"
-            >
+              (click)="openDialog(UpdateUser, true, item,  i, 'admin')">
               <nb-icon icon="more-vertical-outline"></nb-icon>
             </a>
           </td>
-          <td>{{ item.id }}</td>
-          <td>{{ item.nombre }} {{ item.apellido }}</td>
-          <td>{{ item.correo }}</td>
-          <td>{{ item.rol }}</td>
+          <td>{{ item.identificacion }}</td>
+          <td>{{ item.name }} {{ item.last_name }}</td>
+          <td>{{ item.email }}</td>
+          <td>
+            <app-custom-toggle
+              (checkedChange)="updateEstatus($event, i, 'admin')"
+              [checked]="item.estado"
+              [showMsg]="true"></app-custom-toggle>
+          </td>
         </tr>
       </tbody>
     </table>
@@ -85,8 +92,7 @@
       <form
         id="createUserForm"
         #createUserForm="ngForm"
-        (ngSubmit)="addUser(createUserForm)"
-      >
+        (ngSubmit)="addUser(createUserForm)">
         <div class="form-group">
           <label for="id">Identificación</label>
           <input type="text" name="id" class="form-control" ngModel required />
@@ -98,8 +104,7 @@
             name="nombre"
             class="form-control"
             ngModel
-            required
-          />
+            required />
         </div>
         <div class="form-group">
           <label for="apellido">Apellido</label>
@@ -108,8 +113,7 @@
             name="apellido"
             class="form-control"
             ngModel
-            required
-          />
+            required />
         </div>
         <div class="form-group">
           <label for="apellido">Correo</label>
@@ -118,8 +122,7 @@
             name="correo"
             class="form-control"
             ngModel
-            required
-          />
+            required />
         </div>
         <div class="form-group">
           <label for="rol">Tipo de usuario</label>
@@ -136,8 +139,7 @@
             name="clave"
             class="form-control"
             ngModel
-            required
-          />
+            required />
         </div>
         <hr />
         <button (click)="ref.close()" class="btn btn-info">Cancelar</button>
@@ -145,8 +147,7 @@
           id="submit"
           type="submit"
           [disabled]="createUserForm.invalid"
-          class="btn btn-primary float-right"
-        >
+          class="btn btn-primary float-right">
           Enviar
         </button>
       </form>
@@ -166,8 +167,7 @@
       <form
         id="updateUserForm"
         #updateUserForm="ngForm"
-        (ngSubmit)="updateUser(updateUserForm)"
-      >
+        (ngSubmit)="updateUser(updateUserForm)">
         <div class="form-group">
           <label for="id">Identificación</label>
           <input
@@ -177,8 +177,7 @@
             class="form-control"
             readonly
             ngModel
-            required
-          />
+            required />
         </div>
         <div class="form-group">
           <label for="nombre">Nombre</label>
@@ -187,8 +186,7 @@
             name="nombre"
             class="form-control"
             ngModel
-            required
-          />
+            required />
         </div>
         <div class="form-group">
           <label for="apellido">Apellido</label>
@@ -197,8 +195,7 @@
             name="apellido"
             class="form-control"
             ngModel
-            required
-          />
+            required />
         </div>
         <div class="form-group">
           <label for="apellido">Correo</label>
@@ -209,8 +206,7 @@
             class="form-control"
             ngModel
             required
-            readonly
-          />
+            readonly />
         </div>
         <div class="form-group">
           <label for="rol">Tipo de usuario</label>
@@ -224,8 +220,7 @@
           type="button"
           (click)="recoverPassword(correo.value)"
           name="recoverPassword"
-          class="btn btn-secondary"
-        >
+          class="btn btn-secondary">
           Enviar contraseña de recuperación al correo
         </button>
         <hr />
@@ -234,7 +229,7 @@
           type="button"
           (click)="deleteUser(id.value)"
           class="btn btn-danger mx-2"
-        >
+          *ngIf="showDelete">
           Eliminar Usuario
         </button>
         <button id="submit" type="submit" class="btn btn-primary float-right">

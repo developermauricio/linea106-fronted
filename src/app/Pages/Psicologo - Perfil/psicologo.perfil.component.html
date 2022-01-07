@@ -32,6 +32,38 @@
           <input type="text" name="rol" class="form-control" ngModel readonly required>
         </div>
       </form>
+      <div>
+        <button class="btn btn-primary" (click)="openDialog(updatePassword)">Cambiar Contraseña</button>
+      </div>
     </div>
   </nb-card-body>
 </nb-card>
+
+<ng-template #updatePassword let-context let-ref="dialogRef">
+  <nb-card>
+    <nb-card-header>
+      <h6>Actualizar Contraseña</h6>
+    </nb-card-header>
+    <nb-card-body>
+      <form novalidate [formGroup]="formProfile">
+        <div class="mb-3">
+          <label for="old_password" class="form-label">Contraseña</label>
+          <input type="password" class="form-control" id="old_password" formControlName="old_password">
+        </div>
+        <div class="mb-3">
+          <label for="password" class="form-label">Nueva Contraseña</label>
+          <input type="password" class="form-control" id="password" formControlName="password">
+        </div>
+        <div class="mb-3">
+          <label for="password_confirmation" class="form-label">Repetir Nueva Contraseña</label>
+          <input type="password" class="form-control" id="password_confirmation"
+            formControlName="password_confirmation">
+        </div>
+      </form>
+    </nb-card-body>
+    <nb-card-footer>
+      <button (click)="ref.close()" class="btn btn-info">Cancelar</button>
+      <button class="btn btn-primary float-right mx-2" (click)="context.updatePassword($event)">Guardar cambios</button>
+    </nb-card-footer>
+  </nb-card>
+</ng-template>

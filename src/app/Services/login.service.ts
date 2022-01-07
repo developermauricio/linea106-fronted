@@ -126,10 +126,8 @@ export class LoginService {
     }
   }
 
-  createUser(correo: string, clave: string) {
-  }
-
   recoverPassword(correo: string) {
+    console.error("Error al enviar correo, falta implementar");
   }
 
 

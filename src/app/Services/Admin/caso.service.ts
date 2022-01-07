@@ -7,22 +7,9 @@ import { CoreService } from '../core.service';
   providedIn: 'root'
 })
 export class CasoService {
-
   constructor(private _coreService: CoreService) { }
 
   getAll(params: string) {
     return this._coreService.get<PaginateModel<CasoModel>>('/casos?' + params);
-  }
-
-  getMisCasos(params: string) {
-    return this._coreService.get<PaginateModel<CasoModel>>('/casos?mis_casos=1&' + params);
-  }
-
-  getById(id) {
-    return this._coreService.get<CasoModel>(`/show-case/${id}`);
-  }
-
-  delete(id) {
-    return this._coreService.delete<any[]>('/psicologo/casos');
   }
 }

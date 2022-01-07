@@ -1,8 +1,8 @@
 import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
-import { NbDialogService, NbToastrService } from "@nebular/theme";
-import { AnuncioDataService } from "../../anuncio.data.service";
 import { NgForm } from "@angular/forms";
-import { Observable } from 'rxjs';
+import { NbDialogService, NbToastrService } from "@nebular/theme";
+import { AnuncioModel } from 'src/app/Models/anuncio.model';
+import { AnuncioService } from 'src/app/Services/Admin/anuncio.service';
 
 @Component({
   selector: "app-inicio",
@@ -11,25 +11,32 @@ import { Observable } from 'rxjs';
 })
 export class AdminInicioComponent implements OnInit {
   @ViewChild("anuncioForm") anuncioForm: NgForm;
-  anuncios: Observable<any[]>;
+  anuncios: AnuncioModel[];
   modalOpen: any;
   editable: false;
+
+  currentId: number;
+
   constructor(
-    private anuncioDataService: AnuncioDataService,
+    private _anuncioService: AnuncioService,
     private dialogService: NbDialogService,
-    private toastrService: NbToastrService
-  ) {}
+    private toastrService: NbToastrService,
+  ) { }
 
   ngOnInit() {
-    this.anuncios = this.anuncioDataService.getAnuncios();
+    this.loadAnuncios();
+  }
+
+  private loadAnuncios() {
+    this._anuncioService.getAll().subscribe(anuncios => {
+      this.anuncios = anuncios;
+    });
   }
 
   addAnuncio(anuncioForm: NgForm) {
     let newAnuncio = anuncioForm.value;
-    newAnuncio["fecha"] = this.getDate(new Date());
-    this.anuncioDataService
-      .addAnuncio(newAnuncio)
-      .then(resp => {
+    this._anuncioService
+      .store(newAnuncio).subscribe(resp => {
         this.modalOpen.close();
         this.toastrService.show("Anuncio creado correctamente", "Éxito", {
           destroyByClick: true,
@@ -38,8 +45,8 @@ export class AdminInicioComponent implements OnInit {
           icon: "checkmark",
           iconPack: "eva"
         });
-      })
-      .catch(error => {
+        this.anuncios.unshift(resp);
+      }, error => {
         this.toastrService.show(error.message, "Error", {
           destroyByClick: true,
           preventDuplicates: true,
@@ -52,10 +59,8 @@ export class AdminInicioComponent implements OnInit {
 
   updateAnuncio(anuncioForm: NgForm) {
     let anuncio = anuncioForm.value;
-    anuncio["fecha"] = this.getDate(new Date());
-    this.anuncioDataService
-      .updateAnuncio(anuncio)
-      .then(resp => {
+    this._anuncioService
+      .update(this.currentId, anuncio).subscribe(resp => {
         this.modalOpen.close();
         this.toastrService.show("Anuncio actualizado correctamente", "Éxito", {
           destroyByClick: true,
@@ -64,8 +69,8 @@ export class AdminInicioComponent implements OnInit {
           icon: "checkmark",
           iconPack: "eva"
         });
-      })
-      .catch(error => {
+        this.anuncios.splice(this.anuncios.findIndex(r => r.id == this.currentId), 1, resp);
+      }, error => {
         this.toastrService.show(error.message, "Error", {
           destroyByClick: true,
           preventDuplicates: true,
@@ -76,10 +81,10 @@ export class AdminInicioComponent implements OnInit {
       });
   }
 
-  deleteAnuncio(anuncioForm: NgForm) {
-    this.anuncioDataService
-      .deleteAnuncio(anuncioForm.value.id)
-      .then(resp => {
+  deleteAnuncio() {
+    this._anuncioService
+      .delete(this.currentId)
+      .subscribe(() => {
         this.modalOpen.close();
         this.toastrService.show("Anuncio eliminado correctamente", "Éxito", {
           destroyByClick: true,
@@ -88,8 +93,8 @@ export class AdminInicioComponent implements OnInit {
           icon: "checkmark",
           iconPack: "eva"
         });
-      })
-      .catch(error => {
+        this.anuncios.splice(this.anuncios.findIndex(r => r.id == this.currentId), 1);
+      }, error => {
         this.toastrService.show(error.message, "Error", {
           destroyByClick: true,
           preventDuplicates: true,
@@ -100,20 +105,21 @@ export class AdminInicioComponent implements OnInit {
       });
   }
 
-  loadAnuncio(id: string) {
-    this.anuncioDataService.getAnuncioById(id).subscribe( resp => {
+  loadAnuncio(id: number) {
+    this._anuncioService.getById(id).subscribe(resp => {
       this.anuncioForm.setValue({
         id: id,
-        titulo: resp["titulo"],
-        contenido: resp["contenido"]
+        title: resp.title,
+        description: resp.description
       });
-    })
+    });
   }
 
-  openDialog(dialog: TemplateRef<any>, id: string) {
+  openDialog(dialog: TemplateRef<any>, id: number) {
     this.modalOpen = this.dialogService.open(dialog);
     if (id) {
-      this.loadAnuncio(id);
+      this.currentId = Number(id);
+      this.loadAnuncio(this.currentId);
     }
   }
 

@@ -8,4 +8,12 @@ export interface UserModel {
   created_at?: string;
   updated_at?: string;
   rol: "Administrador" | "Psicólogo";
+
+  estado: boolean;
+}
+
+export interface UserUpdateModel extends UserModel {
+  old_password: string;
+  password: string;
+  password_confirmation: string;
 }

@@ -20,4 +20,8 @@ export class PsicologoInicioComponent implements OnInit {
       this.anuncios = res;
     });
   }
+
+  titleAnuncio(item: AnuncioModel){
+    return item.title;
+  }
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { PaginateModel } from 'src/app/Models/paginate.model';
 
 @Component({
@@ -30,20 +30,20 @@ export class PaginationServerComponent implements OnInit {
       return name;
     }
     if (this.isPrev(name)) {
-      return '<';
+      return '< Anterior';
     }
     if (this.isNext(name)) {
-      return '>';
+      return 'Siguiente >';
     }
     return name;
   }
 
   private isPrev(name) {
-    return name.indexOf('Prev') !== -1;
+    return name.indexOf('Anterior') !== -1;
   }
 
   private isNext(name) {
-    return name.indexOf('Next') !== -1;
+    return name.indexOf('Siguiente') !== -1;
   }
 
   changePagination(event, link) {

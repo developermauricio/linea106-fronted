@@ -1,0 +1,290 @@
+<ng-template #verCaso let-data let-ref="dialogRef">
+  <nb-card>
+    <nb-card-header>
+      <div class="row">
+        <div class="col-6">
+          <h6>Vista de caso</h6>
+        </div>
+        <div class="col-6 text-right">
+          <button type="button" class="close pull-right" aria-label="Close" (click)="ref.close()">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+      </div>
+    </nb-card-header>
+    <nb-card-body>
+      <form id="casoForm">
+        <div class="form-group" hidden>
+          <label for="id">Identificador del caso</label>
+          <input type="text" name="id" class="form-control" readonly [value]="case_id" />
+        </div>
+        <div class="form-group" hidden>
+          <label for="paciente">Identificación de Usuario</label>
+          <input type="text" name="paciente" class="form-control" readonly [value]="paciente" />
+        </div>
+        <div class="form-group">
+          <label for="narrativa">Narrativa</label>
+          <textarea rows="9" type="text" name="narrativa" class="form-control" readonly [value]="case_narrativa"></textarea>
+        </div>
+        <div class="form-group">
+          <label for="observaciones">Observaciones de cierre</label>
+          <textarea rows="9" name="observaciones" class="form-control" readonly [value]="case_observaciones"></textarea>
+        </div>
+      </form>
+    </nb-card-body>
+    <nb-card-footer>
+      <button (click)="ref.close()" class="btn btn-info mx-2">Cancelar</button>
+      <button (click)="openDialog('seguimiento', seguimientoTemplate)"
+        class="btn btn-outline-info mx-2 float-right">
+        Agregar seguimiento
+      </button>
+      <button (click)="openDialog('paciente', verPaciente)"
+        class="btn btn-outline-success mx-2 float-right">
+        Ver datos del usuario
+      </button>
+      <button (click)="openDialog('datosCaso', datosCaso)"
+        class="btn btn-outline-primary mx-2 float-right">
+        Ver datos del caso
+      </button>
+    </nb-card-footer>
+  </nb-card>
+</ng-template>
+
+<ng-template #datosCaso let-data let-ref="dialogRef">
+  <nb-card>
+    <nb-card-header>
+      <div class="row">
+        <div class="col-6">
+          <h6>Vista a caso a detalle</h6>
+        </div>
+        <div class="col-6 text-right">
+          <button type="button" class="close pull-right" aria-label="Close" (click)="ref.close()">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+      </div>
+    </nb-card-header>
+    <nb-card-body>
+      <form id="casoDataForm" class="row">
+        <div class="col-12 col-sm-6 col-md-4">
+          <div class="form-group">
+            <label for="id">Identificador del caso</label>
+            <input type="text" name="id" class="form-control" readonly [value]="case_id" />
+          </div>
+          <div class="form-group">
+            <label for="fecha_inicio">Fecha de Inicio</label>
+            <input type="text" name="fecha_inicio" class="form-control" readonly [value]="case_fecha_inicio | date:'MMM d, y'" />
+          </div>
+          <div class="form-group">
+            <label for="fecha_fin">Fecha de cierre</label>
+            <input type="text" name="fecha_fin" class="form-control" readonly disabled [value]="case_fecha_fin | date:'MMM d, y'" />
+          </div>
+          <div class="form-group">
+            <label for="ultima_actualizacion">Última actualización</label>
+            <input type="text" name="ultima_actualizacion" class="form-control" readonly [value]="case_updated_at | date:'MMM d, y'" />
+          </div>
+          <div class="form-group">
+            <label for="quien_comunica">¿Quién se comunica?</label>
+            <input type="text" name="quien_comunica" class="form-control" readonly [value]="case_quien_comunica" />
+          </div>
+          <div class="form-group">
+            <label for="nombre_llama">Nombre de quién llama</label>
+            <input type="text" name="nombre_llama" class="form-control" readonly [value]="case_nombre_llama" />
+          </div>
+        </div>
+        <div class="col-12 col-sm-6 col-md-4">
+          <!-- <div class="form-group">
+            <label for="psicologo">Psicólogo</label>
+            <input type="text" name="psicologo" class="form-control" readonly [value]="case_usuario" />
+          </div> -->
+          <div class="form-group">
+            <label for="tipo_paciente">Tipo de usuario</label>
+            <input type="text" name="tipo_paciente" class="form-control" readonly [value]="case_tipo_paciente" />
+          </div>
+          <div class="form-group">
+            <label for="paciente">Identificación de Usuario</label>
+            <input type="text" name="paciente" class="form-control" readonly [value]="paciente_full_nombre" />
+          </div>
+          <div class="form-group">
+            <label for="origen">Origen</label>
+            <input type="text" name="origen" class="form-control" readonly [value]="case_origen" />
+          </div>
+          <div class="form-group">
+            <label for="fuente">Número o correo</label>
+            <input type="text" name="fuente" class="form-control" readonly [value]="case_fuente" />
+          </div>
+          <div class="form-group">
+            <label for="motivoConsulta">Motivo de consulta</label>
+            <input type="text" name="motivoConsulta" class="form-control" readonly [value]="case_motivo_consulta" />
+          </div>
+        </div>
+        <div class="col-12 col-sm-6 col-md-4">
+          <div class="form-group">
+            <label for="linea_intervencion">Linea de intervención</label>
+            <input type="text" name="linea_intervencion" class="form-control" readonly [value]="case_linea_intervencion" />
+          </div>
+          <div class="form-group">
+            <label for="remision">Entidad</label>
+            <input type="text" name="remision" class="form-control" readonly [value]="case_remision" />
+          </div>
+          <div class="form-group">
+            <label for="respuesta">Respuesta efectiva</label>
+            <input type="text" name="respuesta" class="form-control" readonly [value]="case_respuesta" />
+          </div>
+          <div class="form-group">
+            <label for="radicado">Número de radicado</label>
+            <input type="text" name="radicado" class="form-control" readonly [value]="case_radicado" />
+          </div>
+          <div class="form-group">
+            <label for="cual_servicio_social">Otra servicio social</label>
+            <input type="text" name="cual_servicio_social" class="form-control" readonly value="no se" />
+          </div>
+          <div class="form-group">
+            <label for="cual_no_fomulado">Otra entidad</label>
+            <input type="text" name="cual_no_fomulado" class="form-control" readonly value="no se" />
+          </div>
+        </div>
+      </form>
+    </nb-card-body>
+  </nb-card>
+</ng-template>
+
+<ng-template #verPaciente let-data let-ref="dialogRef">
+  <nb-card>
+    <nb-card-header>
+      <div class="row">
+        <div class="col-6">
+          <h6>Vista a detalle de usuario</h6>
+        </div>
+        <div class="col-6 text-right">
+          <button type="button" class="close pull-right" aria-label="Close" (click)="ref.close()">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+      </div>
+    </nb-card-header>
+    <nb-card-body>
+      <form id="pacienteForm" class="row">
+        <div class="col-12 col-sm-6 col-md-4">
+          <div class="form-group">
+            <label for="tipo_id">Tipo de documento</label>
+            <input type="text" name="tipo_id" class="form-control" readonly [value]="paciente_tipo_identificacion" />
+          </div>
+          <div class="form-group">
+            <label for="nombre">Nombre</label>
+            <input type="text" name="nombre" class="form-control" readonly [value]="paciente_nombre" />
+          </div>
+          <div class="form-group">
+            <label for="sexo">Sexo</label>
+            <input type="text" name="sexo" class="form-control" readonly [value]="paciente_sexo" />
+          </div>
+          <div class="form-group">
+            <label for="edad">Edad</label>
+            <input type="text" name="edad" class="form-control" readonly [value]="paciente_edad" />
+          </div>
+          <div class="form-group">
+            <label for="vereda">Vereda</label>
+            <input type="text" name="vereda" class="form-control" readonly [value]="paciente_vereda" />
+          </div>
+          <div class="form-group">
+            <label for="escolaridad">Escolaridad</label>
+            <input type="text" name="escolaridad" class="form-control" readonly [value]="paciente_nivel_educacion" />
+          </div>
+        </div>
+        <div class="col-12 col-sm-6 col-md-4">
+          <div class="form-group">
+            <label for="id">Número de identificación</label>
+            <input type="text" name="id" class="form-control" readonly [value]="paciente_numero_identificacion" />
+          </div>
+          <div class="form-group">
+            <label for="apellido">Apellido</label>
+            <input type="text" name="apellido" class="form-control" readonly [value]="paciente_apellido" />
+          </div>
+          <div class="form-group">
+            <label for="genero">Género</label>
+            <input type="text" name="genero" class="form-control" readonly [value]="paciente_genero" />
+          </div>
+          <div class="form-group">
+            <label for="municipio">Municipio</label>
+            <input type="text" name="municipio" class="form-control" readonly [value]="paciente_municipio" />
+          </div>
+          <div class="form-group">
+            <label for="direccion">Dirección</label>
+            <input type="text" name="direccion" class="form-control" readonly [value]="paciente_direccion" />
+          </div>
+          <div class="form-group">
+            <label for="ocupacion">Ocupación</label>
+            <input type="text" name="ocupacion" class="form-control" readonly [value]="paciente_ocupacion" />
+          </div>
+        </div>
+        <div class="col-12 col-sm-6 col-md-4">
+          <div class="form-group">
+            <label for="como_conocio">¿Cómo conoció la linea 106?</label>
+            <input type="text" name="como_conocio" class="form-control" readonly [value]="paciente_como_conocio" />
+          </div>
+          <div class="form-group">
+            <label for="fecha_nacimiento">Fecha de nacimiento</label>
+            <input type="text" name="fecha_nacimiento" class="form-control" readonly [value]="paciente_fecha_nacimiento" />
+          </div>
+          <div class="form-group">
+            <label for="orientacion_sexual">Orientación sexual</label>
+            <input type="text" name="orientacion_sexual" class="form-control" readonly [value]="paciente_orientacion_sexual" />
+          </div>
+          <div class="form-group">
+            <label for="zona">Zona</label>
+            <input type="text" name="zona" class="form-control" readonly [value]="paciente_zona" />
+          </div>
+          <div class="form-group">
+            <label for="poblacion_interes">Población de interés</label>
+            <input type="text" name="poblacion_interes" class="form-control" readonly [value]="paciente_poblacion_interes" />
+          </div>
+          <div class="form-group">
+            <label for="estado_civil">Estado Civil</label>
+            <input type="text" name="estado_civil" class="form-control" readonly [value]="paciente_poblacion_interes" />
+          </div>
+        </div>
+      </form>
+    </nb-card-body>
+  </nb-card>
+</ng-template>
+
+<ng-template #seguimientoTemplate let-data let-ref="dialogRef">
+  <nb-card>
+    <nb-card-header>
+      <div class="row">
+        <div class="col-6">
+          <h6>Agregar seguimiento</h6>
+        </div>
+        <div class="col-6 text-right">
+          <button type="button" class="close pull-right" aria-label="Close" (click)="ref.close()">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+      </div>
+    </nb-card-header>
+    <nb-card-body>
+      <form id="seguimientoForm" #seguimientoForm="ngForm" class="row">
+        <div class="col-12">
+          <p class="font-weight-light">
+            Instrucciones: Ingrese la descripción del seguimiento y presione el
+            botón enviar al finalizar
+          </p>
+          <div class="form-group" hidden>
+            <label for="id_caso">Id</label>
+            <input type="text" name="id_caso" class="form-control" readonly ngModel />
+          </div>
+          <div class="form-group">
+            <label for="seguimiento">Segimiento</label>
+            <textarea name="seguimiento" class="form-control" ngModel required></textarea>
+          </div>
+        </div>
+      </form>
+    </nb-card-body>
+    <nb-card-footer>
+      <button (click)="ref.close()" class="btn btn-info mx-2">Cancelar</button>
+      <button (click)="addSeguimiento(seguimientoForm)" class="btn btn-outline-info mx-2 float-right">
+        Enviar
+      </button>
+    </nb-card-footer>
+  </nb-card>
+</ng-template>

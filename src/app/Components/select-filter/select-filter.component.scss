@@ -1,0 +1,29 @@
+div{
+  position: relative;
+}
+
+ul{
+  list-style: none;
+  padding: 0;
+  max-height: 14.5rem;
+  overflow-y: auto;
+
+  position: absolute;
+  background: white;
+  box-shadow: 0px 0px 4px grey;
+  width: 100%;
+}
+
+li{
+  padding: .5rem 1rem;
+  margin: 0;
+}
+
+.selected {
+  background-color: #598bff;
+  color: whitesmoke;
+}
+
+.close{
+  cursor: pointer;
+}
