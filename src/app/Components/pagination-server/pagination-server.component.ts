@@ -30,10 +30,10 @@ export class PaginationServerComponent implements OnInit {
       return name;
     }
     if (this.isPrev(name)) {
-      return '< Anterior';
+      return '<';
     }
     if (this.isNext(name)) {
-      return 'Siguiente >';
+      return '>';
     }
     return name;
   }

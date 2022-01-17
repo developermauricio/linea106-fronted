@@ -25,7 +25,7 @@ export class PsicologoMisCasosComponent implements OnInit {
   source: LocalDataSource;
   private params: string = '';
   private filtros: any[] = [];
-  private casos: PaginateModel<CasoModel> = { data: [] };
+  casos: PaginateModel<CasoModel> = { data: [] };
 
   psicologoId: string;
 
@@ -145,10 +145,12 @@ export class PsicologoMisCasosComponent implements OnInit {
       position: "right",
     },
     rowClassFunction: (row: any) => {
-      if (row.data.respuesta == "Oficio enviado") return "enviado";
-      if (row.data.respuesta == "Oficio recibido") return "recibido";
-      if (row.data.respuesta == "Respuesta de la entidad") return "respuesta";
-      if (row.data.respuesta == "Caso cerrado") return "cerrado";
+      const data: CasoModel = row.data;
+      const respuesta = (data.respuesta?data.respuesta.name:'').toLocaleLowerCase();
+      if (respuesta === "oficio enviado") return "enviado";
+      if (respuesta === "oficio recibido") return "recibido";
+      if (respuesta === "respuesta de la entidad") return "respuesta";
+      if (respuesta === "caso cerrado") return "cerrado";
     },
   };
 

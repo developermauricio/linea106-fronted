@@ -49,6 +49,7 @@ import { AdminInicioComponent } from "./Pages/Admin - Inicio/admin.inicio.compon
 import { AdminMiPerfilComponent } from "./Pages/Admin - Perfil/admin.mi.perfil.component";
 import { AdminReportesComponent } from "./Pages/Admin - Reportes/admin.reportes.component";
 import { AdminUsuariosComponent } from "./Pages/Admin - Usuarios/admin.usuarios.component";
+import { PasswordResetComponent } from './Pages/Auth/password-reset/password-reset.component';
 //Estadisticas Import
 import { EstadisticasComponent } from "./Pages/Estadisticas/estadisticas.component";
 import { PsicologoCasosComponent } from "./Pages/Psicologo - Casos/psicologo.casos.component";
@@ -107,7 +108,8 @@ registerLocaleData(esCo);
     PaginationServerComponent,
     SelectFilterComponent,
     VerCasoComponent,
-    CustomToggleComponent
+    CustomToggleComponent,
+    PasswordResetComponent
   ],
   imports: [
     BrowserModule,

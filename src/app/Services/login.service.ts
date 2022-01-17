@@ -33,17 +33,19 @@ export class LoginService {
 
     this._coreService.post<LoginModel>('/login', data)
       .subscribe(tokenLogin => {
-        this.toastrService.show(
-          'Login correcto',
-          "Success",
-          {
-            destroyByClick: true,
-            preventDuplicates: true,
-            status: "success",
-            icon: "alert-triangle",
-            iconPack: "eva"
-          }
-        );
+        setTimeout(() => {
+          this.toastrService.show(
+            'Login correcto',
+            "Success",
+            {
+              destroyByClick: true,
+              preventDuplicates: true,
+              status: "success",
+              icon: "alert-triangle",
+              iconPack: "eva"
+            }
+          );
+        }, 200);
         this._coreService.setLogin(tokenLogin);
         this.getAuthUser();
       }, err => {
@@ -127,8 +129,55 @@ export class LoginService {
   }
 
   recoverPassword(correo: string) {
-    console.error("Error al enviar correo, falta implementar");
+    this._coreService.post('/password/email', { email: correo }).subscribe(resp => {
+      console.log(resp);
+    }, err => {
+      console.log(err);
+    });
   }
 
+
+  resetPassword(token: string, email: string, password: string, password_confirmation: string) {
+    const data = {
+      token,
+      email,
+      password,
+      password_confirmation
+    };
+
+    this._coreService.post('/password/reset', data).subscribe(resp => {
+      this._router.navigate(["/login"]);
+      setTimeout(() => {
+        this.toastrService.show(
+          'Contraseña cambiada',
+          "Success",
+          {
+            destroyByClick: true,
+            preventDuplicates: true,
+            status: "success",
+            icon: "alert-triangle",
+            iconPack: "eva"
+          }
+        );
+      }, 200);
+    }, err => {
+      let error = err.error.message;
+      if (err.status === 422 && err.error && err.error.errors) {
+        const key = Object.keys(err.error.errors);
+        error = err.error.errors[key[0]].join(',');
+      }
+      this.toastrService.show(
+        error,
+        "Error",
+        {
+          destroyByClick: true,
+          preventDuplicates: true,
+          status: "danger",
+          icon: "alert-triangle",
+          iconPack: "eva"
+        }
+      );
+    });
+  }
 
 }

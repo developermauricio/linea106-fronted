@@ -1,33 +1,34 @@
 import { NgModule } from "@angular/core";
-import { Routes, RouterModule } from "@angular/router";
-
-import { DashboardComponent } from "./Dashboard/dashboard.component";
-
+import { RouterModule, Routes } from "@angular/router";
+import { AdminGuardian } from './Auth/Guardians/adminGuardian.service';
+/*Guardians*/
+import { LoginGuardian } from './Auth/Guardians/loginGuardian.service';
+import { PsicologoGuardian } from './Auth/Guardians/psicologoGuardian.service';
 /*Login Component*/
 import { LoginComponent } from "./Auth/Login/login.component";
-
+import { DashboardComponent } from "./Dashboard/dashboard.component";
+import { AdminCasosComponent } from "./Pages/Admin - Casos/admin.casos.component";
 /*Admin Components*/
 import { AdminInicioComponent } from "./Pages/Admin - Inicio/admin.inicio.component";
-import { AdminCasosComponent } from "./Pages/Admin - Casos/admin.casos.component";
-import { AdminUsuariosComponent } from "./Pages/Admin - Usuarios/admin.usuarios.component";
-import { AdminReportesComponent } from './Pages/Admin - Reportes/admin.reportes.component';
 import { AdminMiPerfilComponent } from './Pages/Admin - Perfil/admin.mi.perfil.component';
-
+import { AdminReportesComponent } from './Pages/Admin - Reportes/admin.reportes.component';
+import { AdminUsuariosComponent } from "./Pages/Admin - Usuarios/admin.usuarios.component";
+import { PasswordResetComponent } from './Pages/Auth/password-reset/password-reset.component';
+/*Estadísitcas Component*/
+import { EstadisticasComponent } from "./Pages/Estadisticas/estadisticas.component";
+import { PsicologoCasosComponent } from './Pages/Psicologo - Casos/psicologo.casos.component';
+import { PsicologoCrearCasoComponent } from './Pages/Psicologo - Crear Caso/psicologo.crear.caso.component';
 /*Psicologo Components*/
 import { PsicologoInicioComponent } from './Pages/Psicologo - Inicio/psicologo.inicio.component';
 import { PsicologoMisCasosComponent } from './Pages/Psicologo - Mis Casos/psicologo.mis.casos.component';
 import { PsicologoPerfilComponent } from './Pages/Psicologo - Perfil/psicologo.perfil.component';
-
-/*Estadísitcas Component*/
-import { EstadisticasComponent } from "./Pages/Estadisticas/estadisticas.component";
-
-/*Guardians*/
-import { LoginGuardian } from './Auth/Guardians/loginGuardian.service';
-import { AdminGuardian } from './Auth/Guardians/adminGuardian.service';
-import { PsicologoGuardian } from './Auth/Guardians/psicologoGuardian.service';
-import { PsicologoCrearCasoComponent } from './Pages/Psicologo - Crear Caso/psicologo.crear.caso.component';
-import { PsicologoCasosComponent } from './Pages/Psicologo - Casos/psicologo.casos.component';
 import { PsicologoSeguimientoComponent } from './Pages/Psicologo - Seguimiento/psicologo.seguimiento.component';
+
+
+
+
+
+
 
 const routes: Routes = [
   {
@@ -99,6 +100,10 @@ const routes: Routes = [
   {
     path: "login",
     component: LoginComponent
+  },
+  {
+    path: "password/reset/:token",
+    component: PasswordResetComponent
   },
 ];
 

@@ -3,7 +3,7 @@
 <button
   class="float-right text-capitalize d-block"
   nbButton
-  (click)="openDialog(CreateUser, false)">
+  (click)="openDialog(CreateUser, false, null, null, null)">
   Agregar nuevo Usuario
 </button>
 <br />
@@ -227,7 +227,7 @@
         <button (click)="ref.close()" class="btn btn-info">Cancelar</button>
         <button
           type="button"
-          (click)="deleteUser(id.value)"
+          (click)="deleteUser()"
           class="btn btn-danger mx-2"
           *ngIf="showDelete">
           Eliminar Usuario

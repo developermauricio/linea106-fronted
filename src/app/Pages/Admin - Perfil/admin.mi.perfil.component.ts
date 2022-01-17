@@ -32,6 +32,9 @@ export class AdminMiPerfilComponent implements OnInit {
     });
 
     this._loginService.user.subscribe(user => {
+      if (!user){
+        return;
+      }
       setTimeout(() => {
         this.profileForm.setValue({
           id: user.id,

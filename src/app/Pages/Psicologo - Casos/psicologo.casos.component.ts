@@ -1,6 +1,5 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
 import { NgForm } from "@angular/forms";
-import { NbDialogService, NbToastrService } from "@nebular/theme";
 import { LocalDataSource } from 'ng2-smart-table';
 import { Subject } from 'rxjs';
 import { CasoModel } from 'src/app/Models/caso.model';
@@ -9,8 +8,6 @@ import { PaginateModel } from 'src/app/Models/paginate.model';
 import { TipoModel } from 'src/app/Models/tipo.model';
 import { UserModel } from 'src/app/Models/user.model';
 import { CasoService } from 'src/app/Services/Psicologo/caso.service';
-import { PatientDataService } from "../../patient.data.service";
-import { SeguimientoDataService } from "../../seguimiento.data.service";
 
 @Component({
   selector: "app-psicologo.casos",
@@ -27,7 +24,7 @@ export class PsicologoCasosComponent implements OnInit {
   source: LocalDataSource;
   private params: string = '';
   private filtros: any[] = [];
-  private casos: PaginateModel<CasoModel> = { data: [] };
+  casos: PaginateModel<CasoModel> = { data: [] };
 
   psicologoId: string;
 
@@ -35,10 +32,6 @@ export class PsicologoCasosComponent implements OnInit {
   showCase: Subject<number> = new Subject();
 
   constructor(
-    private seguimientoDataService: SeguimientoDataService,
-    private patientDataService: PatientDataService,
-    private toastrService: NbToastrService,
-    private dialogService: NbDialogService,
     private _casoService: CasoService
   ) { }
 
@@ -149,10 +142,12 @@ export class PsicologoCasosComponent implements OnInit {
       position: "right",
     },
     rowClassFunction: (row: any) => {
-      if (row.data.respuesta == "Oficio enviado") return "enviado";
-      if (row.data.respuesta == "Oficio recibido") return "recibido";
-      if (row.data.respuesta == "Respuesta de la entidad") return "respuesta";
-      if (row.data.respuesta == "Caso cerrado") return "cerrado";
+      const data: CasoModel = row.data;
+      const respuesta = (data.respuesta?data.respuesta.name:'').toLocaleLowerCase();
+      if (respuesta === "oficio enviado") return "enviado";
+      if (respuesta === "oficio recibido") return "recibido";
+      if (respuesta === "respuesta de la entidad") return "respuesta";
+      if (respuesta === "caso cerrado") return "cerrado";
     },
   };
 

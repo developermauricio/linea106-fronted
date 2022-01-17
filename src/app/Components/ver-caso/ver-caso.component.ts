@@ -53,7 +53,7 @@ export class VerCasoComponent implements OnInit, OnDestroy {
     this.subscribe.unsubscribe();
   }
 
-  openDialog(tipo: string, dialog: TemplateRef<any>, id: number) {
+  openDialog(tipo: string, dialog: TemplateRef<any>, id: number = null) {
     this.loadDataCase(this.caso.id);
     if (tipo === "caso") {
       this.modalOpenCase = this.dialogService.open(dialog);
