@@ -1,5 +1,5 @@
 import { PacienteModel } from './paciente.model';
-import { TipoCasoEspecifico, TipoModel } from './tipo.model';
+import { TipoModel } from './tipo.model';
 import { UserModel } from './user.model';
 
 export interface CasoModel {
@@ -20,15 +20,13 @@ export interface CasoModel {
 
   paciente_id?: number;
   motivo_consulta_id?: number;
+  motivo_consulta_especifico_id?: number;
   quien_comunica_id?: number;
   linea_intervencion_id?: number;
   usuario_id?: number;
   tipo_paciente_id?: number;
   origen_id?: number;
-  motivo_id?: number;
   turno_id?: number;
-  tipo_caso_id?: number;
-  tipo_caso_especifico_id?: number;
   etnicidad_id?: any;
   relacion_id?: any;
   remision_id?: number;
@@ -37,16 +35,14 @@ export interface CasoModel {
   key_server?: string;
 
   paciente: PacienteModel;
-  motivo_consulta: TipoModel;
   quien_comunica: TipoModel;
   linea_intervencion: TipoModel;
+  motivo_consulta: TipoModel;
+  motivo_consulta_especifico: TipoModel;
   usuario: UserModel;
   tipo_paciente: TipoModel;
   origen: TipoModel;
-  motivo?: TipoModel;
   turno: TipoModel;
-  tipo_caso: TipoModel;
-  tipo_caso_especifico: TipoCasoEspecifico;
   etnicidad?: TipoModel;
   relacion?: TipoModel;
   remision?: TipoModel;
