@@ -1,7 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { ExcelReportService } from "src/app/excel.report.service";
 import { PsicologoStatisticModel } from 'src/app/Models/psicologo-statistic.model';
-import { PatientDataService } from "src/app/patient.data.service";
 import { CasoService } from 'src/app/Services/Psicologo/caso.service';
 
 @Component({
@@ -32,16 +31,17 @@ export class EstadisticasComponent implements OnInit {
   constructor(
     private excelService: ExcelReportService,
     private _casoService: CasoService,
-    private patientDataService: PatientDataService
   ) { }
 
   ngOnInit() { }
 
   getCases() {
+    this.showStats = false;
     this._casoService.getStatisticsByDate(
       this.fecha_inicio,
       this.fecha_fin
     ).subscribe(resp => {
+      this.showStats = true;
       this.psicologoStatistics = resp;
     });
   }

@@ -29,6 +29,6 @@ export class CasoService {
 
 
   getStatisticsByDate(fechaInicio, fechaFin) {
-    return this._coreService.get<PsicologoStatisticModel>(`/psicologo/statics?fecha_inicio=${fechaInicio}&fecha_fin=${fechaFin}`);
+    return this._coreService.get<PsicologoStatisticModel>(`/statics?fecha_inicio=${fechaInicio}&fecha_fin=${fechaFin}`);
   }
 }
