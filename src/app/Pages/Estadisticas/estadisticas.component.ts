@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { ExcelReportService } from "src/app/excel.report.service";
-import { PsicologoStatisticModel } from 'src/app/Models/psicologo-statistic.model';
-import { CasoService } from 'src/app/Services/Psicologo/caso.service';
+import { StatisticsModel } from 'src/app/Models/statistic.model';
+import { CasoService } from 'src/app/Services/Common/caso.service';
 
 @Component({
   selector: "app-estadisticas",
@@ -15,7 +15,7 @@ export class EstadisticasComponent implements OnInit {
   fecha_inicio = "";
   fecha_fin = "";
 
-  psicologoStatistics: PsicologoStatisticModel = {
+  psicologoStatistics: StatisticsModel = {
     casos_by_origen: [],
     casos_edades: [],
     casos_genero: [],

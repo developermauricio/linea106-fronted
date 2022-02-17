@@ -3,7 +3,7 @@ export interface StatisticModel {
   total: number;
 }
 
-export interface PsicologoStatisticModel {
+export interface StatisticsModel {
   total: number;
   casos_by_origen: StatisticModel[];
   casos_psicologo: StatisticModel[];
