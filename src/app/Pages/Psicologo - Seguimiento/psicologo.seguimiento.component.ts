@@ -1,5 +1,4 @@
 import { Component, OnInit, TemplateRef, ViewChild } from "@angular/core";
-import { SeguimientoDataService } from "../../seguimiento.data.service";
 import { NbDialogService } from "@nebular/theme";
 import { Observable } from "rxjs";
 import { NgForm } from "@angular/forms";
@@ -17,12 +16,11 @@ export class PsicologoSeguimientoComponent implements OnInit {
 
   modelOpened: any;
   constructor(
-    private seguimientoDataService: SeguimientoDataService,
     private dialogService: NbDialogService
   ) { }
 
   ngOnInit() {
-    this.seguimientos = this.seguimientoDataService.getSeguimientos();
+    // this.seguimientos = this.seguimientoDataService.getSeguimientos();
   }
 
   openDialog(dialog: TemplateRef<any>, id: string) {
@@ -31,30 +29,30 @@ export class PsicologoSeguimientoComponent implements OnInit {
   }
 
   loadSeguimiento(id: string) {
-    this.seguimientoDataService.getSeguimientoById(id).subscribe(resp => {
-      let id_caso;
-      if (resp["id_caso"]) id_caso = resp["id_caso"];
-      else id_caso = "---";
-      let date = resp["fecha"];
-      this.seguimientoForm.setValue({
-        id: id,
-        id_caso: id_caso,
-        seguimiento: resp["seguimiento"],
-        psicologo: resp["psicologo"],
-        fecha: (
-          date.getFullYear() +
-          "-" +
-          (date.getMonth() + 1) +
-          "-" +
-          date.getDate() +
-          " " +
-          date.getHours() +
-          ":" +
-          date.getMinutes() +
-          ":" +
-          date.getSeconds()
-        )
-      });
-    });
+    // this.seguimientoDataService.getSeguimientoById(id).subscribe(resp => {
+    //   let id_caso;
+    //   if (resp["id_caso"]) id_caso = resp["id_caso"];
+    //   else id_caso = "---";
+    //   let date = resp["fecha"];
+    //   this.seguimientoForm.setValue({
+    //     id: id,
+    //     id_caso: id_caso,
+    //     seguimiento: resp["seguimiento"],
+    //     psicologo: resp["psicologo"],
+    //     fecha: (
+    //       date.getFullYear() +
+    //       "-" +
+    //       (date.getMonth() + 1) +
+    //       "-" +
+    //       date.getDate() +
+    //       " " +
+    //       date.getHours() +
+    //       ":" +
+    //       date.getMinutes() +
+    //       ":" +
+    //       date.getSeconds()
+    //     )
+    //   });
+    // });
   }
 }

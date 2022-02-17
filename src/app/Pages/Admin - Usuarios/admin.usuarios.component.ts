@@ -66,7 +66,7 @@ export class AdminUsuariosComponent implements OnInit {
             preventDuplicates: true,
             status: "success",
             icon: "checkmark",
-            iconPack: "eva",
+            // iconPack: "eva",
           }
         );
       }, (error) => {
@@ -75,7 +75,7 @@ export class AdminUsuariosComponent implements OnInit {
           preventDuplicates: true,
           status: "danger",
           icon: "alert-triangle",
-          iconPack: "eva",
+          // iconPack: "eva",
         });
       });
   }
@@ -123,7 +123,7 @@ export class AdminUsuariosComponent implements OnInit {
             preventDuplicates: true,
             status: "success",
             icon: "checkmark",
-            iconPack: "eva",
+            // iconPack: "eva",
           }
         );
       }, (error) => {
@@ -132,7 +132,7 @@ export class AdminUsuariosComponent implements OnInit {
           preventDuplicates: true,
           status: "danger",
           icon: "alert-triangle",
-          iconPack: "eva",
+          // iconPack: "eva",
         });
       }
       );
@@ -159,7 +159,7 @@ export class AdminUsuariosComponent implements OnInit {
           preventDuplicates: true,
           status: "success",
           icon: "checkmark",
-          iconPack: "eva",
+          // iconPack: "eva",
         });
       }, (error) => {
         this.toastrService.show(error.message, "Error", {
@@ -167,7 +167,7 @@ export class AdminUsuariosComponent implements OnInit {
           preventDuplicates: true,
           status: "danger",
           icon: "alert-triangle",
-          iconPack: "eva",
+          // iconPack: "eva",
         });
       });
   }
@@ -204,7 +204,7 @@ export class AdminUsuariosComponent implements OnInit {
         preventDuplicates: true,
         status: "success",
         icon: "checkmark",
-        iconPack: "eva",
+        // iconPack: "eva",
       });
     }, err => {
       user.estado = false;
@@ -213,7 +213,7 @@ export class AdminUsuariosComponent implements OnInit {
         preventDuplicates: true,
         status: "danger",
         icon: "alert-triangle",
-        iconPack: "eva",
+        // iconPack: "eva",
       });
     });
 

@@ -178,7 +178,7 @@ export class PsicologoMisCasosComponent implements OnInit {
           preventDuplicates: true,
           status: "success",
           icon: "checkmark",
-          iconPack: "eva",
+          // iconPack: "eva",
         });
       }, (err) => {
         this.toastrService.show("El caso no pudo ser eliminado", "Error", {
@@ -186,7 +186,7 @@ export class PsicologoMisCasosComponent implements OnInit {
           preventDuplicates: true,
           status: "danger",
           icon: "alert-triangle",
-          iconPack: "eva",
+          // iconPack: "eva",
         });
       });
   }

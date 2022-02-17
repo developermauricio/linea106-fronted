@@ -10,7 +10,7 @@ const EXCEL_EXTENSION = ".xlsx";
   providedIn: "root"
 })
 export class ExcelReportService {
-  constructor() {}
+  constructor() { }
   public exportAsExcelFile(json: any[], excelFileName: string): void {
     const worksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(json);
     const workbook: XLSX.WorkBook = {

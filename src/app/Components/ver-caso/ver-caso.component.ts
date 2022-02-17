@@ -7,8 +7,6 @@ import { CasoModel } from 'src/app/Models/caso.model';
 import { PacienteModel } from 'src/app/Models/paciente.model';
 import { TipoModel } from 'src/app/Models/tipo.model';
 import { UserModel } from 'src/app/Models/user.model';
-import { PatientDataService } from 'src/app/patient.data.service';
-import { SeguimientoDataService } from 'src/app/seguimiento.data.service';
 import { CasoService } from 'src/app/Services/Psicologo/caso.service';
 
 @Component({
@@ -34,8 +32,6 @@ export class VerCasoComponent implements OnInit, OnDestroy {
   subscribe: Subscription = null;
 
   constructor(
-    private seguimientoDataService: SeguimientoDataService,
-    private patientDataService: PatientDataService,
     private toastrService: NbToastrService,
     private dialogService: NbDialogService,
     private _casoService: CasoService,
@@ -91,37 +87,38 @@ export class VerCasoComponent implements OnInit, OnDestroy {
   addSeguimiento(seguimientoForm: NgForm) {
     let seguimiento = seguimientoForm.value;
     seguimiento["fecha"] = this.getDate(new Date());
-    this.seguimientoDataService
-      .addSeguimiento(seguimiento)
-      .then((resp) => {
-        this.modalOpenSeguimiento.close();
-        this.toastrService.show(
-          "Seguimiento registrado correctamente",
-          "Éxito",
-          {
-            destroyByClick: true,
-            preventDuplicates: true,
-            status: "success",
-            icon: "checkmark",
-            iconPack: "eva",
-          }
-        );
-      })
-      .catch((error) => {
-        this.modalOpenSeguimiento.close();
-        this.toastrService.show(
-          "El seguimiento no pudo ser agregado, verifique los datos ingresados e intente nuevamente",
-          "Error",
-          {
-            destroyByClick: true,
-            preventDuplicates: true,
-            status: "danger",
-            icon: "alert-triangle",
-            iconPack: "eva",
-          }
-        );
-        console.log(error);
-      });
+    console.error("Falta generar esta parte");
+    // this.seguimientoDataService
+    //   .addSeguimiento(seguimiento)
+    //   .then((resp) => {
+    //     this.modalOpenSeguimiento.close();
+    //     this.toastrService.show(
+    //       "Seguimiento registrado correctamente",
+    //       "Éxito",
+    //       {
+    //         destroyByClick: true,
+    //         preventDuplicates: true,
+    //         status: "success",
+    //         icon: "checkmark",
+    //         // iconPack: "eva",
+    //       }
+    //     );
+    //   })
+    //   .catch((error) => {
+    //     this.modalOpenSeguimiento.close();
+    //     this.toastrService.show(
+    //       "El seguimiento no pudo ser agregado, verifique los datos ingresados e intente nuevamente",
+    //       "Error",
+    //       {
+    //         destroyByClick: true,
+    //         preventDuplicates: true,
+    //         status: "danger",
+    //         icon: "alert-triangle",
+    //         // iconPack: "eva",
+    //       }
+    //     );
+    //     console.log(error);
+    //   });
   }
 
   private getDate(date: Date) {

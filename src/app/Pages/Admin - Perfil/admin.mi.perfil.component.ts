@@ -58,7 +58,7 @@ export class AdminMiPerfilComponent implements OnInit {
         preventDuplicates: true,
         status: "success",
         icon: "checkmark",
-        iconPack: "eva"
+        // iconPack: "eva"
       });
       this.modalOpen.close();
       this.formProfile.reset();
@@ -75,7 +75,7 @@ export class AdminMiPerfilComponent implements OnInit {
         preventDuplicates: true,
         status: "danger",
         icon: "alert-triangle",
-        iconPack: "eva",
+        // iconPack: "eva",
       });
     });
   }

@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
-import { ExcelReportService } from "src/app/excel.report.service";
 import { StatisticsModel } from 'src/app/Models/statistic.model';
 import { CasoService } from 'src/app/Services/Common/caso.service';
+import { ExcelReportService } from 'src/app/Services/excel.report.service';
 
 @Component({
   selector: "app-estadisticas",

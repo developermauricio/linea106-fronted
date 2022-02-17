@@ -43,7 +43,7 @@ export class AdminInicioComponent implements OnInit {
           preventDuplicates: true,
           status: "success",
           icon: "checkmark",
-          iconPack: "eva"
+          // iconPack: "eva"
         });
         this.anuncios.unshift(resp);
       }, error => {
@@ -52,7 +52,7 @@ export class AdminInicioComponent implements OnInit {
           preventDuplicates: true,
           status: "danger",
           icon: "alert-triangle",
-          iconPack: "eva"
+          // iconPack: "eva"
         });
       });
   }
@@ -67,7 +67,7 @@ export class AdminInicioComponent implements OnInit {
           preventDuplicates: true,
           status: "success",
           icon: "checkmark",
-          iconPack: "eva"
+          // iconPack: "eva"
         });
         this.anuncios.splice(this.anuncios.findIndex(r => r.id == this.currentId), 1, resp);
       }, error => {
@@ -76,7 +76,7 @@ export class AdminInicioComponent implements OnInit {
           preventDuplicates: true,
           status: "danger",
           icon: "alert-triangle",
-          iconPack: "eva"
+          // iconPack: "eva"
         });
       });
   }
@@ -91,7 +91,7 @@ export class AdminInicioComponent implements OnInit {
           preventDuplicates: true,
           status: "success",
           icon: "checkmark",
-          iconPack: "eva"
+          // iconPack: "eva"
         });
         this.anuncios.splice(this.anuncios.findIndex(r => r.id == this.currentId), 1);
       }, error => {
@@ -100,7 +100,7 @@ export class AdminInicioComponent implements OnInit {
           preventDuplicates: true,
           status: "danger",
           icon: "alert-triangle",
-          iconPack: "eva"
+          // iconPack: "eva"
         });
       });
   }

@@ -24,12 +24,6 @@ import { PsicologoMisCasosComponent } from './Pages/Psicologo - Mis Casos/psicol
 import { PsicologoPerfilComponent } from './Pages/Psicologo - Perfil/psicologo.perfil.component';
 import { PsicologoSeguimientoComponent } from './Pages/Psicologo - Seguimiento/psicologo.seguimiento.component';
 
-
-
-
-
-
-
 const routes: Routes = [
   {
     path: "",

@@ -42,7 +42,7 @@ export class LoginService {
               preventDuplicates: true,
               status: "success",
               icon: "alert-triangle",
-              iconPack: "eva"
+              // iconPack: "eva"
             }
           );
         }, 200);
@@ -62,7 +62,7 @@ export class LoginService {
                 preventDuplicates: true,
                 status: "danger",
                 icon: "alert-triangle",
-                iconPack: "eva"
+                // iconPack: "eva"
               }
             );
           }
@@ -75,7 +75,7 @@ export class LoginService {
               preventDuplicates: true,
               status: "danger",
               icon: "alert-triangle",
-              iconPack: "eva"
+              // iconPack: "eva"
             }
           );
         } else {
@@ -88,7 +88,7 @@ export class LoginService {
               preventDuplicates: true,
               status: "danger",
               icon: "alert-triangle",
-              iconPack: "eva"
+              // iconPack: "eva"
             }
           );
         }
@@ -156,7 +156,7 @@ export class LoginService {
             preventDuplicates: true,
             status: "success",
             icon: "alert-triangle",
-            iconPack: "eva"
+            // iconPack: "eva"
           }
         );
       }, 200);
@@ -174,7 +174,7 @@ export class LoginService {
           preventDuplicates: true,
           status: "danger",
           icon: "alert-triangle",
-          iconPack: "eva"
+          // iconPack: "eva"
         }
       );
     });

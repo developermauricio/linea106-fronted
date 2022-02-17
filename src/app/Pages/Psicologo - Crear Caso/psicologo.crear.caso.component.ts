@@ -2,10 +2,6 @@ import { Component, OnInit, ViewChild } from "@angular/core";
 import { NgForm } from "@angular/forms";
 import { Router } from "@angular/router";
 import { NbToastrService } from "@nebular/theme";
-import { CaseDataService } from "../../case.data.service";
-import { DashboardComponent } from "../../Dashboard/dashboard.component";
-import { PatientDataService } from "../../patient.data.service";
-import { UserDataService } from "../../user.data.service";
 
 @Component({
   selector: "app-psicologo.crear.caso",
@@ -18,11 +14,7 @@ export class PsicologoCrearCasoComponent implements OnInit {
   sentButton: boolean = false;
 
   constructor(
-    private patientDataService: PatientDataService,
-    private userDataService: UserDataService,
-    private caseDataService: CaseDataService,
     private toastrService: NbToastrService,
-    private dashboardComponent: DashboardComponent,
     private router: Router
   ) {}
 
@@ -30,143 +22,143 @@ export class PsicologoCrearCasoComponent implements OnInit {
   }
 
   addCase(createCaseForm: NgForm) {
-    this.sentButton = true;
-    const newCase = createCaseForm.value;
-    newCase["fecha_inicio"] = new Date(newCase["fecha_inicio"]).getTime();
-    newCase["fecha_fin"] = new Date(newCase["fecha_fin"]).getTime();
-    newCase["ultima_actualizacion"] = new Date().valueOf();
-    // newCase["psicologo"] = this.psicologo;
-    if (newCase["tipo_paciente"] === "Usuario nuevo") {
-      const newPatient = this.createUsuarioForm.value;
-      if (newPatient.id) {
-        newCase["paciente"] = newPatient.id;
-        this.patientDataService
-          .addPatientWithId(newPatient)
-          .then((resp) => {
-            this.caseDataService
-              .addCase(newCase)
-              .then((resp) => {
-                this.resetForms();
-                this.toastrService.show(
-                  "Caso y usuario registrados correctamente",
-                  "Éxito",
-                  {
-                    destroyByClick: true,
-                    preventDuplicates: true,
-                    status: "success",
-                    icon: "checkmark",
-                    iconPack: "eva",
-                  }
-                );
-              })
-              .catch((error) => {
-                this.toastrService.show(
-                  "El caso no pudo ser creado, verifique los datos ingresados e intente nuevamente",
-                  "Error",
-                  {
-                    destroyByClick: true,
-                    preventDuplicates: true,
-                    status: "danger",
-                    icon: "alert-triangle",
-                    iconPack: "eva",
-                  }
-                );
-                console.log(error);
-              });
-          })
-          .catch((error) => {
-            this.toastrService.show(
-              "El usuario no pudo ser creado, verifique los datos ingresados e intente nuevamente",
-              "Error",
-              {
-                destroyByClick: true,
-                preventDuplicates: true,
-                status: "danger",
-                icon: "alert-triangle",
-                iconPack: "eva",
-              }
-            );
-            console.log(error);
-          });
-      } else {
-        this.patientDataService
-          .addPatient(newPatient)
-          .then((resp) => {
-            newCase["paciente"] = resp.id;
-            this.caseDataService
-              .addCase(newCase)
-              .then((resp) => {
-                this.resetForms();
-                this.toastrService.show(
-                  "Caso y usuario registrados correctamente",
-                  "Éxito",
-                  {
-                    destroyByClick: true,
-                    preventDuplicates: true,
-                    status: "success",
-                    icon: "checkmark",
-                    iconPack: "eva",
-                  }
-                );
-              })
-              .catch((error) => {
-                this.toastrService.show(
-                  "El caso no pudo ser creado, verifique los datos ingresados e intente nuevamente",
-                  "Error",
-                  {
-                    destroyByClick: true,
-                    preventDuplicates: true,
-                    status: "danger",
-                    icon: "alert-triangle",
-                    iconPack: "eva",
-                  }
-                );
-                console.log(error);
-              });
-          })
-          .catch((error) => {
-            this.toastrService.show(
-              "El usuario no pudo ser creado, verifique los datos ingresados e intente nuevamente",
-              "Error",
-              {
-                destroyByClick: true,
-                preventDuplicates: true,
-                status: "danger",
-                icon: "alert-triangle",
-                iconPack: "eva",
-              }
-            );
-            console.log(error);
-          });
-      }
-    } else {
-      this.caseDataService
-        .addCase(newCase)
-        .then((resp) => {
-          this.resetForms();
-          this.toastrService.show("Caso registrado correctamente", "Éxito", {
-            destroyByClick: true,
-            preventDuplicates: true,
-            status: "success",
-            icon: "checkmark",
-            iconPack: "eva",
-          });
-        })
-        .catch((error) => {
-          this.toastrService.show(
-            "El caso no pudo ser creado, verifique los datos ingresados e intente nuevamente",
-            "Error",
-            {
-              destroyByClick: true,
-              preventDuplicates: true,
-              status: "danger",
-              icon: "alert-triangle",
-              iconPack: "eva",
-            }
-          );
-          console.log(error);
-        });
-    }
+    // this.sentButton = true;
+    // const newCase = createCaseForm.value;
+    // newCase["fecha_inicio"] = new Date(newCase["fecha_inicio"]).getTime();
+    // newCase["fecha_fin"] = new Date(newCase["fecha_fin"]).getTime();
+    // newCase["ultima_actualizacion"] = new Date().valueOf();
+    // // newCase["psicologo"] = this.psicologo;
+    // if (newCase["tipo_paciente"] === "Usuario nuevo") {
+    //   const newPatient = this.createUsuarioForm.value;
+    //   if (newPatient.id) {
+    //     newCase["paciente"] = newPatient.id;
+    //     this.patientDataService
+    //       .addPatientWithId(newPatient)
+    //       .then((resp) => {
+    //         this.caseDataService
+    //           .addCase(newCase)
+    //           .then((resp) => {
+    //             this.resetForms();
+    //             this.toastrService.show(
+    //               "Caso y usuario registrados correctamente",
+    //               "Éxito",
+    //               {
+    //                 destroyByClick: true,
+    //                 preventDuplicates: true,
+    //                 status: "success",
+    //                 icon: "checkmark",
+    //                 // iconPack: "eva",
+    //               }
+    //             );
+    //           })
+    //           .catch((error) => {
+    //             this.toastrService.show(
+    //               "El caso no pudo ser creado, verifique los datos ingresados e intente nuevamente",
+    //               "Error",
+    //               {
+    //                 destroyByClick: true,
+    //                 preventDuplicates: true,
+    //                 status: "danger",
+    //                 icon: "alert-triangle",
+    //                 // iconPack: "eva",
+    //               }
+    //             );
+    //             console.log(error);
+    //           });
+    //       })
+    //       .catch((error) => {
+    //         this.toastrService.show(
+    //           "El usuario no pudo ser creado, verifique los datos ingresados e intente nuevamente",
+    //           "Error",
+    //           {
+    //             destroyByClick: true,
+    //             preventDuplicates: true,
+    //             status: "danger",
+    //             icon: "alert-triangle",
+    //             // iconPack: "eva",
+    //           }
+    //         );
+    //         console.log(error);
+    //       });
+    //   } else {
+    //     this.patientDataService
+    //       .addPatient(newPatient)
+    //       .then((resp) => {
+    //         newCase["paciente"] = resp.id;
+    //         this.caseDataService
+    //           .addCase(newCase)
+    //           .then((resp) => {
+    //             this.resetForms();
+    //             this.toastrService.show(
+    //               "Caso y usuario registrados correctamente",
+    //               "Éxito",
+    //               {
+    //                 destroyByClick: true,
+    //                 preventDuplicates: true,
+    //                 status: "success",
+    //                 icon: "checkmark",
+    //                 // iconPack: "eva",
+    //               }
+    //             );
+    //           })
+    //           .catch((error) => {
+    //             this.toastrService.show(
+    //               "El caso no pudo ser creado, verifique los datos ingresados e intente nuevamente",
+    //               "Error",
+    //               {
+    //                 destroyByClick: true,
+    //                 preventDuplicates: true,
+    //                 status: "danger",
+    //                 icon: "alert-triangle",
+    //                 // iconPack: "eva",
+    //               }
+    //             );
+    //             console.log(error);
+    //           });
+    //       })
+    //       .catch((error) => {
+    //         this.toastrService.show(
+    //           "El usuario no pudo ser creado, verifique los datos ingresados e intente nuevamente",
+    //           "Error",
+    //           {
+    //             destroyByClick: true,
+    //             preventDuplicates: true,
+    //             status: "danger",
+    //             icon: "alert-triangle",
+    //             // iconPack: "eva",
+    //           }
+    //         );
+    //         console.log(error);
+    //       });
+    //   }
+    // } else {
+    //   this.caseDataService
+    //     .addCase(newCase)
+    //     .then((resp) => {
+    //       this.resetForms();
+    //       this.toastrService.show("Caso registrado correctamente", "Éxito", {
+    //         destroyByClick: true,
+    //         preventDuplicates: true,
+    //         status: "success",
+    //         icon: "checkmark",
+    //         // iconPack: "eva",
+    //       });
+    //     })
+    //     .catch((error) => {
+    //       this.toastrService.show(
+    //         "El caso no pudo ser creado, verifique los datos ingresados e intente nuevamente",
+    //         "Error",
+    //         {
+    //           destroyByClick: true,
+    //           preventDuplicates: true,
+    //           status: "danger",
+    //           icon: "alert-triangle",
+    //           // iconPack: "eva",
+    //         }
+    //       );
+    //       console.log(error);
+    //     });
+    // }
   }
 
   validatePaciente(option: any) {

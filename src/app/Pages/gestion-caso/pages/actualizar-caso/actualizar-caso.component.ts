@@ -141,7 +141,7 @@ export class ActualizarCasoComponent implements OnInit {
           preventDuplicates: true,
           status: "success",
           icon: "checkmark",
-          iconPack: "eva",
+          // iconPack: "eva",
         }
       );
       if (resp.paciente.identificacion) {
