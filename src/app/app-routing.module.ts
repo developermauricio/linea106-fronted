@@ -94,7 +94,12 @@ const routes: Routes = [
         path: "estadisticas",
         component: EstadisticasComponent,
         canActivate: [LoginGuardian]
-      }
+      },
+      {
+        path: "caso",
+        loadChildren: () => import('./Pages/gestion-caso/gestion-caso.module').then(m => m.GestionCasoModule),
+        canActivate: [PsicologoGuardian],
+      },
     ]
   },
   {

@@ -1,11 +1,17 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, forwardRef, Input, OnInit, Output } from '@angular/core';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
   selector: 'app-select-filter',
   templateUrl: './select-filter.component.html',
-  styleUrls: ['./select-filter.component.scss']
+  styleUrls: ['./select-filter.component.scss'],
+  providers: [{
+    provide: NG_VALUE_ACCESSOR,
+    multi: true,
+    useExisting: forwardRef(() => SelectFilterComponent)
+  }]
 })
-export class SelectFilterComponent implements OnInit {
+export class SelectFilterComponent implements OnInit, ControlValueAccessor {
 
   private listFiltered: any[] = null;
 
@@ -16,7 +22,6 @@ export class SelectFilterComponent implements OnInit {
   @Input() getTitle: (item: any) => string = (item) => { return item; };
   @Input() filter: (searchTerm: string) => Promise<any[]> = (searchTerm) => {
     return new Promise((resolve, reject) => {
-      this.showList = true;
       if (!searchTerm?.trim()) {
         resolve(this.list);
       } else {
@@ -33,9 +38,44 @@ export class SelectFilterComponent implements OnInit {
 
   search = '';
   selectIndex = 0;
-  showList = true;
+  showList = false;
 
   constructor() { }
+
+  onChange = (value: any) => { };
+
+
+  writeValue(obj: any): void {
+    this.listFiltered = this.list;
+    if (obj == null) {
+      this.delete();
+    } else {
+      const index = this.listFiltered.findIndex(item => {
+        return this.getTitle(item).toLocaleLowerCase() === this.getTitle(obj).toLocaleLowerCase();
+      });
+      if (index < 0) {
+        if (!this.listFiltered) {
+          this.listFiltered = [];
+        }
+        this.listFiltered.unshift(obj);
+        this.selectItem(0);
+      } else {
+        this.selectItem(index);
+      }
+    }
+  }
+
+  registerOnChange(fn: any): void {
+    this.onChange = fn;
+  }
+
+  registerOnTouched(fn: any): void {
+    // throw new Error('Method not implemented.');
+  }
+
+  setDisabledState?(isDisabled: boolean): void {
+    // throw new Error('Method not implemented.');
+  }
 
   ngOnInit() { }
 
@@ -58,6 +98,7 @@ export class SelectFilterComponent implements OnInit {
     if (item) {
       this.search = this.getTitle(item);
       this.change.emit(item);
+      this.onChange(item);
     }
   }
 
@@ -86,13 +127,13 @@ export class SelectFilterComponent implements OnInit {
           clearTimeout(this.time);
           this.time = setTimeout(() => {
             this.filter(this.search).then(resp => {
-              console.log("search");
+              this.showList = true;
               this.listFiltered = resp;
             });
           }, 400);
         } else {
           this.filter(this.search).then(resp => {
-            console.log("search");
+            this.showList = true;
             this.listFiltered = resp;
           });
         }
@@ -115,5 +156,6 @@ export class SelectFilterComponent implements OnInit {
     this.search = '';
     this.selectIndex = 0;
     this.listFiltered = this.list;
+    this.onChange(null);
   }
 }

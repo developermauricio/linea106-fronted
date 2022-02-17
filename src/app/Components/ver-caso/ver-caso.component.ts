@@ -1,5 +1,6 @@
 import { Component, Input, OnDestroy, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
 import { NbDialogService, NbToastrService } from '@nebular/theme';
 import { Subject, Subscription } from 'rxjs';
 import { CasoModel } from 'src/app/Models/caso.model';
@@ -37,7 +38,8 @@ export class VerCasoComponent implements OnInit, OnDestroy {
     private patientDataService: PatientDataService,
     private toastrService: NbToastrService,
     private dialogService: NbDialogService,
-    private _casoService: CasoService
+    private _casoService: CasoService,
+    private _router: Router
   ) { }
 
   ngOnInit() {
@@ -296,6 +298,11 @@ export class VerCasoComponent implements OnInit, OnDestroy {
     }
 
     return `${paciente.nombre || ''} ${paciente.apellido || ''}`.trim() || '---';
+  }
+
+  actualizarCaso(){
+    this._router.navigateByUrl('/caso/'+this.id);
+    this.modalOpenCase.close();
   }
 
 }

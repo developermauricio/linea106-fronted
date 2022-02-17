@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { CasoModel } from 'src/app/Models/caso.model';
 import { PaginateModel } from 'src/app/Models/paginate.model';
+import { PsicologoStatisticModel } from 'src/app/Models/psicologo-statistic.model';
 import { CoreService } from '../core.service';
 
 @Injectable({
@@ -24,5 +25,10 @@ export class CasoService {
 
   delete(id) {
     return this._coreService.delete<any[]>('/psicologo/casos');
+  }
+
+
+  getStatisticsByDate(fechaInicio, fechaFin) {
+    return this._coreService.get<PsicologoStatisticModel>(`/psicologo/statics?fecha_inicio=${fechaInicio}&fecha_fin=${fechaFin}`);
   }
 }

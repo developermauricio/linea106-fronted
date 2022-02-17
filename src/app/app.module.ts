@@ -35,10 +35,7 @@ import { LoginComponent } from "./Auth/Login/login.component";
 //Login Import
 import { LoginService } from "./Auth/Login/login.service";
 import { CaseDataService } from "./case.data.service";
-import { CustomToggleComponent } from './Components/custom-toggle/custom-toggle.component';
-import { PaginationServerComponent } from './Components/pagination-server/pagination-server.component';
-import { SelectFilterComponent } from './Components/select-filter/select-filter.component';
-import { VerCasoComponent } from './Components/ver-caso/ver-caso.component';
+import { ComponentsModule } from './Components/components.module';
 //DashboardComponent Import
 import { DashboardComponent } from "./Dashboard/dashboard.component";
 //Excel imports
@@ -67,24 +64,6 @@ import { SeguimientoDataService } from "./seguimiento.data.service";
 import { UserDataService } from "./user.data.service";
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 registerLocaleData(esCo);
 
 @NgModule({
@@ -105,13 +84,10 @@ registerLocaleData(esCo);
     PsicologoSeguimientoComponent,
     EstadisticasComponent,
     seguimientoFilterPipe,
-    PaginationServerComponent,
-    SelectFilterComponent,
-    VerCasoComponent,
-    CustomToggleComponent,
-    PasswordResetComponent
+    PasswordResetComponent,
   ],
   imports: [
+    ComponentsModule,
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
@@ -155,4 +131,4 @@ registerLocaleData(esCo);
   ],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }

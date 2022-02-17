@@ -12,9 +12,8 @@
             type="date"
             name="fecha_inicio"
             class="form-control"
-            (change)="handler('inicio', $event)"
-            required
-          />
+            [(ngModel)]="fecha_inicio"
+            required />
         </div>
         <div class="form-group">
           <label for="fecha_fin">Fecha final (*)</label>
@@ -23,20 +22,19 @@
             type="date"
             name="fecha_fin"
             class="form-control"
-            (change)="handler('fin', $event)"
-            required
-          />
+            [(ngModel)]="fecha_fin"
+            [min]="fecha_inicio"
+            required />
         </div>
       </form>
-      <h6 [hidden]="!showStats" class="text-warning">
+      <!-- <h6 [hidden]="!showStats" class="text-warning">
         ¡Para realizar una nueva consulta recarga la página!
-      </h6>
+      </h6> -->
       <button
         (click)="getCases()"
         class="btn btn-primary float-right"
         [disabled]="!fecha_inicio || !fecha_fin"
-        [hidden]="showCalculateButton"
-      >
+        [hidden]="showCalculateButton">
         Ejecutar
       </button>
     </nb-card-body>
@@ -50,56 +48,16 @@
       </div>
       <div class="row mx-3">
         <div class="col-12 mx-auto px-1">
-          <nb-card>
-            <nb-card-body>
-              <h6 class="mb-2 text-center font-weight-normal">Total casos</h6>
-              <h4 class="text-center m-0">{{ totalCases }}</h4>
-            </nb-card-body>
-          </nb-card>
+          <app-estadistica-item
+            nombre="Total casos"
+            [total]="psicologoStatistics.total"></app-estadistica-item>
         </div>
-        <div class="col-6 col-sm-4 col-lg mx-auto px-1">
-          <nb-card>
-            <nb-card-body>
-              <h6 class="mb-2 text-center font-weight-normal">Teléfono</h6>
-              <h4 class="text-center m-0">{{ totalCasesPhone }}</h4>
-            </nb-card-body>
-          </nb-card>
-        </div>
-        <div class="col-6 col-sm-4 col-lg mx-auto px-1">
-          <nb-card>
-            <nb-card-body>
-              <h6 class="mb-2 text-center font-weight-normal">Whatsapp</h6>
-              <h4 class="text-center m-0">{{ totalCasesWhatsapp }}</h4>
-            </nb-card-body>
-          </nb-card>
-        </div>
-        <div class="col-6 col-sm-4 col-lg mx-auto px-1">
-          <nb-card>
-            <nb-card-body>
-              <h6 class="mb-2 text-center font-weight-normal">
-                Redes Sociales
-              </h6>
-              <h4 class="text-center m-0">{{ totalCasesRedes }}</h4>
-            </nb-card-body>
-          </nb-card>
-        </div>
-        <div class="col-6 col-sm-4 col-lg mx-auto px-1">
-          <nb-card>
-            <nb-card-body>
-              <h6 class="mb-2 text-center font-weight-normal">
-                Correo Electrónico
-              </h6>
-              <h4 class="text-center m-0">{{ totalCasesCorreo }}</h4>
-            </nb-card-body>
-          </nb-card>
-        </div>
-        <div class="col-6 col-sm-4 col-lg mx-auto px-1">
-          <nb-card>
-            <nb-card-body>
-              <h6 class="mb-2 text-center font-weight-normal">Buzón</h6>
-              <h4 class="text-center m-0">{{ totalCasesBuzon }}</h4>
-            </nb-card-body>
-          </nb-card>
+        <div
+          *ngFor="let origen of psicologoStatistics.casos_by_origen"
+          class="col-6 col-sm-4 col-lg mx-auto px-1">
+          <app-estadistica-item
+            [nombre]="origen.nombre"
+            [total]="origen.total"></app-estadistica-item>
         </div>
       </div>
     </div>
@@ -114,16 +72,10 @@
       <div class="row mx-3">
         <div
           class="col-6 col-sm-4 col-lg-4 mx-auto px-1"
-          *ngFor="let psicologo of psicologos"
-        >
-          <nb-card>
-            <nb-card-body>
-              <h6 class="mb-2 text-center font-weight-normal">
-                {{ psicologo.nombre }}
-              </h6>
-              <h4 class="text-center m-0">{{ psicologo.cantidad }}</h4>
-            </nb-card-body>
-          </nb-card>
+          *ngFor="let psicologo of psicologoStatistics.casos_psicologo">
+          <app-estadistica-item
+            [nombre]="psicologo.nombre"
+            [total]="psicologo.total"></app-estadistica-item>
         </div>
       </div>
     </div>
@@ -138,18 +90,10 @@
       <div class="row mx-3">
         <div
           class="col-6 col-sm-4 col-lg-3 mx-auto px-1"
-          *ngFor="let municipio of municipios"
-        >
-          <nb-card>
-            <nb-card-body>
-              <h6 class="mb-2 text-center font-weight-normal">
-                {{ municipio.nombre }}
-              </h6>
-              <h4 class="text-center m-0">
-                {{ municipio.cantidad }}
-              </h4>
-            </nb-card-body>
-          </nb-card>
+          *ngFor="let municipio of psicologoStatistics.casos_municipios">
+          <app-estadistica-item
+            [nombre]="municipio.nombre"
+            [total]="municipio.total"></app-estadistica-item>
         </div>
       </div>
     </div>
@@ -164,18 +108,10 @@
       <div class="row mx-3">
         <div
           class="col-6 col-sm-4 col-lg-3 mx-auto px-1"
-          *ngFor="let edad of edades"
-        >
-          <nb-card>
-            <nb-card-body>
-              <h6 class="mb-2 text-center font-weight-normal">
-                {{ edad.nombre }}
-              </h6>
-              <h4 class="text-center m-0">
-                {{ edad.cantidad }}
-              </h4>
-            </nb-card-body>
-          </nb-card>
+          *ngFor="let edad of psicologoStatistics.casos_edades">
+          <app-estadistica-item
+            [nombre]="edad.nombre"
+            [total]="edad.total"></app-estadistica-item>
         </div>
       </div>
     </div>
@@ -190,16 +126,10 @@
       <div class="row mx-3">
         <div
           class="col-6 col-sm-4 col-lg-3 mx-auto px-1"
-          *ngFor="let sexo of sexos"
-        >
-          <nb-card>
-            <nb-card-body>
-              <h6 class="mb-2 text-center font-weight-normal">
-                {{ sexo.nombre }}
-              </h6>
-              <h4 class="text-center m-0">{{ sexo.cantidad }}</h4>
-            </nb-card-body>
-          </nb-card>
+          *ngFor="let sexo of psicologoStatistics.casos_sexo">
+          <app-estadistica-item
+            [nombre]="sexo.nombre"
+            [total]="sexo.total"></app-estadistica-item>
         </div>
       </div>
     </div>
@@ -214,16 +144,10 @@
       <div class="row mx-3">
         <div
           class="col-6 col-sm-4 col-lg-3 mx-auto px-1"
-          *ngFor="let genero of generos"
-        >
-          <nb-card>
-            <nb-card-body>
-              <h6 class="mb-2 text-center font-weight-normal">
-                {{ genero.nombre }}
-              </h6>
-              <h4 class="text-center m-0">{{ genero.cantidad }}</h4>
-            </nb-card-body>
-          </nb-card>
+          *ngFor="let genero of psicologoStatistics.casos_genero">
+          <app-estadistica-item
+            [nombre]="genero.nombre"
+            [total]="genero.total"></app-estadistica-item>
         </div>
       </div>
     </div>
@@ -236,15 +160,12 @@
         </div>
       </div>
       <div class="row mx-3">
-        <div class="col-6 col-sm-4 mx-auto px-1" *ngFor="let zona of zonas">
-          <nb-card>
-            <nb-card-body>
-              <h6 class="mb-2 text-center font-weight-normal">
-                {{ zona.nombre }}
-              </h6>
-              <h4 class="text-center m-0">{{ zona.cantidad }}</h4>
-            </nb-card-body>
-          </nb-card>
+        <div
+          class="col-6 col-sm-4 mx-auto px-1"
+          *ngFor="let zona of psicologoStatistics.casos_zona">
+          <app-estadistica-item
+            [nombre]="zona.nombre"
+            [total]="zona.total"></app-estadistica-item>
         </div>
       </div>
     </div>
@@ -259,16 +180,10 @@
       <div class="row mx-3">
         <div
           class="col-6 col-sm-4 col-lg-4 mx-auto px-1"
-          *ngFor="let motivo of motivos"
-        >
-          <nb-card>
-            <nb-card-body>
-              <h6 class="mb-2 text-center font-weight-normal">
-                {{ motivo.nombre }}
-              </h6>
-              <h4 class="text-center m-0">{{ motivo.cantidad }}</h4>
-            </nb-card-body>
-          </nb-card>
+          *ngFor="let motivo of psicologoStatistics.casos_motivo_consulta">
+          <app-estadistica-item
+            [nombre]="motivo.nombre"
+            [total]="motivo.total"></app-estadistica-item>
         </div>
       </div>
     </div>
@@ -283,26 +198,19 @@
       <div class="row mx-3">
         <div
           class="col-6 col-sm-4 col-lg-4 mx-auto px-1"
-          *ngFor="let intervencion of intervenciones"
-        >
-          <nb-card>
-            <nb-card-body>
-              <h6 class="mb-2 text-center font-weight-normal">
-                {{ intervencion.nombre }}
-              </h6>
-              <h4 class="text-center m-0">{{ intervencion.cantidad }}</h4>
-            </nb-card-body>
-          </nb-card>
+          *ngFor="let intervencion of psicologoStatistics.casos_linea_intervencion">
+          <app-estadistica-item
+            [nombre]="intervencion.nombre"
+            [total]="intervencion.total"></app-estadistica-item>
         </div>
       </div>
     </div>
   </div>
   <button
-        (click)="exportAsXLSX()"
-        class="btn btn-success float-right"
-        [disabled]="!showExportButton"
-        [hidden]="!showStats"
-      >
-        Descargar reporte
-      </button>
+    (click)="exportAsXLSX()"
+    class="btn btn-success float-right"
+    [disabled]="!showExportButton"
+    [hidden]="!showStats">
+    Descargar reporte
+  </button>
 </div>

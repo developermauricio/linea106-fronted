@@ -1,0 +1,272 @@
+<div class="col-12 text-center pb-4">
+  <ng-container *ngIf="buscar; else elseTemplate">
+    <button
+      class="btn btn-danger mr-2"
+      (click)="cancelarBusquedaUsuario()">Cancelar Busqueda</button>
+  </ng-container>
+  <ng-template #elseTemplate>
+    <button
+      class="btn btn-primary mr-2"
+      (click)="buscarUsuario()">Buscar Usuario</button>
+  </ng-template>
+  <button
+    class="btn btn-success ml-2"
+    (click)="nuevoUsuario()">Nuevo Usuario</button>
+</div>
+<div class="col-12" *ngIf="buscar">
+  <app-list-users (selectPaciente)="selectPaciente($event)"></app-list-users>
+</div>
+<form [formGroup]="formGroupPaciente" (submit)="prevent($event)">
+  <div class="row">
+    <ng-container *ngIf="hasIdentification && !buscar">
+      <div class="col-4 mb-3">
+        <label for="tipo_identificacion" class="form-label">
+          Tipo Identificación
+        </label>
+        <select [compareWith]="compare" formControlName="tipo_identificacion" class="form-control">
+          <option [ngValue]="null" disabled>Seleccione</option>
+          <option
+            [ngValue]="tipo_identificacion"
+            *ngFor="let tipo_identificacion of tipos_identificacion">
+            {{ tipo_identificacion.name }}
+          </option>
+        </select>
+      </div>
+      <div class="col-4 mb-3">
+        <label for="identificacion" class="form-label">
+          Identificación
+        </label>
+        <input
+          formControlName="identificacion"
+          type="text"
+          class="form-control"
+          id="identificacion" />
+      </div>
+      <div class="col-4 mb-3">
+        <label for="nombre" class="form-label">
+          Nombres
+        </label>
+        <input
+          formControlName="nombre"
+          type="text"
+          class="form-control"
+          id="nombre" />
+      </div>
+      <div class="col-4 mb-3">
+        <label for="apellido" class="form-label">
+          Apellidos
+        </label>
+        <input
+          formControlName="apellido"
+          type="text"
+          class="form-control"
+          id="apellido" />
+      </div>
+      <div class="col-4 mb-3">
+        <label for="edad" class="form-label">
+          Edad
+        </label>
+        <input
+          formControlName="edad"
+          type="number"
+          min="1"
+          class="form-control"
+          id="edad" />
+      </div>
+      <div class="col-4 mb-3">
+        <label for="fecha_nacimiento" class="form-label">
+          Fecha Nacimiento
+        </label>
+        <input
+          formControlName="fecha_nacimiento"
+          type="date"
+          class="form-control"
+          id="fecha_nacimiento"
+          [max]="currentDay"
+          />
+      </div>
+      <div class="col-4 mb-3">
+        <label for="direccion" class="form-label">
+          Dirección
+        </label>
+        <input
+          formControlName="direccion"
+          type="text"
+          class="form-control"
+          id="direccion" />
+      </div>
+      <div class="col-4 mb-3">
+        <label for="orientacion_sexual" class="form-label">
+          Orientación Sexual
+        </label>
+        <select [compareWith]="compare" formControlName="orientacion_sexual" class="form-control">
+          <option [ngValue]="null" disabled>Seleccione</option>
+          <option
+            [ngValue]="orientacion"
+            *ngFor="let orientacion of orientaciones_sexuales">
+            {{ orientacion.name }}
+          </option>
+        </select>
+      </div>
+      <div class="col-4 mb-3">
+        <label for="genero" class="form-label">
+          Genero
+        </label>
+        <select [compareWith]="compare" formControlName="genero" class="form-control">
+          <option [ngValue]="null" disabled>Seleccione</option>
+          <option
+            [ngValue]="genero"
+            *ngFor="let genero of generos">
+            {{ genero.name }}
+          </option>
+        </select>
+      </div>
+      <div class="col-4 mb-3">
+        <label for="sexo" class="form-label">
+          Sexo
+        </label>
+        <select [compareWith]="compare" formControlName="sexo" class="form-control">
+          <option [ngValue]="null" disabled>Seleccione</option>
+          <option
+            [ngValue]="sexo"
+            *ngFor="let sexo of sexos">
+            {{ sexo.name }}
+          </option>
+        </select>
+      </div>
+      <div class="col-4 mb-3">
+        <label for="etnia" class="form-label">
+          Etnia
+        </label>
+        <select [compareWith]="compare" formControlName="etnia" class="form-control">
+          <option [ngValue]="null" disabled>Seleccione</option>
+          <option
+            [ngValue]="etnia"
+            *ngFor="let etnia of etnias">
+            {{ etnia.name }}
+          </option>
+        </select>
+      </div>
+      <div class="col-4 mb-3">
+        <label for="estado_civil" class="form-label">
+          Estado Civil
+        </label>
+        <select [compareWith]="compare" formControlName="estado_civil" class="form-control">
+          <option [ngValue]="null" disabled>Seleccione</option>
+          <option
+            [ngValue]="estado_civil"
+            *ngFor="let estado_civil of estado_civiles">
+            {{ estado_civil.name }}
+          </option>
+        </select>
+      </div>
+      <div class="col-4 mb-3">
+        <label for="ocupacion" class="form-label">
+          Ocupación
+        </label>
+        <select [compareWith]="compare" formControlName="ocupacion" class="form-control">
+          <option [ngValue]="null" disabled>Seleccione</option>
+          <option
+            [ngValue]="ocupacion"
+            *ngFor="let ocupacion of ocupaciones">
+            {{ ocupacion.name }}
+          </option>
+        </select>
+      </div>
+      <div class="col-4 mb-3">
+        <label for="nivel_educacion" class="form-label">
+          Nivel Educación
+        </label>
+        <select [compareWith]="compare" formControlName="nivel_educacion" class="form-control">
+          <option [ngValue]="null" disabled>Seleccione</option>
+          <option
+            [ngValue]="nivel_educacion"
+            *ngFor="let nivel_educacion of niveles_educacion">
+            {{ nivel_educacion.name }}
+          </option>
+        </select>
+      </div>
+      <div class="col-4 mb-3">
+        <label for="zona" class="form-label">
+          Zonas
+        </label>
+        <select [compareWith]="compare" formControlName="zona" class="form-control">
+          <option [ngValue]="null" disabled>Seleccione</option>
+          <option
+            [ngValue]="zona"
+            *ngFor="let zona of zonas">
+            {{ zona.name }}
+          </option>
+        </select>
+      </div>
+      <div class="col-4 mb-3">
+        <label for="como_conocio" class="form-label">
+          ¿Como conoció?
+        </label>
+        <select [compareWith]="compare" formControlName="como_conocio" class="form-control">
+          <option [ngValue]="null" disabled>Seleccione</option>
+          <option
+            [ngValue]="como"
+            *ngFor="let como of como_conocio">
+            {{ como.name }}
+          </option>
+        </select>
+      </div>
+      <div class="col-4 mb-3">
+        <label for="como_conocio_descripcion" class="form-label">
+          Como conoció descripción adicional
+        </label>
+        <input
+          formControlName="como_conocio_descripcion"
+          type="text"
+          class="form-control"
+          id="como_conocio_descripcion" />
+      </div>
+      <div class="col-4 mb-3">
+        <label for="poblacion_interes" class="form-label">
+          Población Interés
+        </label>
+        <select [compareWith]="compare" formControlName="poblacion_interes" class="form-control">
+          <option [ngValue]="null" disabled>Seleccione</option>
+          <option
+            [ngValue]="poblacion_interes"
+            *ngFor="let poblacion_interes of poblacion_intereses">
+            {{ poblacion_interes.name }}
+          </option>
+        </select>
+      </div>
+      <div class="col-4 mb-3">
+        <label for="departamento" class="form-label">
+          Departamento
+        </label>
+
+        <app-select-filter
+          [list]="departamentos"
+          [getTitle]="getTitleDepartamento"
+          formControlName="departamento"></app-select-filter>
+      </div>
+      <div class="col-4 mb-3" *ngIf="hasDepartamento">
+        <label for="municipio" class="form-label">
+          Municipio
+        </label>
+        <app-select-filter
+          [list]="municipios"
+          [getTitle]="getTitleMunicipio"
+          formControlName="municipio"
+          [filter]="callbackFilterMunicipio"
+          [debounce]="true"></app-select-filter>
+      </div>
+      <div class="col-4 mb-3" *ngIf="is_rural && hasMunicipio">
+        <label for="vereda" class="form-label">
+          Vereda
+        </label>
+        <app-select-filter
+          formControlName="vereda"
+          [list]="veredas"
+          [getTitle]="getTitleVereda"
+          [filter]="callbackFilterVereda"
+          [debounce]="true"></app-select-filter>
+      </div>
+    </ng-container>
+  </div>
+</form>

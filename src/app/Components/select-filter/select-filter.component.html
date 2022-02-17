@@ -1,15 +1,27 @@
 <div>
   <div class="input-group flex-nowrap">
-    <input (blur)="select()" (focus)="showList = true" [(ngModel)]="search" (keyup)="pressKeyUp($event)"
-      class="form-control" type="text" placeholder="Search for names..">
-    <button (click)="delete()" class="btn btn-sm btn-outline-danger" *ngIf="showDelete">
+    <input
+      (blur)="select()"
+      (focus)="showList = true"
+      [(ngModel)]="search"
+      (keyup)="pressKeyUp($event)"
+      class="form-control"
+      type="text"
+      placeholder="Search for names..">
+    <span
+      (click)="delete()"
+      class="btn btn-sm btn-outline-danger clear-select"
+      *ngIf="showDelete">
       <i class="fas fa-times" (click)="delete()"></i>
-    </button>
+    </span>
   </div>
   <div class="cont d-flex">
   </div>
   <ul [hidden]="!showList">
-    <li (click)="selectItem(i)" *ngFor="let item of listItems; index as i" [ngClass]="{'selected': i == selectIndex}">
+    <li
+      (click)="selectItem(i)"
+      *ngFor="let item of listItems; index as i"
+      [ngClass]="{'selected': i == selectIndex}">
       <a (click)="selectItem(i)">{{ getTitle(item) }}</a>
     </li>
   </ul>

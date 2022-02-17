@@ -14,8 +14,7 @@
             name="fecha_inicio"
             class="form-control"
             ngModel
-            required
-          />
+            required />
         </div>
         <hr class="w-100 mt-4" />
         <div class="form-group">
@@ -36,8 +35,7 @@
             type="text"
             name="documento_llama"
             class="form-control"
-            ngModel
-          />
+            ngModel />
         </div>
         <div class="form-group" *ngIf="otraPersona.selected">
           <label for="relacion">Relación con el usuario</label>
@@ -50,8 +48,7 @@
             class="form-control"
             ngModel
             required
-            (change)="validatePaciente(pacienteNuevo)"
-          >
+            (change)="validatePaciente(pacienteNuevo)">
             <option disabled selected value>--Seleccione--</option>
             <option #pacienteNuevo>Usuario nuevo</option>
             <option #pacienteExistente>Usuario existente</option>
@@ -64,8 +61,7 @@
             name="paciente"
             class="form-control"
             ngModel
-            required
-          />
+            required />
         </div>
       </div>
       <div class="col-md-4">
@@ -76,8 +72,7 @@
             name="fecha_fin"
             class="form-control"
             ngModel
-            required
-          />
+            required />
         </div>
         <hr class="w-100 mt-4" />
         <div class="form-group">
@@ -105,15 +100,11 @@
             <option #m6>Estados Emocionales Específicos</option>
             <option #m7>Suicidio</option>
             <option #m8>Sustancias PSICO ADICTIVAS</option>
-            <option #m9
-              >Situaciones en la educación y contextos académicos</option
-            >
+            <option #m9>Situaciones en la educación y contextos académicos</option>
             <option #m10>Desarrollo Laboral</option>
             <option #m11>Salud sexual y reproductiva</option>
             <option #m12>Violencia</option>
-            <option #m13
-              >Vulnerabilidad Social - Barreras de acceso a servicios</option
-            >
+            <option #m13>Vulnerabilidad Social - Barreras de acceso a servicios</option>
             <option #m14>Protocolos Internos</option>
             <option #m15>Juego</option>
             <option>No aplica</option>
@@ -125,10 +116,8 @@
           <select name="especificoSalud" class="form-control" ngModel required>
             <option disabled selected value>--Seleccione--</option>
             <option>Enfermedades prevalentes por etapa del ciclo vital</option>
-            <option
-              >RIAS primera infancia – crecimiento y desarrollo, vacunación,
-              nutrición</option
-            >
+            <option>RIAS primera infancia – crecimiento y desarrollo, vacunación,
+              nutrición</option>
             <option>Cuidado al cuidador</option>
             <option>Hábitos y estilos de vida saludables</option>
             <option>Nutrición</option>
@@ -140,8 +129,7 @@
             name="especificoSaludMental"
             class="form-control"
             ngModel
-            required
-          >
+            required>
             <option disabled selected value>--Seleccione--</option>
             <option>Habilidades para la vida</option>
             <option>Habilidades cognitivas</option>
@@ -161,15 +149,12 @@
             name="especificoFamiliar"
             class="form-control"
             ngModel
-            required
-          >
+            required>
             <option disabled selected value>--Seleccione--</option>
             <option>Relaciones Familiares</option>
             <option>Padres en conflicto (separación, divorcio…)</option>
-            <option
-              >Relaciones de pareja (infidelidad, otros conflictos de
-              pareja…)</option
-            >
+            <option>Relaciones de pareja (infidelidad, otros conflictos de
+              pareja…)</option>
             <option>Relaciones entre Padres e hijos - hijos y padres</option>
             <option>Relaciones entre hijos-hijos y padres</option>
             <option>Relaciones entre hermanos</option>
@@ -185,8 +170,7 @@
             name="especificoContexto"
             class="form-control"
             ngModel
-            required
-          >
+            required>
             <option disabled selected value>--Seleccione--</option>
             <option>Relaciones de pares</option>
             <option>Relaciones con amigos-amigas</option>
@@ -200,8 +184,7 @@
             name="especificoTrastornos"
             class="form-control"
             ngModel
-            required
-          >
+            required>
             <option disabled selected value>--Seleccione--</option>
             <option>Depresión</option>
             <option>Ansiedad</option>
@@ -215,15 +198,12 @@
           </select>
         </div>
         <div class="form-group" *ngIf="m6.selected">
-          <label for="especificoEstadosEmocionales"
-            >Motivo específico (*)</label
-          >
+          <label for="especificoEstadosEmocionales">Motivo específico (*)</label>
           <select
             name="especificoEstadosEmocionales"
             class="form-control"
             ngModel
-            required
-          >
+            required>
             <option disabled selected value>--Seleccione--</option>
             <option>Soledad</option>
             <option>Sentimiento de Tristeza</option>
@@ -237,8 +217,7 @@
             name="especificoSuicidio"
             class="form-control"
             ngModel
-            required
-          >
+            required>
             <option disabled selected value>--Seleccione--</option>
             <option>Conducta Suicida</option>
             <option>Idea Suicida</option>
@@ -254,8 +233,7 @@
             name="especificoSustancias"
             class="form-control"
             ngModel
-            required
-          >
+            required>
             <option disabled selected value>--Seleccione--</option>
             <option>Consumo de Sustancias Psicoactivas</option>
             <option>Inquietudes sobre el uso de SPA</option>
@@ -268,8 +246,7 @@
             name="especificoEducacion"
             class="form-control"
             ngModel
-            required
-          >
+            required>
             <option disabled selected value>--Seleccione--</option>
             <option>Deserción Educativa</option>
             <option>Problemas Académicos</option>
@@ -294,8 +271,7 @@
             name="especificoLaboral"
             class="form-control"
             ngModel
-            required
-          >
+            required>
             <option disabled selected value>--Seleccione--</option>
             <option>Desempleo</option>
             <option>Ambiente Laboral</option>
@@ -308,8 +284,7 @@
             name="especificoSaludSexual"
             class="form-control"
             ngModel
-            required
-          >
+            required>
             <option disabled selected value>--Seleccione--</option>
             <option>Inquietudes sobre sexualidad</option>
             <option>Sexualidad en Personas con Discapacidad</option>
@@ -328,8 +303,7 @@
             name="especificoViolencia"
             class="form-control"
             ngModel
-            required
-          >
+            required>
             <option disabled selected value>--Seleccione--</option>
             <option>Violencia Física</option>
             <option>Violencia Sexual</option>
@@ -349,8 +323,7 @@
             name="especificoVulnerabilidad"
             class="form-control"
             ngModel
-            required
-          >
+            required>
             <option disabled selected value>--Seleccione--</option>
             <option>Educción</option>
             <option>Salud</option>
@@ -364,8 +337,7 @@
             name="especificoProtocolos"
             class="form-control"
             ngModel
-            required
-          >
+            required>
             <option selected value>Otros motivos no clasificados</option>
           </select>
         </div>
@@ -376,8 +348,7 @@
             name="cual_motivo"
             class="form-control"
             ngModel
-            required
-          />
+            required />
         </div>
         <div class="form-group" *ngIf="m17.selected">
           <label for="especificoCoronavirus">Motivo específico (*)</label>
@@ -385,30 +356,19 @@
             name="especificoCoronavirus"
             class="form-control"
             ngModel
-            required
-          >
+            required>
             <option disabled selected value>--Seleccione--</option>
-            <option
-              >Información de protocolos prevención y cuidado sobre el
-              COVID-19</option
-            >
-            <option
-              >Reporte de sintomatología sospechosa para caso de
-              COVID-19</option
-            >
+            <option>Información de protocolos prevención y cuidado sobre el
+              COVID-19</option>
+            <option>Reporte de sintomatología sospechosa para caso de
+              COVID-19</option>
             <option>Información sobre rutas de atención del COVID-19</option>
-            <option
-              >Información sobre normativas que rigen durante el estado de
-              emergencia sanitaria</option
-            >
-            <option
-              >Afectaciones de salud mental debido al aislamiento
-              obligatorio</option
-            >
-            <option
-              >Reporte de casos de violencia intrafamiliar debido al aislamiento
-              obligatorio</option
-            >
+            <option>Información sobre normativas que rigen durante el estado de
+              emergencia sanitaria</option>
+            <option>Afectaciones de salud mental debido al aislamiento
+              obligatorio</option>
+            <option>Reporte de casos de violencia intrafamiliar debido al aislamiento
+              obligatorio</option>
             <option>Otras relacionadas con el aislamiento obligatorio</option>
             <option>Otras relacionadas con el COVID-19</option>
           </select>
@@ -432,8 +392,7 @@
             name="fuente"
             class="form-control"
             ngModel
-            required
-          />
+            required />
         </div>
 
         <div class="form-group">
@@ -442,8 +401,7 @@
             name="linea_intervencion"
             class="form-control"
             ngModel
-            required
-          >
+            required>
             <option disabled selected value>--Seleccione--</option>
             <option>Acompañamiento psicosocial</option>
             <option>Promoción de la Salud y Prevención de la enfermedad</option>
@@ -473,34 +431,24 @@
             <option>SIJIN</option>
             <option>EAPB (u otras entidades de salud)</option>
             <option>Hospitales</option>
-            <option
-              >Línea 155 de orientación a mujeres víctimas de la Policía
-              Nacional de Colombia</option
-            >
+            <option>Línea 155 de orientación a mujeres víctimas de la Policía
+              Nacional de Colombia</option>
             <option>SIVIGILA</option>
-            <option
-              >Instituciones educativas / Instituciones de educación
-              superior</option
-            >
+            <option>Instituciones educativas / Instituciones de educación
+              superior</option>
             <option>Línea 141 de Protección ICBF</option>
             <option>Línea 123 de la Policía Nacional de Colombia</option>
             <option>Línea 119 Bomberos</option>
             <option>Línea 132 de Cruz Roja</option>
             <option>Línea 144 de la Defensa Civil</option>
-            <option
-              >Línea 018000911119 de Reparación Integral de Víctimas</option
-            >
+            <option>Línea 018000911119 de Reparación Integral de Víctimas</option>
             <option>Línea 122 para denunciar casos de trata de personas</option>
-            <option
-              >Línea 018000522020 para denunciar casos de trata de
-              personas</option
-            >
+            <option>Línea 018000522020 para denunciar casos de trata de
+              personas</option>
             <option #otroSS>Otros servicios sociales</option>
             <option #otroNF>Otros no formulados</option>
-            <option
-              >Línea 112 del Centro Regulador de Urgencias, Emergencias y
-              Desastres (CRUE)</option
-            >
+            <option>Línea 112 del Centro Regulador de Urgencias, Emergencias y
+              Desastres (CRUE)</option>
             <option>Policía de infancia y adolescencia</option>
           </select>
         </div>
@@ -521,8 +469,7 @@
             name="radicado"
             class="form-control"
             ngModel
-            required
-          />
+            required />
         </div>
       </div>
       <hr class="w-100 mt-4" />
@@ -536,8 +483,7 @@
             class="form-control"
             maxlength="8000"
             ngModel
-            required
-          ></textarea>
+            required></textarea>
           <div #counterLetter class="my-2 float-right">
             <span #current>0</span>
             <span> / 8.000</span>
@@ -551,9 +497,7 @@
               <div class="form-group">
                 <label for="tipo_id">Tipo de documento</label>
                 <select name="tipo_id" class="form-control" ngModel>
-                  <option #seleccione disabled selected value
-                    >--Seleccione--</option
-                  >
+                  <option #seleccione disabled selected value>--Seleccione--</option>
                   <option>Cedula de Ciudadanía</option>
                   <option>Cedula de Extranjería</option>
                   <option #adultoNI>Adulto sin identificar</option>
@@ -569,8 +513,7 @@
                   !seleccione.selected &&
                   !adultoNI.selected &&
                   !menorNI.selected
-                "
-              >
+                ">
                 <label for="id">Número de identificación</label>
                 <input type="text" name="id" class="form-control" ngModel />
               </div>
@@ -584,8 +527,7 @@
                   type="text"
                   name="apellido"
                   class="form-control"
-                  ngModel
-                />
+                  ngModel />
               </div>
               <div class="form-group">
                 <label for="fecha_nacimiento">Fecha de nacimiento</label>
@@ -593,8 +535,7 @@
                   type="date"
                   name="fecha_nacimiento"
                   class="form-control"
-                  ngModel
-                />
+                  ngModel />
               </div>
 
               <div class="form-group">
@@ -664,17 +605,14 @@
                 <select name="poblacion_interes" class="form-control" ngModel>
                   <option disabled selected value>--Seleccione--</option>
                   <option>Gestante</option>
-                  <option
-                    >PSD (Población en Situación de Desplazamiento)</option
-                  >
+                  <option>PSD (Población en Situación de Desplazamiento)</option>
                   <option>Habitante de Calle</option>
                   <option>Discapacidad</option>
                   <option>LGBTI</option>
                   <option>Trabajador Infantil</option>
                   <option>No Escolarizado</option>
                   <option>Riesgo o Vinculación al Conflicto Armado</option>
-                  <option
-                    >Trastorno por déficit de atención con hiperactividad
+                  <option>Trastorno por déficit de atención con hiperactividad
                   </option>
                   <option>Migrantes</option>
                   <option>Carcelarios</option>
@@ -747,8 +685,7 @@
                   type="text"
                   name="otroDepartamento"
                   class="form-control"
-                  ngModel
-                />
+                  ngModel />
               </div>
               <div class="form-group">
                 <label for="zona">Zona</label>
@@ -768,8 +705,7 @@
                   type="text"
                   name="direccion"
                   class="form-control"
-                  ngModel
-                />
+                  ngModel />
               </div>
               <div class="form-group">
                 <label for="como_conocio">¿Cómo conoció la linea 106?</label>
@@ -777,8 +713,7 @@
                   type="text"
                   name="como_conocio"
                   class="form-control"
-                  ngModel
-                />
+                  ngModel />
               </div>
 
               <div class="form-group">
@@ -819,8 +754,7 @@
             class="form-control"
             maxlength="4000"
             ngModel
-            required
-          ></textarea>
+            required></textarea>
           <div #counterLetter2 class="my-2 float-right">
             <span #current2>0</span>
             <span> / 4.000</span>
@@ -832,27 +766,18 @@
   <nb-card-footer>
     <button
       class="btn btn-outline-success mx-2"
-      (click)="
-        redirect('https://www.adres.gov.co/BDUA/Consulta-Afiliados-BDUA')
-      "
-    >
+      (click)="redirect('https://www.adres.gov.co/BDUA/Consulta-Afiliados-BDUA')">
       Comprobador de derechos
     </button>
     <button
       class="btn btn-outline-success mx-2"
-      (click)="
-        redirect(
-          'https://www.sisben.gov.co/atencion-al-ciudadano/paginas/consulta-del-puntaje.aspx'
-        )
-      "
-    >
+      (click)="redirect('https://www.sisben.gov.co/atencion-al-ciudadano/paginas/consulta-del-puntaje.aspx')">
       Sisben
     </button>
     <button
       (click)="resetForms()"
       class="btn btn-info mx-2 float-right"
-      *ngIf="!nuevoPaciente"
-    >
+      *ngIf="!nuevoPaciente">
       Cancelar
     </button>
     <button
@@ -861,16 +786,14 @@
       type="submit"
       *ngIf="!nuevoPaciente"
       [disabled]="createCaseForm.invalid || sentButton"
-      class="btn btn-primary ml-2 float-right"
-    >
+      class="btn btn-primary ml-2 float-right">
       Enviar
     </button>
 
     <button
       (click)="resetForms()"
       class="btn btn-info mx-2 float-right"
-      *ngIf="nuevoPaciente"
-    >
+      *ngIf="nuevoPaciente">
       Cancelar
     </button>
     <button
@@ -879,8 +802,7 @@
       type="submit"
       *ngIf="nuevoPaciente"
       [disabled]="!createCaseForm.valid || !createUsuarioForm.valid"
-      class="btn btn-primary ml-2 float-right"
-    >
+      class="btn btn-primary ml-2 float-right">
       Enviar
     </button>
   </nb-card-footer>

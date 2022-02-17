@@ -57,7 +57,7 @@ export class DashboardComponent implements OnInit {
       {
         title: "Crear Caso",
         icon: "file-add-outline",
-        link: ["/crearCaso"],
+        link: ["/caso/crear"],
       },
       {
         title: "Todos los casos",

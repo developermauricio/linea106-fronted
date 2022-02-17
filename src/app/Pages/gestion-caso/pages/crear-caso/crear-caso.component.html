@@ -1,0 +1,38 @@
+<nb-card>
+  <nb-card-header>
+    <h5 class="text-center">Datos del caso</h5>
+  </nb-card-header>
+  <nb-card-body>
+    <app-frm-caso
+      [dataPaciente]="dataPaciente"
+      [dataCase]="dataCase"
+      (setFormGroupCase)="setFormGroupCase($event)"
+      (setFormGroupPaciente)="setFormGroupPaciente($event)"></app-frm-caso>
+  </nb-card-body>
+  <nb-card-footer>
+    <button
+      class="btn btn-outline-success mx-2"
+      (click)="redirect('https://www.adres.gov.co/BDUA/Consulta-Afiliados-BDUA')">
+      Comprobador de derechos
+    </button>
+    <button
+      class="btn btn-outline-success mx-2"
+      (click)="redirect('https://www.sisben.gov.co/atencion-al-ciudadano/paginas/consulta-del-puntaje.aspx')">
+      Sisben
+    </button>
+    <button
+      (click)="resetForms()"
+      class="btn btn-info mx-2 float-right"
+      *ngIf="!nuevoPaciente">
+      Cancelar
+    </button>
+    <button
+      (click)="createCase()"
+      [disabled]="hasErrors&&false"
+      id="submit"
+      type="submit"
+      class="btn btn-primary ml-2 float-right">
+      {{ btnName }}
+    </button>
+  </nb-card-footer>
+</nb-card>

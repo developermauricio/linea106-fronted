@@ -1,12 +1,11 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
 import { NgForm } from "@angular/forms";
-import { CaseDataService } from "../../case.data.service";
+import { Router } from "@angular/router";
 import { NbToastrService } from "@nebular/theme";
+import { CaseDataService } from "../../case.data.service";
+import { DashboardComponent } from "../../Dashboard/dashboard.component";
 import { PatientDataService } from "../../patient.data.service";
 import { UserDataService } from "../../user.data.service";
-import { Router } from "@angular/router";
-import { LoginService } from "../../Auth/Login/login.service";
-import { DashboardComponent } from "../../Dashboard/dashboard.component";
 
 @Component({
   selector: "app-psicologo.crear.caso",
@@ -203,7 +202,7 @@ export class PsicologoCrearCasoComponent implements OnInit {
   resetForms() {
     this.router
       .navigateByUrl("/anuncios", { skipLocationChange: true })
-      .then(() => this.router.navigate(["/crearCaso"]));
+      .then(() => this.router.navigate(["/caso/crear"]));
   }
 
   redirect(link: string) {

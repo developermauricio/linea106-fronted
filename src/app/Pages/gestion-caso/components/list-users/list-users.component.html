@@ -1,0 +1,33 @@
+<div class="py-2">
+  <input type="search"
+    class="form-control mb-2"
+    placeholder="ingrese búsqueda por nombre, apellido o identificación"
+    (keyup)="searchPaciente($event)">
+  <table class="table table-bordered text-center">
+    <thead>
+      <tr>
+        <th>Identificación</th>
+        <th>Nombre completo</th>
+        <th>Opción</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let paciente of pacientes">
+        <td>{{ paciente.identificacion?paciente.identificacion:'N/A' }}</td>
+        <td>
+          <p class="text-center">
+            {{ paciente.nombre }} {{ paciente.apellido }}
+          </p>
+        </td>
+        <td>
+          <div class="text-center">
+            <button
+              class="btn btn-sm btn-success"
+              (click)="seleccionar(paciente)">Seleccionar</button>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+</div>
