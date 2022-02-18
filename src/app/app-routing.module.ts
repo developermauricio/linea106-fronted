@@ -44,11 +44,11 @@ const routes: Routes = [
         component: AdminUsuariosComponent,
         canActivate: [AdminGuardian],
       },
-      {
-        path: "reportes",
-        component: AdminReportesComponent,
-        canActivate: [AdminGuardian],
-      },
+      // {
+      //   path: "reportes",
+      //   component: AdminReportesComponent,
+      //   canActivate: [AdminGuardian],
+      // },
       {
         path: "perfil",
         component: AdminMiPerfilComponent,
@@ -88,6 +88,11 @@ const routes: Routes = [
         path: "estadisticas",
         component: EstadisticasComponent,
         canActivate: [LoginGuardian]
+      },
+      {
+        path: "reportes",
+        loadChildren: () => import('./Pages/gestion-reportes/gestion-reportes.module').then(m => m.GestionReportesModule),
+        canActivate: [AdminGuardian],
       },
       {
         path: "caso",

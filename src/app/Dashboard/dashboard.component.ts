@@ -101,6 +101,11 @@ export class DashboardComponent implements OnInit {
         link: ["/estadisticas"],
       },
       {
+        title: "Reportes",
+        icon: "activity-outline",
+        link: ["/reportes"],
+      },
+      {
         title: "Administrar",
         icon: "options-2-outline",
         expanded: false,

@@ -12,7 +12,6 @@ import {
   NbActionsModule, NbAlertModule, NbButtonModule, NbCardModule, NbContextMenuModule, NbDialogModule, NbIconModule, NbInputModule, NbLayoutModule, NbMenuModule, NbSidebarModule,
   NbThemeModule, NbToastrModule, NbUserModule
 } from "@nebular/theme";
-import { NgChartsModule } from 'ng2-charts';
 import { Ng2SmartTableModule } from "ng2-smart-table";
 //Evironments Imports
 import { AppRoutingModule } from "./app-routing.module";
@@ -74,7 +73,6 @@ registerLocaleData(esCo);
   ],
   imports: [
     BrowserModule,
-    NgChartsModule,
     ComponentsModule,
     BrowserAnimationsModule,
     AppRoutingModule,
