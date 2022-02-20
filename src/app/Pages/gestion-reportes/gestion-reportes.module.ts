@@ -5,12 +5,14 @@ import { GestionReportesRoutingModule } from './gestion-reportes-routing.module'
 import { GestionReportesComponent } from './pages/gestion-reportes/gestion-reportes.component';
 import { Chart, registerables } from 'chart.js';
 import { CharJsComponent } from './components/char-js/char-js.component';
+import { ReporteCantidadCasosComponent } from './components/reporte-cantidad-casos/reporte-cantidad-casos.component';
 
 Chart.register(...registerables);
 @NgModule({
   declarations: [
     GestionReportesComponent,
-    CharJsComponent
+    CharJsComponent,
+    ReporteCantidadCasosComponent
   ],
   imports: [
     CommonModule,
