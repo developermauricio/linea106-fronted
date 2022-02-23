@@ -1,20 +1,20 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Subject, Subscription } from 'rxjs';
+import { ReporteMesPsicologos } from '../../models/reporte-mes-psicologos';
 import { ReportesService } from '../../services/reportes.service';
 
 @Component({
-  selector: 'app-reporte-cantidad-casos',
-  templateUrl: './reporte-cantidad-casos.component.html',
-  styleUrls: ['./reporte-cantidad-casos.component.css']
+  selector: 'app-reporte-mes-psicologos',
+  templateUrl: './reporte-mes-psicologos.component.html',
+  styleUrls: ['./reporte-mes-psicologos.component.css']
 })
-export class ReporteCantidadCasosComponent implements OnInit, OnDestroy {
-
-  private meses = ['', 'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
-
+export class ReporteMesPsicologosComponent implements OnInit {
   config = {};
 
-  @Input() update: Subject<number>;
+  @Input() update: Subject<string>;
   @Input() currentYear: number;
+
+  total = 0;
 
   private subscriber: Subscription[] = [];
 
@@ -22,7 +22,7 @@ export class ReporteCantidadCasosComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     const subUpdate = this.update.subscribe(year => {
-      const subReporte = this._reportesService.getCasosPorMes(year)
+      const subReporte = this._reportesService.getCasosPsicologoByMes(year)
         .subscribe(resp => {
           this.processResp(resp);
         });
@@ -35,13 +35,15 @@ export class ReporteCantidadCasosComponent implements OnInit, OnDestroy {
     this.subscriber.forEach(s => s.unsubscribe());
   }
 
-  private processResp(resp) {
+  private processResp(resp: ReporteMesPsicologos[]) {
     const labels = [];
     const data = [];
 
+    this.total = 0;
     resp.forEach(item => {
-      labels.push(this.meses[+item.label]);
+      labels.push(item.nombre);
       data.push(item.total);
+      this.total += item.total;
     });
     this.initConfig(labels, data);
   }
@@ -51,7 +53,7 @@ export class ReporteCantidadCasosComponent implements OnInit, OnDestroy {
       labels: labels,
       datasets: [
         {
-          label: 'Usuarios',
+          label: 'Casos',
           data: dataUsers,
           borderColor: "#3080d0",
           backgroundColor: '#3080f0',
@@ -64,6 +66,8 @@ export class ReporteCantidadCasosComponent implements OnInit, OnDestroy {
       type: 'bar',
       data: data,
       options: {
+        indexAxis: 'y',
+
         responsive: true,
         plugins: {
           datalabels: {
@@ -73,14 +77,20 @@ export class ReporteCantidadCasosComponent implements OnInit, OnDestroy {
           },
           legend: {
             position: 'top',
+            display: false
           },
           title: {
             display: true,
-            text: 'Numero de usuarios mes a mes'
+            text: 'Numero de Atenciones por Psicólogo'
+          },
+          subtitle: {
+            display: true,
+            text: 'Total Atenciones ' + this.total
           }
         }
       },
     });
   }
+
 
 }

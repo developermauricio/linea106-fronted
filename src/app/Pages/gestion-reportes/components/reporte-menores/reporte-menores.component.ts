@@ -1,13 +1,13 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Subject, Subscription } from 'rxjs';
 import { ReportesService } from '../../services/reportes.service';
 
 @Component({
-  selector: 'app-reporte-cantidad-casos',
-  templateUrl: './reporte-cantidad-casos.component.html',
-  styleUrls: ['./reporte-cantidad-casos.component.css']
+  selector: 'app-reporte-menores',
+  templateUrl: './reporte-menores.component.html',
+  styleUrls: ['./reporte-menores.component.css']
 })
-export class ReporteCantidadCasosComponent implements OnInit, OnDestroy {
+export class ReporteMenoresComponent implements OnInit {
 
   private meses = ['', 'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
 
@@ -22,7 +22,7 @@ export class ReporteCantidadCasosComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     const subUpdate = this.update.subscribe(year => {
-      const subReporte = this._reportesService.getCasosPorMes(year)
+      const subReporte = this._reportesService.getReporteMenores(year)
         .subscribe(resp => {
           this.processResp(resp);
         });
@@ -51,7 +51,7 @@ export class ReporteCantidadCasosComponent implements OnInit, OnDestroy {
       labels: labels,
       datasets: [
         {
-          label: 'Usuarios',
+          label: '4-13 años',
           data: dataUsers,
           borderColor: "#3080d0",
           backgroundColor: '#3080f0',

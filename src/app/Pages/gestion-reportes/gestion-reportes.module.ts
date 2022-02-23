@@ -6,17 +6,27 @@ import { GestionReportesComponent } from './pages/gestion-reportes/gestion-repor
 import { Chart, registerables } from 'chart.js';
 import { CharJsComponent } from './components/char-js/char-js.component';
 import { ReporteCantidadCasosComponent } from './components/reporte-cantidad-casos/reporte-cantidad-casos.component';
+import ChartDataLabels from 'chartjs-plugin-datalabels';
+import { FormsModule } from '@angular/forms';
+import { ReporteConductaSuicidaComponent } from './components/reporte-conducta-suicida/reporte-conducta-suicida.component';
+import { ReporteMenoresComponent } from './components/reporte-menores/reporte-menores.component';
+import { ReporteMesPsicologosComponent } from './components/reporte-mes-psicologos/reporte-mes-psicologos.component';
 
 Chart.register(...registerables);
+Chart.register(ChartDataLabels);
 @NgModule({
   declarations: [
     GestionReportesComponent,
     CharJsComponent,
-    ReporteCantidadCasosComponent
+    ReporteCantidadCasosComponent,
+    ReporteConductaSuicidaComponent,
+    ReporteMenoresComponent,
+    ReporteMesPsicologosComponent
   ],
   imports: [
     CommonModule,
-    GestionReportesRoutingModule
+    GestionReportesRoutingModule,
+    FormsModule
   ]
 })
 export class GestionReportesModule { }

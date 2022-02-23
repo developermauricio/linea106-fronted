@@ -1,1 +1,48 @@
-<app-reporte-cantidad-casos></app-reporte-cantidad-casos>
+<div class="row">
+  <div class="col-12 pb-2">
+    <h1 class="h5 text-center">Estadísticas por Mes</h1>
+    <div class="col-12">
+      <input
+        [(ngModel)]="month"
+        (change)="updateReportMonth()"
+        class="form-control input-mes"
+        type="month" id="mes" name="mes"
+        min="2018-08">
+    </div>
+  </div>
+  <div class="col-8" [hidden]="!month">
+    <app-reporte-mes-psicologos
+      [update]="updateGraphicMonth"
+      [currentYear]="currentYear"></app-reporte-mes-psicologos>
+  </div>
+
+  <div class="col-12">
+    <h1 class="h5 text-center">Estadísticas por Año</h1>
+  </div>
+  <div class="col-12">
+    <select
+      [(ngModel)]="year"
+      (change)="updateReportYear()"
+      class="form-control input-anio"
+      name="year"
+      id="year">
+      <option [value]="null" disabled>Seleccione un Año</option>
+      <option [value]="year" *ngFor="let year of years">{{ year }}</option>
+    </select>
+  </div>
+  <div class="col-6" [hidden]="!year">
+    <app-reporte-cantidad-casos
+      [update]="updateGraphicYear"
+      [currentYear]="currentYear"></app-reporte-cantidad-casos>
+  </div>
+  <div class="col-6" [hidden]="!year">
+    <app-reporte-menores
+      [update]="updateGraphicYear"
+      [currentYear]="currentYear"></app-reporte-menores>
+  </div>
+  <div class="col-12" [hidden]="!year">
+    <app-reporte-conducta-suicida
+      [update]="updateGraphicYear"
+      [currentYear]="currentYear"></app-reporte-conducta-suicida>
+  </div>
+</div>
