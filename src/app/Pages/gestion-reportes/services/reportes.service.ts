@@ -3,8 +3,11 @@ import { CoreService } from 'src/app/Services/core.service';
 import { ReporteCasos } from '../models/reporte-casos';
 import { ReporteConductaSuicida } from '../models/reporte-conducta-suicida';
 import { ReporteMenores } from '../models/reporte-menores';
+import { ReporteMesEdad } from '../models/reporte-mes-edad';
 import { ReporteMesOrigen } from '../models/reporte-mes-origen';
 import { ReporteMesPsicologos } from '../models/reporte-mes-psicologos';
+import { ReporteMesTipoPaciente } from '../models/reporte-mes-tipo-paciente';
+import { ReporteMesTurno } from '../models/reporte-mes-turno';
 
 @Injectable({
   providedIn: 'root'
@@ -31,5 +34,17 @@ export class ReportesService {
 
   getCasosOrigenByMes(date: string) {
     return this._coreService.get<ReporteMesOrigen[]>('/mes/origen?d=' + date);
+  }
+
+  getCasosTipoPacienteByMes(date: string) {
+    return this._coreService.get<ReporteMesTipoPaciente[]>('/mes/tipo-paciente?d=' + date);
+  }
+
+  getCasosTurnosByMes(date: string) {
+    return this._coreService.get<ReporteMesTurno[]>('/mes/turno?d=' + date);
+  }
+
+  getCasosEdadByMes(date: string) {
+    return this._coreService.get<ReporteMesEdad[]>('/mes/edad?d=' + date);
   }
 }

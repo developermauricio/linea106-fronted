@@ -15,10 +15,28 @@
       [update]="updateGraphicMonth"
       [currentYear]="currentYear"></app-reporte-mes-psicologos>
   </div>
-  <div class="col-6" [hidden]="!month">
+  <div class="col-6" [hidden]="!month" *ngIf="false">
     <app-reporte-mes-origen
       [update]="updateGraphicMonth"
       [currentYear]="currentYear"></app-reporte-mes-origen>
+  </div>
+
+  <div class="col-6" [hidden]="!month" *ngIf="false">
+    <app-reporte-mes-tipo-paciente
+      [update]="updateGraphicMonth"
+      [currentYear]="currentYear"></app-reporte-mes-tipo-paciente>
+  </div>
+
+  <div class="col-6" [hidden]="!month" *ngIf="false">
+    <app-reporte-mes-turnos
+      [update]="updateGraphicMonth"
+      [currentYear]="currentYear"></app-reporte-mes-turnos>
+  </div>
+
+  <div class="col-6" [hidden]="!month">
+    <app-reporte-mes-edad
+      [update]="updateGraphicMonth"
+      [currentYear]="currentYear"></app-reporte-mes-edad>
   </div>
 
   <div class="col-12">
