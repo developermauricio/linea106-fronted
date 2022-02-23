@@ -11,6 +11,7 @@ import { FormsModule } from '@angular/forms';
 import { ReporteConductaSuicidaComponent } from './components/reporte-conducta-suicida/reporte-conducta-suicida.component';
 import { ReporteMenoresComponent } from './components/reporte-menores/reporte-menores.component';
 import { ReporteMesPsicologosComponent } from './components/reporte-mes-psicologos/reporte-mes-psicologos.component';
+import { ReporteMesOrigenComponent } from './components/reporte-mes-origen/reporte-mes-origen.component';
 
 Chart.register(...registerables);
 Chart.register(ChartDataLabels);
@@ -21,7 +22,8 @@ Chart.register(ChartDataLabels);
     ReporteCantidadCasosComponent,
     ReporteConductaSuicidaComponent,
     ReporteMenoresComponent,
-    ReporteMesPsicologosComponent
+    ReporteMesPsicologosComponent,
+    ReporteMesOrigenComponent
   ],
   imports: [
     CommonModule,
