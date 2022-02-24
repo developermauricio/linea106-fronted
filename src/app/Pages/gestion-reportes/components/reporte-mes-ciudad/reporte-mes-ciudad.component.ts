@@ -1,15 +1,14 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Subject, Subscription } from 'rxjs';
-import { ReporteMesTipoPaciente } from '../../models/reporte-mes-tipo-paciente';
+import { ReporteBase } from '../../models/reporte-base';
 import { ReportesService } from '../../services/reportes.service';
 
 @Component({
-  selector: 'app-reporte-mes-tipo-paciente',
-  templateUrl: './reporte-mes-tipo-paciente.component.html',
-  styleUrls: ['./reporte-mes-tipo-paciente.component.css']
+  selector: 'app-reporte-mes-ciudad',
+  templateUrl: './reporte-mes-ciudad.component.html',
+  styleUrls: ['./reporte-mes-ciudad.component.css']
 })
-export class ReporteMesTipoPacienteComponent implements OnInit {
-
+export class ReporteMesCiudadComponent implements OnInit {
   config = {};
 
   @Input() update: Subject<string>;
@@ -23,7 +22,7 @@ export class ReporteMesTipoPacienteComponent implements OnInit {
 
   ngOnInit(): void {
     const subUpdate = this.update.subscribe(year => {
-      const subReporte = this._reportesService.getCasosTipoPacienteByMes(year)
+      const subReporte = this._reportesService.getCasosCiudadByMes(year)
         .subscribe(resp => {
           this.processResp(resp);
         });
@@ -36,7 +35,7 @@ export class ReporteMesTipoPacienteComponent implements OnInit {
     this.subscriber.forEach(s => s.unsubscribe());
   }
 
-  private processResp(resp: ReporteMesTipoPaciente[]) {
+  private processResp(resp: ReporteBase[]) {
     const labels = [];
     const data = [];
 
@@ -50,7 +49,7 @@ export class ReporteMesTipoPacienteComponent implements OnInit {
   }
 
   private initConfig(labels, dataUsers) {
-    const colors = ['#bbdefb', '#dcedc8', '#ffe0b2', '#d7ccc8', '#f5f5f5'];
+    const colors = '#bbdefb';
     const data = {
       labels: labels,
       datasets: [
@@ -65,11 +64,13 @@ export class ReporteMesTipoPacienteComponent implements OnInit {
     };
 
     this.config = Object.assign({}, {
-      type: 'pie',
+      type: 'bar',
       data: data,
       options: {
+        indexAxis: 'y',
         scales: {
-          y: {
+          x: {
+            type: 'logarithmic',
             display: false,
           }
         },
@@ -77,15 +78,16 @@ export class ReporteMesTipoPacienteComponent implements OnInit {
         plugins: {
           datalabels: {
             color: '#3080d0',
-            align: 'center',
-            anchor: 'center',
+            align: 'start',
+            anchor: 'end'
           },
           legend: {
-            position: 'bottom'
+            position: 'top',
+            display: false
           },
           title: {
             display: true,
-            text: 'Numero de Atenciones por tipo paciente'
+            text: 'Numero de Atenciones por Ciudad'
           },
           subtitle: {
             display: true,
@@ -95,5 +97,4 @@ export class ReporteMesTipoPacienteComponent implements OnInit {
       },
     });
   }
-
 }

@@ -41,7 +41,7 @@ export class ReporteMesPsicologosComponent implements OnInit {
 
     this.total = 0;
     resp.forEach(item => {
-      labels.push(item.nombre);
+      labels.push(item.nombre ? item.nombre : 'Anónimo');
       data.push(item.total);
       this.total += item.total;
     });
@@ -49,14 +49,15 @@ export class ReporteMesPsicologosComponent implements OnInit {
   }
 
   private initConfig(labels, dataUsers) {
+    const colors = '#bbdefb';
     const data = {
       labels: labels,
       datasets: [
         {
           label: 'Casos',
           data: dataUsers,
-          borderColor: "#3080d0",
-          backgroundColor: '#3080f0',
+          borderColor: colors,
+          backgroundColor: colors,
           order: 1
         },
       ]
@@ -67,12 +68,17 @@ export class ReporteMesPsicologosComponent implements OnInit {
       data: data,
       options: {
         indexAxis: 'y',
-
+        scales: {
+          x: {
+            type: 'logarithmic',
+            display: false,
+          }
+        },
         responsive: true,
         plugins: {
           datalabels: {
             color: '#3080d0',
-            align: 'end',
+            align: 'start',
             anchor: 'end'
           },
           legend: {

@@ -41,7 +41,7 @@ export class ReporteMesOrigenComponent implements OnInit {
 
     this.total = 0;
     resp.forEach(item => {
-      labels.push(item.name);
+      labels.push(item.name ? item.name : 'Anónimo');
       data.push(item.total);
       this.total += item.total;
     });
@@ -86,7 +86,7 @@ export class ReporteMesOrigenComponent implements OnInit {
           },
           title: {
             display: true,
-            text: 'Numero de Atenciones por Psicólogo'
+            text: 'Numero de Atenciones por Origen'
           },
           subtitle: {
             display: true,

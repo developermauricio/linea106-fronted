@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Subject } from 'rxjs';
+import { TipoModel } from 'src/app/Models/tipo.model';
+import { ReportesService } from '../../services/reportes.service';
 
 @Component({
   selector: 'app-gestion-reportes',
@@ -8,6 +10,7 @@ import { Subject } from 'rxjs';
 })
 export class GestionReportesComponent implements OnInit {
 
+  motivosConsulta: TipoModel[] = [];
   updateGraphicYear = new Subject<number>();
   updateGraphicMonth = new Subject<string>();
 
@@ -16,7 +19,7 @@ export class GestionReportesComponent implements OnInit {
   year = null;
   month = null;
 
-  constructor() { }
+  constructor(private _reportesService: ReportesService) { }
 
   ngOnInit(): void {
     const year = new Date().getFullYear();
@@ -25,6 +28,10 @@ export class GestionReportesComponent implements OnInit {
       this.years.push(i);
     }
     this.years = this.years.reverse();
+
+    this._reportesService.getAllMotivosConsulta().subscribe(motivos => {
+      this.motivosConsulta = motivos;
+    });
   }
 
   updateReportYear() {

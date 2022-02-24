@@ -1,18 +1,20 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Subject, Subscription } from 'rxjs';
-import { ReporteMesTipoPaciente } from '../../models/reporte-mes-tipo-paciente';
+import { ReporteBase } from '../../models/reporte-base';
 import { ReportesService } from '../../services/reportes.service';
 
 @Component({
-  selector: 'app-reporte-mes-tipo-paciente',
-  templateUrl: './reporte-mes-tipo-paciente.component.html',
-  styleUrls: ['./reporte-mes-tipo-paciente.component.css']
+  selector: 'app-reporte-mes-motivo-especifico',
+  templateUrl: './reporte-mes-motivo-especifico.component.html',
+  styleUrls: ['./reporte-mes-motivo-especifico.component.css']
 })
-export class ReporteMesTipoPacienteComponent implements OnInit {
+export class ReporteMesMotivoEspecificoComponent implements OnInit {
 
   config = {};
 
   @Input() update: Subject<string>;
+  @Input() motivo_id: number;
+  @Input() title: string;
   @Input() currentYear: number;
 
   total = 0;
@@ -23,7 +25,7 @@ export class ReporteMesTipoPacienteComponent implements OnInit {
 
   ngOnInit(): void {
     const subUpdate = this.update.subscribe(year => {
-      const subReporte = this._reportesService.getCasosTipoPacienteByMes(year)
+      const subReporte = this._reportesService.getCasosMotivoEspecificoByMes(year, this.motivo_id)
         .subscribe(resp => {
           this.processResp(resp);
         });
@@ -36,7 +38,7 @@ export class ReporteMesTipoPacienteComponent implements OnInit {
     this.subscriber.forEach(s => s.unsubscribe());
   }
 
-  private processResp(resp: ReporteMesTipoPaciente[]) {
+  private processResp(resp: ReporteBase[]) {
     const labels = [];
     const data = [];
 
@@ -50,7 +52,7 @@ export class ReporteMesTipoPacienteComponent implements OnInit {
   }
 
   private initConfig(labels, dataUsers) {
-    const colors = ['#bbdefb', '#dcedc8', '#ffe0b2', '#d7ccc8', '#f5f5f5'];
+    const colors = '#bbdefb';
     const data = {
       labels: labels,
       datasets: [
@@ -65,11 +67,13 @@ export class ReporteMesTipoPacienteComponent implements OnInit {
     };
 
     this.config = Object.assign({}, {
-      type: 'pie',
+      type: 'bar',
       data: data,
       options: {
+        indexAxis: 'y',
         scales: {
-          y: {
+          x: {
+            type: 'logarithmic',
             display: false,
           }
         },
@@ -81,11 +85,12 @@ export class ReporteMesTipoPacienteComponent implements OnInit {
             anchor: 'center',
           },
           legend: {
-            position: 'bottom'
+            position: 'bottom',
+            display: false
           },
           title: {
             display: true,
-            text: 'Numero de Atenciones por tipo paciente'
+            text: this.title
           },
           subtitle: {
             display: true,
@@ -95,5 +100,4 @@ export class ReporteMesTipoPacienteComponent implements OnInit {
       },
     });
   }
-
 }

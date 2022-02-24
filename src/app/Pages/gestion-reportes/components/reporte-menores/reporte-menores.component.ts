@@ -76,7 +76,7 @@ export class ReporteMenoresComponent implements OnInit {
           },
           title: {
             display: true,
-            text: 'Numero de usuarios mes a mes'
+            text: 'Usuarios entre 4 y 14 años'
           }
         }
       },

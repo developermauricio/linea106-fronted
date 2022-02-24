@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
+import { TipoModel } from 'src/app/Models/tipo.model';
 import { CoreService } from 'src/app/Services/core.service';
+import { ReporteBase } from '../models/reporte-base';
 import { ReporteCasos } from '../models/reporte-casos';
 import { ReporteConductaSuicida } from '../models/reporte-conducta-suicida';
 import { ReporteMenores } from '../models/reporte-menores';
@@ -46,5 +48,37 @@ export class ReportesService {
 
   getCasosEdadByMes(date: string) {
     return this._coreService.get<ReporteMesEdad[]>('/mes/edad?d=' + date);
+  }
+
+  getCasosEscolaridadByMes(date: string) {
+    return this._coreService.get<ReporteBase[]>('/mes/escolaridad?d=' + date);
+  }
+
+  getCasosCiudadByMes(date: string) {
+    return this._coreService.get<ReporteBase[]>('/mes/ciudad?d=' + date);
+  }
+
+  getCasosSexoByMes(date: string) {
+    return this._coreService.get<ReporteBase[]>('/mes/sexo?d=' + date);
+  }
+
+  getCasosZonaByMes(date: string) {
+    return this._coreService.get<ReporteBase[]>('/mes/zona?d=' + date);
+  }
+
+  getCasosOcupacionByMes(date: string) {
+    return this._coreService.get<ReporteBase[]>('/mes/ocupacion?d=' + date);
+  }
+
+  getCasosGeneroByMes(date: string) {
+    return this._coreService.get<ReporteBase[]>('/mes/genero?d=' + date);
+  }
+
+  getCasosMotivoEspecificoByMes(date: string, motivo_id: number) {
+    return this._coreService.get<ReporteBase[]>(`/mes/motivo-especifico?d=${date}&motivo=${motivo_id}`);
+  }
+
+  getAllMotivosConsulta() {
+    return this._coreService.get<TipoModel[]>(`/get-motivos-consulta-reportes`);
   }
 }

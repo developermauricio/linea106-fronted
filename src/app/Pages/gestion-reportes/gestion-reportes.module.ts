@@ -14,6 +14,13 @@ import { ReporteMesTipoPacienteComponent } from './components/reporte-mes-tipo-p
 import { ReporteMesTurnosComponent } from './components/reporte-mes-turnos/reporte-mes-turnos.component';
 import { GestionReportesRoutingModule } from './gestion-reportes-routing.module';
 import { GestionReportesComponent } from './pages/gestion-reportes/gestion-reportes.component';
+import { ReporteMesEscolaridadComponent } from './components/reporte-mes-escolaridad/reporte-mes-escolaridad.component';
+import { ReporteMesSexoComponent } from './components/reporte-mes-sexo/reporte-mes-sexo.component';
+import { ReporteMesZonaComponent } from './components/reporte-mes-zona/reporte-mes-zona.component';
+import { ReporteMesOcupacionComponent } from './components/reporte-mes-ocupacion/reporte-mes-ocupacion.component';
+import { ReporteMesGeneroComponent } from './components/reporte-mes-genero/reporte-mes-genero.component';
+import { ReporteMesMotivoEspecificoComponent } from './components/reporte-mes-motivo-especifico/reporte-mes-motivo-especifico.component';
+import { ReporteMesCiudadComponent } from './components/reporte-mes-ciudad/reporte-mes-ciudad.component';
 
 
 Chart.register(...registerables);
@@ -29,7 +36,14 @@ Chart.register(ChartDataLabels);
     ReporteMesOrigenComponent,
     ReporteMesTipoPacienteComponent,
     ReporteMesTurnosComponent,
-    ReporteMesEdadComponent
+    ReporteMesEdadComponent,
+    ReporteMesEscolaridadComponent,
+    ReporteMesSexoComponent,
+    ReporteMesZonaComponent,
+    ReporteMesOcupacionComponent,
+    ReporteMesGeneroComponent,
+    ReporteMesMotivoEspecificoComponent,
+    ReporteMesCiudadComponent
   ],
   imports: [
     CommonModule,

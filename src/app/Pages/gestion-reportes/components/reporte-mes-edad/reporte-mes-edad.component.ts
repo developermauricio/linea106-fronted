@@ -42,7 +42,7 @@ export class ReporteMesEdadComponent implements OnInit {
 
     this.total = 0;
     resp.forEach(item => {
-      labels.push(item.name);
+      labels.push(item.name ? item.name : 'Anónimo');
       data.push(item.total);
       this.total += item.total;
     });

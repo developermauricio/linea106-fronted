@@ -10,33 +10,77 @@
         min="2018-08">
     </div>
   </div>
-  <div class="col-8" [hidden]="!month" *ngIf="false">
-    <app-reporte-mes-psicologos
-      [update]="updateGraphicMonth"
-      [currentYear]="currentYear"></app-reporte-mes-psicologos>
-  </div>
-  <div class="col-6" [hidden]="!month" *ngIf="false">
-    <app-reporte-mes-origen
-      [update]="updateGraphicMonth"
-      [currentYear]="currentYear"></app-reporte-mes-origen>
-  </div>
 
-  <div class="col-6" [hidden]="!month" *ngIf="false">
+  <div class="col-6" [hidden]="!month">
     <app-reporte-mes-tipo-paciente
       [update]="updateGraphicMonth"
       [currentYear]="currentYear"></app-reporte-mes-tipo-paciente>
   </div>
 
-  <div class="col-6" [hidden]="!month" *ngIf="false">
+  <div class="col-6" [hidden]="!month">
     <app-reporte-mes-turnos
       [update]="updateGraphicMonth"
       [currentYear]="currentYear"></app-reporte-mes-turnos>
   </div>
 
   <div class="col-6" [hidden]="!month">
+    <app-reporte-mes-origen
+      [update]="updateGraphicMonth"
+      [currentYear]="currentYear"></app-reporte-mes-origen>
+  </div>
+
+  <div class="col-6" [hidden]="!month">
     <app-reporte-mes-edad
       [update]="updateGraphicMonth"
       [currentYear]="currentYear"></app-reporte-mes-edad>
+  </div>
+
+  <div class="col-6" [hidden]="!month">
+    <app-reporte-mes-escolaridad
+      [update]="updateGraphicMonth"
+      [currentYear]="currentYear"></app-reporte-mes-escolaridad>
+  </div>
+
+  <div class="col-6" [hidden]="!month">
+    <app-reporte-mes-sexo
+      [update]="updateGraphicMonth"
+      [currentYear]="currentYear"></app-reporte-mes-sexo>
+  </div>
+
+  <div class="col-6" [hidden]="!month">
+    <app-reporte-mes-zona
+      [update]="updateGraphicMonth"
+      [currentYear]="currentYear"></app-reporte-mes-zona>
+  </div>
+
+  <div class="col-6" [hidden]="!month">
+    <app-reporte-mes-ocupacion
+      [update]="updateGraphicMonth"
+      [currentYear]="currentYear"></app-reporte-mes-ocupacion>
+  </div>
+
+  <div class="col-6" [hidden]="!month">
+    <app-reporte-mes-genero
+      [update]="updateGraphicMonth"
+      [currentYear]="currentYear"></app-reporte-mes-genero>
+  </div>
+  <div class="col-6" [hidden]="!month" *ngFor="let motivo of motivosConsulta">
+    <app-reporte-mes-motivo-especifico
+      [motivo_id]="motivo.id"
+      [title]="motivo.name"
+      [update]="updateGraphicMonth"
+      [currentYear]="currentYear"></app-reporte-mes-motivo-especifico>
+  </div>
+  <div class="col-8" [hidden]="!month">
+    <app-reporte-mes-psicologos
+      [update]="updateGraphicMonth"
+      [currentYear]="currentYear"></app-reporte-mes-psicologos>
+  </div>
+
+  <div class="col-12" [hidden]="!month">
+    <app-reporte-mes-ciudad
+      [update]="updateGraphicMonth"
+      [currentYear]="currentYear"></app-reporte-mes-ciudad>
   </div>
 
   <div class="col-12">
