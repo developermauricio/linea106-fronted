@@ -17,6 +17,9 @@ export interface CasoModel {
   respuesta_id?: number;
   radicado_id?: number;
   errores?: string;
+  descripcion_relacion?: string;
+  descripcion_motivo?: string;
+  descripcion_radicado?: string;
 
   paciente_id?: number;
   motivo_consulta_id?: number;

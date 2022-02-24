@@ -21,6 +21,24 @@ export class ActualizarCasoComponent implements OnInit {
   public formGroupCase: FormGroup;
   public formGroupPaciente: FormGroup;
   public idCase: number;
+  public currentCase: CasoModel = {
+    fecha_fin: null,
+    fecha_inicio: null,
+    fuente: null,
+    linea_intervencion: null,
+    motivo_consulta: null,
+    motivo_consulta_especifico: null,
+    narrativa: null,
+    observaciones: null,
+    origen: null,
+    paciente: {
+      identificacion: null
+    },
+    quien_comunica: null,
+    tipo_paciente: null,
+    turno: null,
+    usuario: null,
+  };
 
   setPaciente: Subject<PacienteModel> = new Subject();
   setCaso: Subject<CasoModel> = new Subject();
@@ -74,6 +92,8 @@ export class ActualizarCasoComponent implements OnInit {
       if (param.id) {
         this.idCase = param.id;
         this._casoService.getById(param.id).subscribe(resp => {
+          this.currentCase = Object.assign({}, resp);
+          resp.id = null;
           this.setPaciente.next(resp.paciente);
           this.setCaso.next(resp);
         }, err => {
@@ -146,7 +166,7 @@ export class ActualizarCasoComponent implements OnInit {
           // iconPack: "eva",
         }
       );
-      if (resp.paciente.identificacion) {
+      if (!resp.paciente.identificacion) {
         resp.paciente.identificacion = '';
       }
       this.setCaso.next(resp.caso);
@@ -166,5 +186,31 @@ export class ActualizarCasoComponent implements OnInit {
 
   cancelar() {
     this._location.back();
+  }
+
+  clonar() {
+    this.formGroupCase.reset();
+    this.formGroupPaciente.reset();
+    const caso = Object.assign({}, this.currentCase);
+    caso.id = null;
+    caso.fecha_inicio = null;
+    caso.fecha_fin = null;
+    caso.turno = null;
+    caso.turno_id = null;
+    this.idCase = null;
+    this.setCaso.next(caso);
+    this.setPaciente.next(caso.paciente);
+  }
+
+  limpiar() {
+    this.formGroupCase.reset();
+    this.formGroupPaciente.reset();
+    const caso: CasoModel = Object.assign({}, JSON.parse('{}'));
+    caso.paciente = this.currentCase.paciente;
+    caso.fuente = this.currentCase.fuente;
+    caso.origen = this.currentCase.origen;
+    this.idCase = null;
+    this.setCaso.next(caso);
+    this.setPaciente.next(caso.paciente);
   }
 }

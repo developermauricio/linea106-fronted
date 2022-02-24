@@ -41,4 +41,6 @@ export interface PacienteModel {
   zona?: TipoModel;
   poblacion_interes?: TipoModel;
   estado_civil?: TipoModel;
+  etnia?: TipoModel;
+  departamento?: TipoModel;
 }

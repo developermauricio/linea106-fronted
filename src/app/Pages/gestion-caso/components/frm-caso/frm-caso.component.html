@@ -1,15 +1,15 @@
 <form [formGroup]="formGroupCase">
   <div class="row">
     <div class="col-4 mb-3">
-      <label for="fechaInicial" class="form-label">Fecha Inicial</label>
+      <label for="fechaInicial" class="form-label">Fecha Inicial <span class="required">*</span></label>
       <input formControlName="fecha_inicio" type="datetime-local" class="form-control" id="fechaInicial" [max]="maxDate" />
     </div>
     <div class="col-4 mb-3">
-      <label for="fechaFinal" class="form-label">Fecha Final</label>
+      <label for="fechaFinal" class="form-label">Fecha Final <span class="required">*</span></label>
       <input formControlName="fecha_fin" type="datetime-local" class="form-control" id="fechaFinal" [min]="minDateFinal" [max]="maxDate" />
     </div>
     <div class="col-4 mb-3">
-      <label for="turno" class="form-label">Turno</label>
+      <label for="turno" class="form-label">Turno <span class="required">*</span></label>
       <select
         [compareWith]="compare"
         formControlName="turno"
@@ -23,7 +23,7 @@
     </div>
     <div class="col-4 mb-3">
       <label for="quienSeComunica" class="form-label">
-        ¿Quién se comunica?
+        ¿Quién se comunica? <span class="required">*</span>
       </label>
       <select
         [compareWith]="compare"
@@ -75,7 +75,7 @@
 
     <div class="col-4 mb-3">
       <label for="origen" class="form-label">
-        Origen
+        Origen <span class="required">*</span>
       </label>
       <select
         [compareWith]="compare"
@@ -90,7 +90,7 @@
       </select>
     </div>
     <div class="col-4 mb-3">
-      <label for="fuente" class="form-label">Numero o Correo del Usuario</label>
+      <label for="fuente" class="form-label">Numero o Correo del Usuario <span class="required">*</span></label>
       <input
         type="text"
         class="form-control"
@@ -116,7 +116,7 @@
     </div> -->
     <div class="col-4 mb-3">
       <label for="motivo_consulta" class="form-label">
-        Motivo de consulta
+        Motivo de consulta <span class="required">*</span>
       </label>
       <select
         [compareWith]="compare"
@@ -134,7 +134,7 @@
     </div>
     <div class="col-4 mb-3" *ngIf="has_motivos_especificos">
       <label for="motivo_consulta_especifico" class="form-label">
-        Motivo de consulta especifico
+        Motivo de consulta especifico <span class="required">*</span>
       </label>
       <select
         [compareWith]="compare"
@@ -160,7 +160,7 @@
     </div>
     <div class="col-4 mb-3">
       <label for="linea_intervencion" class="form-label">
-        Linea Intervención
+        Linea Intervención <span class="required">*</span>
       </label>
       <select
         [compareWith]="compare"
@@ -226,7 +226,7 @@
 
     <div class="col-12 mb-3">
       <label for="narrativa" class="form-label">
-        Narrativa
+        Narrativa <span class="required">*</span>
       </label>
       <textarea
         class="form-control"
@@ -248,7 +248,7 @@
   <div class="row">
     <div class="col-12 mb-3">
       <label for="observaciones" class="form-label">
-        Observaciones de cierre
+        Observaciones de cierre <span class="required">*</span>
       </label>
       <textarea
         class="form-control"

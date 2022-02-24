@@ -12,6 +12,8 @@ import { GestionCasoRoutingModule } from './gestion-caso-routing.module';
 import { CrearCasoComponent } from './pages/crear-caso/crear-caso.component';
 import { ActualizarCasoComponent } from './pages/actualizar-caso/actualizar-caso.component';
 import { SeguimientosComponent } from './components/seguimientos/seguimientos.component';
+import { MostrarCasoComponent } from './components/mostrar-caso/mostrar-caso.component';
+import { MostrarItemComponent } from './components/mostrar-item/mostrar-item.component';
 
 
 
@@ -22,7 +24,9 @@ import { SeguimientosComponent } from './components/seguimientos/seguimientos.co
     FrmPacienteComponent,
     ListUsersComponent,
     ActualizarCasoComponent,
-    SeguimientosComponent
+    SeguimientosComponent,
+    MostrarCasoComponent,
+    MostrarItemComponent
   ],
   imports: [
     ComponentsModule,

@@ -42,10 +42,20 @@ export class FrmCasoComponent implements OnInit, OnDestroy {
     if (this.setCaso) {
       this.subscriber = this.setCaso.subscribe(caso => {
         this.formGroupCase.patchValue(caso);
-        this.formGroupCase.patchValue({
-          'fecha_inicio': this.getDateTimeInput(new Date(caso.fecha_inicio)),
-          'fecha_fin': this.getDateTimeInput(new Date(caso.fecha_fin)),
-        });
+        if (caso.fecha_inicio) {
+          this.formGroupCase.patchValue({
+            'fecha_inicio': this.getDateTimeInput(new Date(caso.fecha_inicio)),
+          });
+        } else {
+          this.formGroupCase.patchValue({
+            'fecha_inicio': this.getDateTimeInput(new Date()),
+          })
+        }
+        if (caso.fecha_fin) {
+          this.formGroupCase.patchValue({
+            'fecha_fin': this.getDateTimeInput(new Date(caso.fecha_fin)),
+          });
+        }
       });
     }
     this.updateMaxDate();
@@ -85,10 +95,10 @@ export class FrmCasoComponent implements OnInit, OnDestroy {
       descripcion_relacion: [null],
       descripcion_radicado: [null],
       paciente: [null],
-      motivo_consulta: [null],
+      motivo_consulta: [null, [Validators.required]],
       motivo_consulta_especifico: [null],
       quien_comunica: [null],
-      turno: [null],
+      turno: [null, [Validators.required]],
       etnicidad: [null],
       relacion: [null],
       remision: [null],

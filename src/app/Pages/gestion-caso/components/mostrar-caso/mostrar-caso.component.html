@@ -1,0 +1,219 @@
+<div class="row">
+  <!-- Datos Caso -->
+  <div class="col col-md-4" [hidden]="!hasText(caso.fecha_inicio)">
+    <app-mostrar-item
+      title="Fecha Inicio"
+      [text]="caso.fecha_inicio | date:'short'"></app-mostrar-item>
+  </div>
+  <div class="col col-md-4" [hidden]="!hasText(caso.fecha_fin)">
+    <app-mostrar-item
+      title="Fecha Fin"
+      [text]="caso.fecha_fin | date:'short'"></app-mostrar-item>
+  </div>
+  <div class="col col-md-4" [hidden]="!hasText(getNameTipo(caso.quien_comunica))">
+    <app-mostrar-item
+      title="Quien se comunica"
+      [text]="getNameTipo(caso.quien_comunica)"></app-mostrar-item>
+  </div>
+  <div class="col col-md-4" [hidden]="!hasText(getNameTipo(caso.relacion))">
+    <app-mostrar-item
+      title="Relación"
+      [text]="getNameTipo(caso.relacion)"></app-mostrar-item>
+  </div>
+  <div class="col col-md-4" [hidden]="!hasText(caso.descripcion_relacion)">
+    <app-mostrar-item
+      title="Descripción relacion"
+      [text]="caso.descripcion_relacion"></app-mostrar-item>
+  </div>
+  <div class="col col-md-4" [hidden]="!hasText(caso.nombre_llama)">
+    <app-mostrar-item
+      title="Nombre quien llama"
+      [text]="caso.nombre_llama"></app-mostrar-item>
+  </div>
+  <div class="col col-md-4" [hidden]="!hasText(caso.documento_llama)">
+    <app-mostrar-item
+      title="Documento quien llama"
+      [text]="caso.documento_llama"></app-mostrar-item>
+  </div>
+  <div class="col col-md-4" [hidden]="!hasText(getNameTipo(caso.motivo_consulta))">
+    <app-mostrar-item
+      title="Motivo consulta"
+      [text]="getNameTipo(caso.motivo_consulta)"></app-mostrar-item>
+  </div>
+  <div class="col col-md-4" [hidden]="!hasText(getNameTipo(caso.motivo_consulta_especifico))">
+    <app-mostrar-item
+      title="Motivo especifico"
+      [text]="getNameTipo(caso.motivo_consulta_especifico)"></app-mostrar-item>
+  </div>
+  <div class="col col-md-4" [hidden]="!hasText(caso.descripcion_motivo)">
+    <app-mostrar-item
+      title="Descripción motivo"
+      [text]="caso.descripcion_motivo"></app-mostrar-item>
+  </div>
+  <div class="col col-md-4" [hidden]="!hasText(getNameTipo(caso.tipo_paciente))">
+    <app-mostrar-item
+      title="Tipo paciente"
+      [text]="getNameTipo(caso.tipo_paciente)"></app-mostrar-item>
+  </div>
+  <div class="col col-md-4" [hidden]="!hasText(getNameTipo(caso.origen))">
+    <app-mostrar-item
+      title="Origen"
+      [text]="getNameTipo(caso.origen)"></app-mostrar-item>
+  </div>
+  <div class="col col-md-4" [hidden]="!hasText(caso.fuente)">
+    <app-mostrar-item
+      title="Fuente"
+      [text]="caso.fuente"></app-mostrar-item>
+  </div>
+  <div class="col col-md-4" [hidden]="!hasText(getNameTipo(caso.turno))">
+    <app-mostrar-item
+      title="Turno"
+      [text]="getNameTipo(caso.turno)"></app-mostrar-item>
+  </div>
+  <div class="col col-md-4" [hidden]="!hasText(getNameTipo(caso.linea_intervencion))">
+    <app-mostrar-item
+      title="Linea de intervención"
+      [text]="getNameTipo(caso.linea_intervencion)"></app-mostrar-item>
+  </div>
+  <div class="col col-md-4" [hidden]="!hasText(getNameTipo(caso.remision))">
+    <app-mostrar-item
+      title="Remisión"
+      [text]="getNameTipo(caso.remision)"></app-mostrar-item>
+  </div>
+  <div class="col col-md-4" [hidden]="!hasText(getNameTipo(caso.respuesta))">
+    <app-mostrar-item
+      title="Respuesta"
+      [text]="getNameTipo(caso.respuesta)"></app-mostrar-item>
+  </div>
+  <div class="col col-md-4" [hidden]="!hasText(getNameTipo(caso.radicado))">
+    <app-mostrar-item
+      title="Radicado"
+      [text]="getNameTipo(caso.radicado)"></app-mostrar-item>
+  </div>
+  <div class="col col-md-4" [hidden]="!hasText(caso.descripcion_radicado)">
+    <app-mostrar-item
+      title="Número Radicado"
+      [text]="caso.descripcion_radicado"></app-mostrar-item>
+  </div>
+  <hr>
+  <!-- Datos Paciente -->
+  <div class="col col-md-4" [hidden]="!hasText(nombrePaciente)">
+    <app-mostrar-item
+      title="Nombre"
+      [text]="nombrePaciente"></app-mostrar-item>
+  </div>
+  <div class="col col-md-4" [hidden]="!hasText(getNameTipo(paciente.tipo_identificacion))">
+    <app-mostrar-item
+      title="Tipo Identificación"
+      [text]="getNameTipo(paciente.tipo_identificacion)"></app-mostrar-item>
+  </div>
+  <div class="col col-md-4" [hidden]="!hasText(paciente.identificacion)">
+    <app-mostrar-item
+      title="Identificación"
+      [text]="paciente.identificacion"></app-mostrar-item>
+  </div>
+
+  <div class="col col-md-4" [hidden]="!hasText(paciente.direccion)">
+    <app-mostrar-item
+      title="Dirección"
+      [text]="paciente.direccion"></app-mostrar-item>
+  </div>
+
+  <div class="col col-md-4" [hidden]="!hasText(paciente.sisben)">
+    <app-mostrar-item
+      title="Sisben"
+      [text]="paciente.sisben"></app-mostrar-item>
+  </div>
+  <div class="col col-md-4" [hidden]="!hasText(paciente.edad+'')">
+    <app-mostrar-item
+      title="Edad"
+      [text]="paciente.edad"></app-mostrar-item>
+  </div>
+  <div class="col col-md-4" [hidden]="!hasText(paciente.fecha_nacimiento)">
+    <app-mostrar-item
+      title="Fecha nacimiento"
+      [text]="paciente.fecha_nacimiento|date:'longDate'"></app-mostrar-item>
+  </div>
+  <div class="col col-md-4" [hidden]="!hasText(getNameTipo(paciente.como_conocio))">
+    <app-mostrar-item
+      title="Como conoció"
+      [text]="getNameTipo(paciente.como_conocio)"></app-mostrar-item>
+  </div>
+  <div class="col col-md-4" [hidden]="!hasText(paciente.como_conocio_descripcion)">
+    <app-mostrar-item
+      title="Como conoció descripción"
+      [text]="paciente.como_conocio_descripcion"></app-mostrar-item>
+  </div>
+  <div class="col col-md-4" [hidden]="!hasText(getNameTipo(paciente.orientacion_sexual))">
+    <app-mostrar-item
+      title="Orientación Sexual"
+      [text]="getNameTipo(paciente.orientacion_sexual)"></app-mostrar-item>
+  </div>
+  <div class="col col-md-4" [hidden]="!hasText(getNameTipo(paciente.genero))">
+    <app-mostrar-item
+      title="Genero"
+      [text]="getNameTipo(paciente.genero)"></app-mostrar-item>
+  </div>
+  <div class="col col-md-4" [hidden]="!hasText(getNameTipo(paciente.sexo))">
+    <app-mostrar-item
+      title="Sexo"
+      [text]="getNameTipo(paciente.sexo)"></app-mostrar-item>
+  </div>
+  <div class="col col-md-4" [hidden]="!hasText(getNameTipo(paciente.estado_civil))">
+    <app-mostrar-item
+      title="Estado civil"
+      [text]="getNameTipo(paciente.estado_civil)"></app-mostrar-item>
+  </div>
+  <div class="col col-md-4" [hidden]="!hasText(getNameTipo(paciente.etnia))">
+    <app-mostrar-item
+      title="Etnia"
+      [text]="getNameTipo(paciente.etnia)"></app-mostrar-item>
+  </div>
+  <div class="col col-md-4" [hidden]="!hasText(getNameTipo(paciente.nivel_educacion))">
+    <app-mostrar-item
+      title="Nivel Educación"
+      [text]="getNameTipo(paciente.nivel_educacion)"></app-mostrar-item>
+  </div>
+  <div class="col col-md-4" [hidden]="!hasText(getNameTipo(paciente.ocupacion))">
+    <app-mostrar-item
+      title="Ocupación"
+      [text]="getNameTipo(paciente.ocupacion)"></app-mostrar-item>
+  </div>
+  <div class="col col-md-4" [hidden]="!hasText(getNameTipo(paciente.poblacion_interes))">
+    <app-mostrar-item
+      title="Población de interés"
+      [text]="getNameTipo(paciente.poblacion_interes)"></app-mostrar-item>
+  </div>
+  <div class="col col-md-4" [hidden]="!hasText(getNameTipo(paciente.zona))">
+    <app-mostrar-item
+      title="Zona"
+      [text]="getNameTipo(paciente.zona)"></app-mostrar-item>
+  </div>
+  <div class="col col-md-4" [hidden]="!hasText(getNameTipo(paciente.departamento))">
+    <app-mostrar-item
+      title="Departamento"
+      [text]="getNameTipo(paciente.departamento)"></app-mostrar-item>
+  </div>
+  <div class="col col-md-4" [hidden]="!hasText(getNameTipo(paciente.municipio))">
+    <app-mostrar-item
+      title="Municipio"
+      [text]="getNameTipo(paciente.municipio)"></app-mostrar-item>
+  </div>
+  <div class="col col-md-4" [hidden]="!hasText(getNameTipo(paciente.vereda))">
+    <app-mostrar-item
+      title="Vereda"
+      [text]="getNameTipo(paciente.vereda)"></app-mostrar-item>
+  </div>
+  <hr>
+  <!-- Datos Caso -->
+  <div class="col-12" [hidden]="!hasText(caso.narrativa)">
+    <app-mostrar-item
+      title="Narrativa"
+      [text]="caso.narrativa"></app-mostrar-item>
+  </div>
+  <div class="col-12" [hidden]="!hasText(caso.observaciones)">
+    <app-mostrar-item
+      title="Observaciones"
+      [text]="caso.observaciones"></app-mostrar-item>
+  </div>
+</div>

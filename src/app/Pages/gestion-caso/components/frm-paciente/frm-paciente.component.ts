@@ -77,6 +77,7 @@ export class FrmPacienteComponent implements OnInit {
         if (paciente.id && !paciente.identificacion) {
           paciente.identificacion = '';
         }
+        console.log(paciente);
         this.formGroupPaciente.patchValue(paciente);
       });
     }
