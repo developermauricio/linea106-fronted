@@ -11,7 +11,6 @@ import { AdminCasosComponent } from "./Pages/Admin - Casos/admin.casos.component
 /*Admin Components*/
 import { AdminInicioComponent } from "./Pages/Admin - Inicio/admin.inicio.component";
 import { AdminMiPerfilComponent } from './Pages/Admin - Perfil/admin.mi.perfil.component';
-import { AdminReportesComponent } from './Pages/Admin - Reportes/admin.reportes.component';
 import { AdminUsuariosComponent } from "./Pages/Admin - Usuarios/admin.usuarios.component";
 import { PasswordResetComponent } from './Pages/Auth/password-reset/password-reset.component';
 /*Estadísitcas Component*/

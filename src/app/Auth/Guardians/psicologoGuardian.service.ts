@@ -1,8 +1,8 @@
-import { CanActivate, Router } from '@angular/router';
 import { Injectable } from '@angular/core';
-import { LoginService } from 'src/app/Services/login.service';
+import { CanActivate, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { LoginService } from 'src/app/Services/login.service';
 
 @Injectable()
 export class PsicologoGuardian implements CanActivate {
@@ -14,7 +14,7 @@ export class PsicologoGuardian implements CanActivate {
   canActivate(): Observable<boolean> {
     return this._loginService.user.pipe(
       map(user => {
-        if (user && user.rol == 'Psicólogo') {
+        if (user && (user.rol == 'Psicólogo' || user.rol == 'Administrador')) {
           return true;
         } else {
           this._router.navigate(['/login']);

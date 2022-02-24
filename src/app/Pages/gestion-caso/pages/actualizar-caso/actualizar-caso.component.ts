@@ -20,6 +20,7 @@ export class ActualizarCasoComponent implements OnInit {
 
   public formGroupCase: FormGroup;
   public formGroupPaciente: FormGroup;
+  public idCase: number;
 
   setPaciente: Subject<PacienteModel> = new Subject();
   setCaso: Subject<CasoModel> = new Subject();
@@ -71,6 +72,7 @@ export class ActualizarCasoComponent implements OnInit {
     });
     this._activateRoute.params.subscribe(param => {
       if (param.id) {
+        this.idCase = param.id;
         this._casoService.getById(param.id).subscribe(resp => {
           this.setPaciente.next(resp.paciente);
           this.setCaso.next(resp);

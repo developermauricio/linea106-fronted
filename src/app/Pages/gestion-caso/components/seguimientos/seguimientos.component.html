@@ -1,0 +1,27 @@
+<div class="p-2">
+  <h2 class="h5 text-center m-0 p-0">Seguimientos</h2>
+  <div class="d-flex col-6 m-auto pb-2">
+    <textarea
+      class="form-control"
+      name="seguimiento"
+      id="seguimiento"
+      cols="30"
+      rows="2"
+      [value]="seguimiento"
+      (input)="updateTextSeguimiento($event)">
+    </textarea>
+    <div class="ml-2">
+      <button class="btn btn-primary" (click)="addSeguimiento()">
+        Añadir Seguimiento
+      </button>
+    </div>
+  </div>
+  <ul class="timeline m-0 d-table m-auto">
+    <li class="event mb-1" *ngFor="let seguimiento of seguimientos">
+      <p>
+        {{ seguimiento.seguimiento }}
+        <span class="text-muted date">({{ seguimiento.created_at | date:'short'}})</span>
+      </p>
+    </li>
+  </ul>
+</div>
