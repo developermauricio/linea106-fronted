@@ -47,14 +47,15 @@ export class ReporteMenoresComponent implements OnInit {
   }
 
   private initConfig(labels, dataUsers) {
+    const colors = '#bbdefb';
     const data = {
       labels: labels,
       datasets: [
         {
           label: '4-13 años',
           data: dataUsers,
-          borderColor: "#3080d0",
-          backgroundColor: '#3080f0',
+          borderColor: colors,
+          backgroundColor: colors,
           order: 1
         },
       ]
@@ -68,11 +69,12 @@ export class ReporteMenoresComponent implements OnInit {
         plugins: {
           datalabels: {
             color: '#3080d0',
-            align: 'end',
-            anchor: 'end'
+            align: 'center',
+            anchor: 'center'
           },
           legend: {
             position: 'top',
+            display: false
           },
           title: {
             display: true,
