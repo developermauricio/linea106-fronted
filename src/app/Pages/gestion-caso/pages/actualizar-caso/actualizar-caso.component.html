@@ -17,8 +17,8 @@
         (setFormGroupPaciente)="setFormGroupPaciente($event)"></app-frm-caso>
     </div>
     <app-seguimientos
-      *ngIf="idCase"
-      [idCase]="idCase"></app-seguimientos>
+      *ngIf="idSeguimiento"
+      [idCase]="idSeguimiento"></app-seguimientos>
   </nb-card-body>
   <nb-card-footer>
     <button
@@ -38,9 +38,9 @@
     </button>
     <button
       *ngIf="idCase"
-      (click)="clonar()"
+      (click)="actualizar()"
       class="btn btn-info mx-2 float-right">
-      Clonar
+      Editar
     </button>
     <button
       *ngIf="idCase"

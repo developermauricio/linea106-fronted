@@ -188,15 +188,15 @@ export class ActualizarCasoComponent implements OnInit {
     this._location.back();
   }
 
-  clonar() {
+  actualizar() {
     this.formGroupCase.reset();
     this.formGroupPaciente.reset();
     const caso = Object.assign({}, this.currentCase);
-    caso.id = null;
-    caso.fecha_inicio = null;
-    caso.fecha_fin = null;
-    caso.turno = null;
-    caso.turno_id = null;
+    // caso.id = null;
+    // caso.fecha_inicio = null;
+    // caso.fecha_fin = null;
+    // caso.turno = null;
+    // caso.turno_id = null;
     this.idCase = null;
     this.setCaso.next(caso);
     this.setPaciente.next(caso.paciente);
@@ -212,5 +212,9 @@ export class ActualizarCasoComponent implements OnInit {
     this.idCase = null;
     this.setCaso.next(caso);
     this.setPaciente.next(caso.paciente);
+  }
+
+  get idSeguimiento(){
+    return this.idCase || this.formGroupCase.get('id').value;
   }
 }

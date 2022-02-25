@@ -19,9 +19,11 @@ export class SeguimientosComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this._seguimientoService.getSeguimientos(this.idCase).subscribe(resp => {
-      this.seguimientos = resp;
-    });
+    this._seguimientoService
+      .getSeguimientos(this.idCase)
+      .subscribe(resp => {
+        this.seguimientos = resp;
+      });
   }
 
   updateTextSeguimiento($event: any) {
