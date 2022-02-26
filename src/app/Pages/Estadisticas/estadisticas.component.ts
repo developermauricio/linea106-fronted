@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { StatisticsModel } from 'src/app/Models/statistic.model';
 import { CasoService } from 'src/app/Services/Common/caso.service';
 import { ExcelReportService } from 'src/app/Services/excel.report.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: "app-estadisticas",
@@ -51,5 +52,9 @@ export class EstadisticasComponent implements OnInit {
     // let casosJson = [];
     // casosJson = this.casesToExport as [];
     // this.excelService.exportAsExcelFile(casosJson, "reporte");
+  }
+
+  get linkDownloadExcel() {
+    return environment.apiUrl + `/../download-cases?fecha_inicio=${this.fecha_inicio}&fecha_fin=${this.fecha_fin}`;
   }
 }

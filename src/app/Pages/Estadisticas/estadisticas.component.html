@@ -205,11 +205,9 @@
       </div>
     </div>
   </div>
-  <button
-    (click)="exportAsXLSX()"
-    class="btn btn-success float-right"
-    [disabled]="!showExportButton"
-    [hidden]="!showStats">
-    Descargar reporte
-  </button>
+  <a
+    [href]="linkDownloadExcel"
+    target="_blank"
+    class="btn btn-success download-report float-right white"
+    [hidden]="!showStats">Descargar reporte</a>
 </div>
