@@ -1,5 +1,4 @@
 import { Component, Input, OnDestroy, OnInit, TemplateRef, ViewChild } from '@angular/core';
-import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NbDialogService, NbToastrService } from '@nebular/theme';
 import { Subject, Subscription } from 'rxjs';
@@ -84,42 +83,42 @@ export class VerCasoComponent implements OnInit, OnDestroy {
     }, 100);
   }
 
-  addSeguimiento(seguimientoForm: NgForm) {
-    let seguimiento = seguimientoForm.value;
-    seguimiento["fecha"] = this.getDate(new Date());
-    console.error("Falta generar esta parte");
-    // this.seguimientoDataService
-    //   .addSeguimiento(seguimiento)
-    //   .then((resp) => {
-    //     this.modalOpenSeguimiento.close();
-    //     this.toastrService.show(
-    //       "Seguimiento registrado correctamente",
-    //       "Éxito",
-    //       {
-    //         destroyByClick: true,
-    //         preventDuplicates: true,
-    //         status: "success",
-    //         icon: "checkmark",
-    //         // iconPack: "eva",
-    //       }
-    //     );
-    //   })
-    //   .catch((error) => {
-    //     this.modalOpenSeguimiento.close();
-    //     this.toastrService.show(
-    //       "El seguimiento no pudo ser agregado, verifique los datos ingresados e intente nuevamente",
-    //       "Error",
-    //       {
-    //         destroyByClick: true,
-    //         preventDuplicates: true,
-    //         status: "danger",
-    //         icon: "alert-triangle",
-    //         // iconPack: "eva",
-    //       }
-    //     );
-    //     console.log(error);
-    //   });
-  }
+  // addSeguimiento(seguimientoForm: NgForm) {
+  //   let seguimiento = seguimientoForm.value;
+  //   seguimiento["fecha"] = this.getDate(new Date());
+  //   console.error("Falta generar esta parte");
+  //   // this.seguimientoDataService
+  //   //   .addSeguimiento(seguimiento)
+  //   //   .then((resp) => {
+  //   //     this.modalOpenSeguimiento.close();
+  //   //     this.toastrService.show(
+  //   //       "Seguimiento registrado correctamente",
+  //   //       "Éxito",
+  //   //       {
+  //   //         destroyByClick: true,
+  //   //         preventDuplicates: true,
+  //   //         status: "success",
+  //   //         icon: "checkmark",
+  //   //         // iconPack: "eva",
+  //   //       }
+  //   //     );
+  //   //   })
+  //   //   .catch((error) => {
+  //   //     this.modalOpenSeguimiento.close();
+  //   //     this.toastrService.show(
+  //   //       "El seguimiento no pudo ser agregado, verifique los datos ingresados e intente nuevamente",
+  //   //       "Error",
+  //   //       {
+  //   //         destroyByClick: true,
+  //   //         preventDuplicates: true,
+  //   //         status: "danger",
+  //   //         icon: "alert-triangle",
+  //   //         // iconPack: "eva",
+  //   //       }
+  //   //     );
+  //   //     console.log(error);
+  //   //   });
+  // }
 
   private getDate(date: Date) {
     return date.toISOString();
@@ -182,7 +181,7 @@ export class VerCasoComponent implements OnInit, OnDestroy {
   }
 
   get case_radicado() {
-    return this.getNameTipo(this.caso.radicado);
+    return this.caso.descripcion_radicado;
   }
 
   get case_fuente() {
@@ -246,7 +245,11 @@ export class VerCasoComponent implements OnInit, OnDestroy {
   }
 
   get paciente_como_conocio() {
-    return this.getNameTipo(this.paciente.como_conocio);
+    if (this.paciente.como_conocio_descripcion) {
+      return `( ${this.paciente.como_conocio_descripcion} )`;
+    } else {
+      return this.getNameTipo(this.paciente.como_conocio);
+    }
   }
 
   get paciente_orientacion_sexual() {
@@ -297,8 +300,8 @@ export class VerCasoComponent implements OnInit, OnDestroy {
     return `${paciente.nombre || ''} ${paciente.apellido || ''}`.trim() || '---';
   }
 
-  actualizarCaso(){
-    this._router.navigateByUrl('/caso/'+this.id);
+  actualizarCaso() {
+    this._router.navigateByUrl('/caso/' + this.id);
     this.modalOpenCase.close();
   }
 

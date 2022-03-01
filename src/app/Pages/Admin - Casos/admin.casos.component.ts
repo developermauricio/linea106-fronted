@@ -1,5 +1,4 @@
 import { Component, OnInit } from "@angular/core";
-import { NbToastrService } from "@nebular/theme";
 import { Subject } from 'rxjs';
 import { CasoModel } from 'src/app/Models/caso.model';
 import { PaginateModel } from 'src/app/Models/paginate.model';
@@ -21,7 +20,6 @@ export class AdminCasosComponent implements OnInit {
   showCase: Subject<number> = new Subject();
 
   constructor(
-    private toastrService: NbToastrService,
     private _casoService: CasoService
   ) { }
 
