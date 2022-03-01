@@ -34,18 +34,10 @@
       </div>
     </div>
     <nb-card-body>
-      <ng2-smart-table [settings]="settings" [source]="source" (custom)="showCase.next($event.data)">
-      </ng2-smart-table>
-      <div class="row">
-        <div class="col-12">
-          <app-pagination-server (changePage)="updatePagination($event)" [pagination]="casos"></app-pagination-server>
-        </div>
-        <div class="col-12">
-          <h6 class="text-center">
-            <b>Mostrando {{ casos.per_page }} de {{ casos.total }} casos</b>
-          </h6>
-        </div>
-      </div>
+      <app-table-cases
+        [cases]="casos"
+        (onSearchCases)="updatePagination($event)"
+        (onShowCase)="showCase.next($event)"></app-table-cases>
     </nb-card-body>
   </div>
 </div>

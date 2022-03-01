@@ -1,0 +1,15 @@
+.caso-enviado{
+  border-left: .4rem solid var(--success);
+}
+
+.caso-recibido{
+  border-left: .4rem solid var(--blue);
+}
+
+.caso-respuesta{
+  border-left: .4rem solid var(--red);
+}
+
+.caso-cerrado{
+  border-left: .4rem solid var(--gray-dark);
+}

@@ -8,6 +8,7 @@ import { CustomToggleComponent } from './custom-toggle/custom-toggle.component';
 import { EstadisticaItemComponent } from './estadistica-item/estadistica-item.component';
 import { PaginationServerComponent } from './pagination-server/pagination-server.component';
 import { SelectFilterComponent } from './select-filter/select-filter.component';
+import { TableCasesComponent } from './table-cases/table-cases.component';
 import { VerCasoComponent } from './ver-caso/ver-caso.component';
 
 @NgModule({
@@ -16,14 +17,16 @@ import { VerCasoComponent } from './ver-caso/ver-caso.component';
     PaginationServerComponent,
     SelectFilterComponent,
     VerCasoComponent,
-    EstadisticaItemComponent
+    EstadisticaItemComponent,
+    TableCasesComponent
   ],
   declarations: [
     CustomToggleComponent,
     PaginationServerComponent,
     SelectFilterComponent,
     VerCasoComponent,
-    EstadisticaItemComponent
+    EstadisticaItemComponent,
+    TableCasesComponent,
   ],
   imports: [
     CommonModule,

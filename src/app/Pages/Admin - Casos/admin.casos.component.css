@@ -139,21 +139,7 @@ label {
   display: inline-block;
 }
 
-.dot-enviado {
-  background-color: green;
-}
 
-.dot-recibido {
-  background-color: blue;
-}
-
-.dot-respuesta {
-  background-color: red;
-}
-
-.dot-cerrado {
-  background-color: black;
-}
 
 :host /deep/ ng2-smart-table tbody > .enviado {
   border-left: 10px solid green;

@@ -1,0 +1,104 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th>Psicólogo</th>
+      <th>Motivo</th>
+      <th>Origen</th>
+      <th>Fuente</th>
+      <th>Usuario</th>
+      <th>Fecha</th>
+      <th>Intervención</th>
+      <th>Ver</th>
+    </tr>
+    <tr>
+      <th>
+        <select *ngIf="!hiddenFilterPsicologo" (change)="updateFilter()" [(ngModel)]="psicologo" class="form-control" name="psicologo" id="psicologo">
+          <option [ngValue]="null">Seleccione</option>
+          <option
+            [ngValue]="item.id"
+            *ngFor="let item of filterData.psicologos">
+            {{ item.name }}
+          </option>
+        </select>
+      </th>
+      <th>
+        <select (change)="updateFilter()" [(ngModel)]="motivo" class="form-control" name="motivo" id="motivo">
+          <option [ngValue]="null">Seleccione</option>
+          <option
+            [ngValue]="item.id"
+            *ngFor="let item of filterData.motivos">
+            {{ item.name }}
+          </option>
+        </select>
+      </th>
+      <th>
+        <select (change)="updateFilter()" [(ngModel)]="origen" class="form-control" name="origen" id="origen">
+          <option [ngValue]="null">Seleccione</option>
+          <option
+            [ngValue]="item.id"
+            *ngFor="let item of filterData.origenes">
+            {{ item.name }}
+          </option>
+        </select>
+      </th>
+      <th>
+        <input (keyup)="updateFilterInput()" autocomplete="off" class="form-control" type="text" [(ngModel)]="fuente"
+          id="fuente" name="fuente">
+      </th>
+      <th>
+        <input (keyup)="updateFilterInput()" autocomplete="off" class="form-control" type="text" [(ngModel)]="paciente"
+          id="paciente" name="paciente">
+      </th>
+      <th>
+        <input (change)="updateFilter()" autocomplete="off" class="form-control" type="date" [(ngModel)]="fecha"
+          id="fecha" name="fecha">
+      </th>
+      <th>
+        <select (change)="updateFilter()" [(ngModel)]="intervencion" class="form-control" name="intervencion"
+          id="intervencion">
+          <option [ngValue]="null">Seleccione</option>
+          <option
+            [ngValue]="item.id"
+            *ngFor="let item of filterData.lineas_intervencion">
+            {{ item.name }}
+          </option>
+        </select>
+      </th>
+      <th>
+
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let case of casesData">
+      <td [class]="getCustomClass(case)">{{getCustomClass(case)}} {{ getPsicologo(case) }}</td>
+      <td>{{ getMotivo(case) }}</td>
+      <td>{{ getOrigen(case) }}</td>
+      <td>{{ getFuente(case) }}</td>
+      <td>{{ getUsuario(case) }}</td>
+      <td>{{ case.fecha_inicio | date:'short' }}</td>
+      <td>{{ getLineaIntervencion(case) }}</td>
+      <td>
+        <div class="text-center" style="cursor:pointer" (click)="showCase(case)">
+          <i class="material-icons">&#xE417;</i>
+        </div>
+      </td>
+    </tr>
+    <tr *ngIf="sinCasos">
+      <td colspan="8" class="text-center">Sin casos</td>
+    </tr>
+  </tbody>
+  <tfoot>
+    <tr>
+      <th colspan="8">
+        <app-pagination-server
+          [center]="true"
+          [pagination]="cases"
+          (changePage)="updatePagination($event)"></app-pagination-server>
+        <div class="text-center">
+          <b>Mostrando {{ cases.per_page }} de {{ cases.total }} casos</b>
+        </div>
+      </th>
+    </tr>
+  </tfoot>
+</table>

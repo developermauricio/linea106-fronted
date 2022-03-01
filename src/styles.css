@@ -1,1 +1,18 @@
 /* You can add global styles to this file, and also import other style files */
+
+
+.dot-enviado {
+  background-color: var(--success);
+}
+
+.dot-recibido {
+  background-color: var(--blue);
+}
+
+.dot-respuesta {
+  background-color: var(--red);
+}
+
+.dot-cerrado {
+  background-color: var(--gray-dark);
+}
